@@ -1,0 +1,1276 @@
+
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <style type="text/css">
+      	header, main, footer, .content{
+	      padding-left: 300px;
+	    }
+
+	    @media only screen and (max-width : 992px) {
+	      header, main, footer, .content {
+	        padding-left: 0;
+	      }
+	    }
+
+	    body {
+		    display: flex;
+		    min-height: 100vh;
+		    flex-direction: column;
+		  }
+
+		  main {
+		    flex: 1 0 auto;
+		  }
+
+		  nav{
+		  	background-color: #808080;
+		  }
+
+		  .page-footer{
+		  	background-color: #808080;
+
+		  }
+
+		  .footer-copyright{
+		  	background-color: #000;
+		  }
+      </style>
+      <title>Glucose Variability Indices</title>
+      <link rel="icon" type="image/png" href="img/diabetes.png"/>
+	  <link rel="icon" type="image/png" href="img/diabetes.png"/>
+    </head>
+
+    <body>
+    	<header>
+    		<nav> 
+				<div class="nav-wrapper">
+			      <a href="#" class="brand-logo center">GlucoCheck</a>
+			    </div>
+	    	</nav>
+	    </header>
+
+	    <div id="slide-out" class="sidenav sidenav-fixed">
+	    	<br><br>
+	    	<h5 class="center">Index</h5>
+		    <ol type="1">
+		      <li><a href="chapter1.html">Package Description</a></li>
+		      <li><a href="chapter2.html">Constants</a></li>
+		      <li><a href="chapter3.html">Core Methods</a></li>
+		      <ol>
+		      	<li><a href="chapter3.html#chp3.1">Training the Model</a></li>
+		      	<li><a href="chapter3.html#chp3.2">Impute Data</a></li>
+		      	<li><a href="chapter3.html#chp3.3">Describe Data</a></li>
+		      	<li><a href="chapter3.html#chp3.4">Describe Individual</a></li>
+		      	<li><a href="chapter3.html#chp3.5">Plot Individual</a></li>
+		      </ol>
+		      <li><a href="chapter4.html">Helper Methods</a></li>
+		      <ol>
+		      	<li><a href="chapter4.html#chp4.1">Smoothing</a></li>
+		      	<li><a href="chapter4.html#chp4.2">Subsampling</a></li>
+		      	<li><a href="chapter4.html#chp4.3">Convert Units</a></li>
+		      	<li><a href="chapter4.html#chp4.4">Only Complete days</a></li>
+		      	<li><a href="chapter4.html#chp4.5">Day & Night Mean</a></li>
+		      	<li><a href="chapter4.html#chp4.6">Hourly Sampling</a></li>
+		      </ol>
+		      <li><a href="chapter5.html">Inner Methods</a></li>
+		      <ol>
+		      	<li><a href="chapter5.html#chp5.1">Plot Imputed Values</a></li>
+		      	<li><a href="chapter5.html#chp5.2">Detect Gap</a></li>
+		      	<li><a href="chapter5.html#chp5.3">Preprocess Date</a></li>
+		      </ol>
+		      <li><a href="chapter6.html">Glucose Variability Indices</a></li>
+		      <ol>
+		      	<li><a href="chapter6.html#chp6.1">All Indices</a></li>
+		      	<li><a href="chapter6.html#chp6.2">Individual Indices</a></li>
+		      	<li><a href="chapter6.html#chp6.3">MAGE</a></li>
+		      	<li><a href="chapter6.html#chp6.4">GFI</a></li>
+		      	<li><a href="chapter6.html#chp6.5">BGRI</a></li>
+		      	<li><a href="chapter6.html#chp6.6">GRADE</a></li>
+		      	<li><a href="chapter6.html#chp6.7">J Index</a></li>
+		      	<li><a href="chapter6.html#chp6.8">M - Value</a></li>
+		      	<li><a href="chapter6.html#chp6.9">MAG</a></li>
+		      	<li><a href="chapter6.html#chp6.10">GVP</a></li>
+		      	<li><a href="chapter6.html#chp6.11">GMI</a></li>
+		      	<li><a href="chapter6.html#chp6.12">LAGE</a></li>
+		      	<li><a href="chapter6.html#chp6.13">Estimated hbA1c</a></li>
+		      	<li><a href="chapter6.html#chp6.14">Summary Statistices</a></li>
+		      	<li><a href="chapter6.html#chp6.15">SD of ROC</a></li>
+		      	<li><a href="chapter6.html#chp6.16">PGS</a></li>
+		      	<li><a href="chapter6.html#chp6.17">Distance Travelled</a></li>
+		      	<li><a href="chapter6.html#chp6.18">Time in Range</a></li>
+		      	<li><a href="chapter6.html#chp6.19">Variability Episodes</a></li>
+		      	<li><a href="chapter6.html#chp6.20">IGC</a></li>
+		      	<li><a href="chapter6.html#chp6.21">GLI</a></li>
+		      	<li><a href="chapter6.html#chp6.22">ADRR</a></li>
+		      	<li><a href="chapter6.html#chp6.23">MODD</a></li>
+		      	<li><a href="chapter6.html#chp6.24">CONGAn</a></li>
+
+		      </ol>
+		      <li><a href="chapter7.html">Error Metrics</a></li>
+		      <ol>
+		      	<li><a href="chapter7.html#chp7.1">Get All Metrics</a></li>
+		      	<li><a href="chapter7.html#chp7.2">Index of Agreement</a></li>
+		      	<li><a href="chapter7.html#chp7.3">RMSE</a></li>
+		      	<li><a href="chapter7.html#chp7.4">MAD</a></li>
+		      	<li><a href="chapter7.html#chp7.5">MAPE</a></li>
+		      </ol>
+		      <br><br><br>
+		    </ol>
+	    </div>
+	    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons large">chevron_right</i></a>
+    	
+	    
+
+	    <div class="content">
+	    	<div class="inner" style="padding-left: 5%; padding-right: 5%">
+	    			
+	    			<h5 id='chp6'>6. Glucose Variability Indices </h5>
+	    			<p id="chp6.1"><br>
+	    				<h6>6.1 All Indices</h6>
+	    				
+	    				<p>
+	    					This method provides a consolidated  table of all the glucose variability indices of all the individuals in the default data (The default data set for the training includes data from the CGMAnalysis package, Gluvarpro package, CGMAnalyzer package, and the Ohio University dataset).<br><br>
+	    					<b>Method Signature:</b> def gvIndices(self, data )<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>data</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b>A consolidated table of all the glucose variability indices of all the individuals. This table is also saved as a CSV file.<br><br>
+							
+							<b>Example:</b>All individuals' variability indices<br>
+							<img class="materialboxed" src="img/6_1.png">
+		    				<br><br>
+		    			</p>
+	    			</p>
+	    			<p id="chp6.2"><br>
+	    				<h6>6.2 Individual Indices</h6>
+	    				
+	    				<p>
+	    					<b>Method Signature:</b> def individualGvIndices(self, uid, data)<br>
+	    					This method provides a consolidated  table of all the glucose variability indices of all the individuals in the default data (The default data set for the training includes data from the CGMAnalysis package, Gluvarpro package, CGMAnalyzer package, and the Ohio University dataset).<br><br>
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>data</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>uid</td>
+										<td>The subject ID of the user to plot</td>
+										<td> String</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> A consolidated table of all the glucose variability indices of all the individuals. This table is also saved as a CSV file.<br><br>
+							<b>Example:</b> An individual's variablilty indices<br><br>
+							<img class="materialboxed" src="img/6_2.png">
+	    					<br><br>
+	    				</p>
+	    			</p>
+	    			<p id="chp6.3"><br>
+	    				<h6>6.3 Mean Amplitude Glycemic Excursions</h6>
+	    				
+	    				<p>
+	    					This function calculates the mean amplitude glycemic excursions and the excursion frequency of an individual's glucose variability.<br><br>
+	    					<b>Method Signature:</b> def mageCalculation(self, df, std)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>df</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>std</td>
+										<td>It is the standard deviation for the model. The default value is 1 </td>
+										<td> integer</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> Values for excursion frequency and MAGE score.<br><br>
+							<b>Example:</b> An individual's MAGE score and Excursion Frequency<br>
+							<img class="materialboxed" src="img/6_3.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.4"><br>
+	    				<h6>6.4 Glucose Fluctuation Index and Glucose Coefficient of Fluctuation</h6>
+	    				
+	    				<p>
+	    					The GFI is based on consecutive glucose differences, where consecutive differences in GFI are squared prior to finding their mean and taking the square root. The potential benefit is that differences are weighted individually, giving more importance to the greatest ones, which are likely to be more detrimental. GCF is computed as the ratio of GFI to the mean of input glucose values. The function takes in a sequence of continuous glucose values,  and computes glucose fluctuation index (GFI)  and the glucose coefficient of fluctuation (GCF). This function accepts data given either in mmol/L or mg/dl.<br><br>
+	    					<b>Method Signature:</b> def gfi(self, x)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is numeric values for GFI and GCF accordingly.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>Le Floch J, Kessler L (2016). “Glucose variability: comparison of different indices during continuous glucose monitoring in diabetic patients.” Journal of diabetes science and technology, 10(4), 885–891.</li>
+							</ol><br><br>
+							<b>Example:</b>The GFI and GCF for an individual<br><br>
+							<img class="materialboxed" src="img/6_4.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.5"><br>
+	    				<h6>6.5 Blood Glucose Risk Index</h6>
+	    				
+	    				<p>
+	    					LBGI is a measure of the frequency and extent of low blood glucose (BG) readings; HBGI is a measure of the frequency and extent of high BG readings; BGRI is a measure for the overall risk of extreme BG equal to LBGI + HBGI. The LBGI has been validated as a predictor of severe hypoglycemia, while the HBGI has been related to risk for hyperglycemia and HbA1c; Both indices demonstrate high sensitivity to changes in glycemic profiles and metabolic control, as well as high sensitivity to the effects of treatment. Larger values of LBGI and HBGI indicate a higher risk for hypoglycemia and hyperglycemia, respectively. Although originally derived using self-monitored blood glucose data, these parameters have been adapted to continuous interstitial glucose monitoring data. Correlations between LBGI and subsequent hypoglycemia and between HBGI and HbA1c have been reported. The LBGI and the HBGI are non-negative numbers; each index and their sum could range theoretically between 0 and 100. Takes in a sequence of continuous glucose values and computes: low blood glucose index (LBGI), high blood glucose index (HBGI), and overall blood glucose risk index (BGRI). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def bgri(self, x, units)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is numeric values for LBGI, HBGI and BGRI accordingly; details LBGI is a measure of the frequency and extent of low blood glucose (BG) readings<br><br>
+							<b>References:</b>
+							<ol>
+								<li>Service FJ (2013). “Glucose variability.” Diabetes, 62(5), 1398.</li>
+								<li>Kovatchev BP, Clarke WL, Breton M, Brayman K, McCall A (2005). “Quantifying temporal glucose variability in diabetes via continuous glucose monitoring: mathematical methods and clinical application.” Diabetes technology & therapeutics, 7(6), 849–862.</li>
+							</ol><br><br>
+							<b>Example:</b><br>
+							<img class="materialboxed" src="img/6_5.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.6"><br>
+	    				<h6>6.6 Glycaemic Risk Assessment Diabetes Equation</h6>
+	    				
+	    				<p>
+	    					GRADE is a score derived to summarize the degree of risk associated with a certain glucose profile. Qualitative risk scoring for a wide range of glucose levels inclusive of marked hypoglycemia and hyperglycemia is obtained based on a committee of diabetes practitioners. The calculated score can range from 0 -- meaning no risk to 50 -- meaning maximal risk. The structure of the formula is designed to give a continuous curvilinear approximation with a nadir at 4.96 mmol/L (90 mg/dL) and high adverse weighting for both hyper- and hypoglycemia. The contribution of hypoglycemia, euglycemia, and hyperglycemia to the GRADE score are expressed as percentages: e.g. GRADE (hypoglycemia %, euglycemia %, hyperglycemia %), which are defined as: <3.9 mmol/L (70 mg/dL) hypoglycaemia; 3.9 - 7.8mmol/L (70–140 mg/dL) euglycemia; and >7.8 mml/L (140 mg/dL) hyperglycemia. Takes in a sequence of continuous glucose values and computes Glycaemic Risk Assessment Diabetes Equation (GRADE) score. This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def grade(self, x, units)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is numeric values for GRADE and percentages expressing risk calculated from hypoglycemia, euglycemia, and hyperglycemia.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>Service FJ (2013). “Glucose variability.” Diabetes, 62(5), 1398.</li>
+								<li>KHill N, Hindmarsh P, Stevens R, Stratton I, Levy J, Matthews D (2007). “A method for assessing quality of control from glucose profiles.” Diabetic medicine, 24(7), 753–758.</li>
+							</ol><br><br>
+							<b>Example:</b> The GRAGE value for an individual<br>
+							<img class="materialboxed" src="img/6_6.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.7"><br>
+	    				<h6>6.7 J-index</h6>
+	    				
+	    				<p>
+	    					The J-index definition includes a standard deviation into the measurement of glycemic variability. This index was developed to stress the importance of the two major glycemia components: mean level and variability. J-index can be used to describe glucose control using the following scheme: - Ideal glucose control 10 ≤ J-index ≤ 20; - Good glucose control 20 < J-index ≤ 30; - Poor glucose control 30 < J-index ≤ 40; - Lack of glucose control J-index > 40. Originally derived from intermittent blood glucose determinations, it has been adapted to continuous monitoring data too. Takes in a sequence of continuous glucose values and computes J-index.This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def j_index(self, x, units)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for J-index.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>Service FJ (2013). “Glucose variability.” Diabetes, 62(5), 1398.</li>
+								<li>KWojcicki J (1995). “J-index. A new proposition of the assessment of current glucose control in diabetic patients.” Hormone and metabolic research, 27(01), 41–42.</li>
+							</ol><br><br>
+							<b>Example:</b> The J-Index of an individual<br>
+							<img class="materialboxed" src="img/6_7.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.8"><br>
+	    				<h6>6.8 M-value</h6>
+	    				
+	    				<p>
+	    					Originally, M-value was defined as a quantitative index of the lack of efficacy of the treatment in the individual diabetic patient. Otherwise, M-value was proposed as a result of trying to quantify the glycemic control of diabetes patients. It is a measure of the stability of the glucose excursions in comparison with an “ideal” glucose value of 120 mg/dL; developed using six self-monitored blood glucose values over 24 h in 20 patients with type-I diabetes. In the final M-value expression, choice of the ideal glucose/reference value is left for the user. The M-value is zero in healthy persons, rising with increasing glycemic variability or poorer glycemic control. M-value should be calculated for each individual day (i.e. over 24h). The formula gives greater emphasis to hypoglycemia than hyperglycemia, making it difficult to distinguish between patients with either high mean glucose or high glucose variability. Thus the M-value is not an indicator solely of glucose variability but is a hybrid measure of both variability and mean glycemia. Takes in a sequence of continuous glucose values and computes M-value. This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					
+	    					<b>Method Signature:</b> def m_value(self, x, units, ref_value)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+									<tr>
+										<td>ref_value</td>
+										<td>gives option to set a reference value; e.g. use 120mg/dL to reflect original M-value formula, set to 80mg/dL for whole blood, set to 90mg/dL for plasma measurements of glucose</td>
+										<td>int</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for M-value<br><br>
+							<b>References:</b>
+							<ol>
+								<li>Service FJ (2013). “Glucose variability.” Diabetes, 62(5), 1398.</li>
+								<li>Schlichtkrull J, Munck O, Jersild M (1965). “The M-value, an index of blood-sugar control in diabetics.” Acta Medica Scandinavica, 177(1), 95–102.</li>
+								<li>Siegelaar SE, Holleman F, Hoekstra JB, DeVries JH (2010). “Glucose variability; does it matter?” Endocrine reviews, 31(2), 171–182.</li>
+							</ol><br><br>
+							<b>Example:</b> The M-Value for an individual<br>
+							<img class="materialboxed" src="img/6_8.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.9"><br>
+	    				<h6>6.9 Mean Absolute Glucose Change</h6>
+	    				
+	    				<p>
+	    					The MAG is based on added-up differences between sequential blood glucose profiles per 24h divided by the time in hours between the first and last blood glucose measurements. It measures both the amplitude and frequency of oscillations. Takes in a sequence of continuous glucose values and computes mean absolute glucose change (MAG). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def mag(self, x)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for MAG.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>Hermanides J, Vriesendorp TM, Bosman RJ, Zandstra DF, Hoekstra JB, DeVries JH (2010).  “Glucose variability is associated with intensive care unit mortality.”  Critical care medicine, 38(3), 838–842.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> The MAG value of an individual<br><br>
+							<img class="materialboxed" src="img/6_9.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.10"><br>
+	    				<h6>6.10 Glycemic Variability Percentage</h6>
+	    				
+	    				<p>
+	    					GVP can provide a quantitative measurement of glycemic variability over a given interval of time by analyzing the length of the CGM temporal trace normalized to the duration under evaluation. It is expressed as a percentage above the minimum line length with zero glycemic variability. This metric gives equal weight to both the amplitude and frequency. GVP value does contain a dependency on the unit of measure of glucose (mg/dL or mmol/L). It is recommended to perform calculation in glucose units of mg/dL. Recommended sampling intervals should not exeede 15min, greater sampling intervals such as 30 or 60 min are not suitable for use with the GVP metric. This method is best suited for CGM traces with a high data recording rate and a low number of data omissions. Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given mg/dL only.<br><br>
+
+	    					<b>Method Signature:</b> def gvp(self, x, units)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for GVP.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>T. A. Peyser, A. K. Balo, B. A. Buckingham, I. B. Hirsch, and A. Garcia. Glycemic variability percentage: a novel method for assessing glycemic variability from continuous glucose monitor data.  Diabetes technology & therapeutics, 20(1):6–16, 2018.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> The GVP value of an individual<br>
+							<img class="materialboxed" src="img/6_10.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.11"><br>
+	    				<h6>6.11 Glucose Management Indicator</h6>
+	    				
+	    				<p>
+	    					GMI is calculated from a formula derived from the regression line computed from a plot of mean glucose concentration points on the x-axis and contemporaneously measured A1C values on the y-axis ( replacement to "estimated A1C"). It was rerived using a Dexcom sensor, therefore there is no guarantee that this formula would be precisely the same for CGM data collected from a different sensor. Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def gmi(self, x, units)<br><br>
+	    					
+
+							
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for GMI.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>R. M. Bergenstal, R. W. Beck, K. L. Close, G. Grunberger, D. B. Sacks,A. Kowalski, A. S. Brown, L. Heinemann, G. Aleppo, D. B. Ryan, et al. Glucosemanagement indicator (gmi): a new term for estimating a1c from continuous glucose monitoring. Diabetes care, 41(11):2275–2280, 2018.</li>
+								
+							</ol><br><br>
+							<b>Example:</b>An individual's GMI <br>
+							<img class="materialboxed" src="img/6_11.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.12"><br>
+	    				<h6>6.12 Largest Amplitude of Glycemic Excursions</h6>
+	    				
+	    				<p>
+	    					LAGE is the difference between the maximum and minimum glucose values within a day,  It is equivalent to a range in statistics and represents the single, biggest fluctuation in glucose level within a day. Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+
+	    					<b>Method Signature:</b> def lage(self, x)<br><br>
+	    					
+							<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for LAGE, MIN, MAX.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>TA. Soliman, V. De Sanctis, M. Yassin, and R. Elalaily. Therapeutic use anddiagnostic potential of continuous glucose monitoring systems (cgms) inadolescents.Adv Diabetes Metab, 2:21–30, 2014.</li>
+								<li>M. Tao, J. Zhou, J. Zhu, W. Lu, and W. Jia. Continuous glucose monitoringreveals abnormal features of postprandial glycemic excursions in women withpolycystic ovarian syndrome. Postgraduate medicine, 123(2):185–190, 2011.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's LAGE, MIN, MAX values<br>
+							<img class="materialboxed" src="img/6_12.png">
+	    			</p>
+	    			<p id="chp6.13"><br>
+	    				<h6>6.13 Estimated HbA1c</h6>
+	    				
+	    				<p>
+	    					The original formula is based on computing estimated glucose level using HbA1c: eAC = 28.7*HbA1c - 46.7. Rearranging arguments we can compute eHbA1c. Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+
+	    					<b>Method Signature:</b> ddef ehba1c(self, x)<br><br>
+	    					
+							<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for eHbA1c.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>G. Bozkaya, E. Ozgu, and B. Karaca. The association between estimated average glucose levels and fasting plasma glucose levels.Clinics, 65(11):1077–1080, 2010</li>
+								
+							</ol><br><br>
+							<b>Example:</b> The eHbA1c value of an individual<br>
+							<img class="materialboxed" src="img/6_13.png">
+	    			</p>
+	    			<p id="chp6.14"><br>
+	    				<h6>6.14 Summary Statistics</h6>
+	    				
+	    				<p>
+	    					Produce a simple summary statistics: mean, standard deviation, coefficient of variation, and interquartile range. Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def sumstats(self, x)<br><br>
+	    					
+
+							<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for mean, standard deviation, coefficient of variation, and interquartile range.<br><br>
+							<b>Example:</b> Summary statistics of an individual<br>
+							<img class="materialboxed" src="img/6_14.png">
+	    			</p>
+	    			<p id="chp6.15"><br>
+	    				<h6>6.15 Standard Deviation of the Glucose Rate of Change</h6>
+	    				
+	    				<p>
+	    					The glucose rate of change is a way to evaluate the dynamics of glucose fluctuations on the time scale of minutes. A larger variation of the glucose rate of change indicates  rapid and more pronounced BG fluctuations Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def rc(self, x)<br>
+	    					
+
+							<br><br><b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for SDRC.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>W. Clarke and B. Kovatchev. Statistical tools to analyze continuous glucose monitor data. Diabetes technology & therapeutics, 11(S1):S–45, 2009.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's SDRC value<br>
+							<img class="materialboxed" src="img/6_15.png">
+	    			</p>
+	    			<p id="chp6.16"><br>
+	    				<h6>6.16 Personal Glycemic State</h6>
+	    				
+	    				<p>
+	    					The PGS is an additive composite metric calculated using the following simple equation PGS = F(GVP) + F(MG) + F(PTIR) + F(H), where F(GVP) is a function of the glycemic variability percentage,  F(MG) is a function of the mean glucose,  F(PTIR) is a function of the percent time in range (from 70 to 180 mg/ dL), and F(H) is a function of the incidence of the number of hypoglycemic episodes per week. The hypoglycemia function incorporates two distinct thresholds (54 and 70 mg/dL) and is the sum of two terms: F54(H) and F70(H). PGS is computed per week and then averaged across all weeks. The min value of the PGS metric is 4.6 corresponding to excellent glycemic control (no diabetes or patients with diabetes under superb glycemic control). The max value of the PGS metric is 40 corresponding to poor quality of glycemic control that would be seen in patients with elevated A1c values, high mean glucose, and low percent of the time in the euglycemic range. Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def pgs(self, x)<br>
+	    					
+
+							<br><b>Function Parameters:</b><br>
+
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for PGS.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>I. B. Hirsch, A. K. Balo, K. Sayer, A. Garcia, B. A. Buckingham, and T. A.Peyser.  A simple composite metric for the assessment of glycemic status from continuous glucose monitoring data: implications for clinical practice and the artificial pancreas. Diabetes technology & therapeutics, 19(S3):S–38, 2017.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> AN individual's PGS value<br>
+							<img class="materialboxed" src="img/6_16.png">
+	    			</p>
+	    			<p id="chp6.17"><br>
+	    				<h6>6.17 Distance Travelled</h6>
+	    				
+	    				<p>
+	    					This metric is the sum of the absolute difference in glucose levels for one day of consecutive CGM readings. It does not directly calculate frequency or magnitude (amplitude) of excursions; instead, it quantifies the total change in blood glucose levels throughout the day by measuring the total distance from a point to point in a daily CGM plot. Thus the greater the distance traveled, the greater the variability. DT is computed for each day and then averaged across all days. Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+
+	    					<b>Method Signature:</b> def dt(self, x)<br>
+	    					
+							<br><br><b>Function Parameters:</b><br>
+	    					
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for average DT.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>D. Rodbard. Glucose variability: a review of clinical applications and research developments. Diabetes technology & therapeutics, 20(S2):S2–5, 2018.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's average distance travelled<br>
+							<img class="materialboxed" src="img/6_17.png">
+	    			</p>
+	    			<p id="chp6.18"><br>
+	    				<h6>6.18 Time in Range</h6>
+	    				
+	    				<p>
+	    					<p>
+	    					The percentage of time spent within the glucose target range:<br>
+							Very high: Time above range (TAR): % of readings and time > 250 mg/dL (>13.9 mmol/L)<br>
+							High: Time above range (TAR): % of readings and time 181–250 mg/dL (10.1–13.9 mmol/L)<br>
+							In range: Time in range (TIR): % of readings and time 70–180 mg/dL (3.9–10.0 mmol/L)<br>
+							Low: Time below range (TBR): % of readings and time 54–69 mg/dL (3.0–3.8 mmol/L)<br>
+							Very low: Time below range (TBR): % of readings and time <54 mg/dL (<3.0 mmol/L)<br>
+							Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.
+							</p> 
+	    					<b>Method Signature:</b> def tir(self, x, units)<br>
+	    					
+	    					<br><b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for TIR.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>T. Battelino, T. Danne, R. M. Bergenstal, S. A. Amiel, R. Beck, T. Biester,E. Bosi, B. A. Buckingham, W. T. Cefalu, K. L. Close, et al. Clinical targets forcontinuous glucose monitoring data interpretation: recommendations from the international consensus on time in range.Diabetes Care, 42(8):1593–1603, 2019.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's TIR value<br>
+							<img class="materialboxed" src="img/6_18.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.19"><br>
+	    				<h6>6.19 Variability Episodes</h6>
+	    				
+	    				<p>
+	    					Number of hypoglycemic (glucose concentrations of less than 3.0 mmol/L (54 mg/dL))and number of hyperglycemic (glucose concentration of more than 13.9 mmol/L (250 mg/dL)) episodes that last at least 15min. Hypoglycemic Excursions and Hyperglycemic Excursions are computed for each day and then averaged across all days within individual time series.Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+
+	    					<b>Method Signature:</b> def variabilityEpisodes(self, df, unit)<br>
+	    					
+							<br><br><b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output a numeric value for average Hypoglycemic Excursions and Hyperglycemic Excursions.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>T. Battelino, T. Danne, R. M. Bergenstal, S. A. Amiel, R. Beck, T. Biester,E. Bosi, B. A. Buckingham, W. T. Cefalu, K. L. Close, et al. Clinical targets forcontinuous glucose monitoring data interpretation: recommendations from the international consensus on time in range.Diabetes Care, 42(8):1593–1603, 2019.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's Hypoglycemic Excursions and Hyperglycemic Excursions.<br>
+							<img class="materialboxed" src="img/6_19.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.20"><br>
+	    				<h6>6.20 Index of Glycemic Control</h6>
+	    				
+	    				<p>
+	    					Sum of Hyperglycemia Index and Hypoglycemia Index. Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def IGC(self, df, unit, lltr = 80, ultr = 140, a = 1.1, b = 2.0, c = 30, d = 30)<br>
+	    					
+
+							<br><br><b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>tshould be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+									<tr>
+										<td>lltr</td>
+										<td>constant. default is 80</td>
+										<td>int</td>
+									</tr>
+									<tr>
+										<td>ultr</td>
+										<td>constant. default is 140</td>
+										<td>int</td>
+									</tr>
+									<tr>
+										<td>a</td>
+										<td>constant. default is 1.1</td>
+										<td>int</td>
+									</tr>
+									<tr>
+										<td>b</td>
+										<td>constant. default is 2</td>
+										<td>int</td>
+									</tr>
+									<tr>
+										<td>c</td>
+										<td>constant. default is 30</td>
+										<td>int</td>
+									</tr>
+									<tr>
+										<td>d</td>
+										<td>constant. default is 30</td>
+										<td>int</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output a numeric value for IGC, Hypoglycemic index, Hyperglycemic index.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>“Interpretation of Continuous Glucose Monitoring Data: Glycemic Variability and Quality of Glycemic Control” by David Rodbard, M.D. (see appendix 2). This function must output three measures: IGC, Hypoglycemic index, Hyperglycemic index.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's IGC value<br>
+							<img class="materialboxed" src="img/6_20.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.21"><br>
+	    				<h6>6.21 Glucose Liability Index</h6>
+	    				
+	    				<p>
+	    					Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def def glucoseLiabilityIndex(self,data, unit)<br>
+	    					
+
+							
+	    					<br><br><b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>should be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output a numeric value for GLI.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>“E. A. Ryan, T. Shandro, K. Green, B. W. Paty, P. A. Senior, D. Bigam, A. J. Shapiro, and M.-C. Vantyghem. Assessment of the severity of hypoglycemia and glycemic lability in type 1 diabetic subjects undergoing islet transplantation. Diabetes, 53(4):955–962, 2004”: https://diabetes.diabetesjournals.org/content/53/4/955.long</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's GLI<br>
+							<img class="materialboxed" src="img/6_12.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.22"><br>
+	    				<h6>6.22 Average Daily Risk Range</h6>
+	    				
+	    				<p>
+	    					The average sum of |HBGI for maximum glucose| plus |LBGI for minimum glucose| for each day. High Blood Glucose Index (HBGI), Low Blood Glucose Index (LBGI). Takes in a sequence of continuous glucose values and computes glycemic variability percentage (GVP). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def adrr(self, x, unit)<br>
+	    					
+	    					<br><br><b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>units</td>
+										<td>should be set either to "mmol" or to "mg"</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output a numeric value for ADRR.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>“B. P. Kovatchev, E. Otto, D. Cox, L. Gonder-Frederick, and W. Clarke. Evaluation of a new measure of blood glucose variability in diabetes. Diabetes care, 29(11):2433–2438, 2006”: https://care.diabetesjournals.org/content/29/11/2433.long</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's ADRR<br>
+							<img class="materialboxed" src="img/6_22.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.23"><br>
+	    				<h6>6.23 Mean of Daily Differences</h6>
+	    				
+	    				<p>
+	    					Mean difference between glucose values obtained at the same time of day on two consecutive days under standardized conditions. Takes in a sequence of continuous glucose values and computes mean absolute glucose change (MAG). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def modd(self, x)<br>
+	    					
+	    					<br><br><b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for MODD.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>“C. McDonnell, S. Donath, S. Vidmar, G. Werther, and F. Cameron. A novel approach to continuous glucose analysis utilizing glycemic variation. Diabetes technology & therapeutics, 7(2):253–263, 2005”.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's MAD value<br>
+							<img class="materialboxed" src="img/6_23.png">
+	    				<br><br>
+	    			</p>
+	    			<p id="chp6.24"><br>
+	    				<h6>6.24 Continuous Overlapping Net Glycemic Action</h6>
+	    				
+	    				<p>
+	    					A measure of within-day glucose variability: SD of differences between any glucose value and another one exactly N hours later. Takes in a sequence of continuous glucose values and computes mean absolute glucose change (MAG). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					<b>Method Signature:</b> def congaN(self, df, n)<br>
+	    					
+	    					<br><br><b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>x</td>
+										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>n</td>
+										<td>hour parameter; usually 1, 2, or 4.
+										</td>
+										<td>int</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> The output is a numeric value for CONGA.<br><br>
+							<b>References:</b>
+							<ol>
+								<li>“C. McDonnell, S. Donath, S. Vidmar, G. Werther, and F. Cameron. A novel approach to continuous glucose analysis utilizing glycemic variation. Diabetes technology & therapeutics, 7(2):253–263, 2005”.</li>
+								
+							</ol><br><br>
+							<b>Example:</b> An individual's CONGA values<br>
+							<img class="materialboxed" src="img/6_24.png">
+	    				<br><br>
+	    			</p>
+
+
+
+
+	    			<br><br><hr><br><br>
+	    			</p>
+
+	    			<div>
+	    				<div class="right">
+	    					<a class="waves-effect waves-light btn-small grey" href="chapter7.html"><i class="material-icons right">arrow_right</i>Next</a>
+	    				</div>
+	    				<div class="left">
+	    					<a class="waves-effect waves-light btn-small grey" href="chapter5.html"><i class="material-icons left">arrow_left</i>Previous</a>
+	    				</div>
+	    				<br><br>
+	    			</div>
+
+
+	    			<br><br>
+	    	</div>
+	    	
+	    </div>
+  
+		<footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l10 s12 offset-l1">
+                <p class="grey-text text-lighten-4">Developed at the National Scenter for Supercomputing Applications at the University of Illinois, Urbana-Champaign.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2020 Copyright
+            <a class="grey-text text-lighten-4 right" href="#!">Author</a>
+            </div>
+          </div>
+        </footer>
+
+		<!--JavaScript at end of body for optimized loading-->
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+
+  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+  // var collapsibleElem = document.querySelector('.collapsible');
+  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+$(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+        
+      
+    </script>
+    </body>
+  </html>

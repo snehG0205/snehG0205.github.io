@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <style type="text/css">
+      	header, main, footer, .content{
+	      padding-left: 300px;
+	    }
+
+	    @media only screen and (max-width : 992px) {
+	      header, main, footer, .content {
+	        padding-left: 0;
+	      }
+	    }
+
+	    body {
+		    display: flex;
+		    min-height: 100vh;
+		    flex-direction: column;
+		  }
+
+		  main {
+		    flex: 1 0 auto;
+		  }
+
+		  nav{
+		  	background-color: #808080;
+		  }
+
+		  .page-footer{
+		  	background-color: #808080;
+
+		  }
+
+		  .footer-copyright{
+		  	background-color: #000;
+		  }
+      </style>
+      <title>Constants</title>
+      <link rel="icon" type="image/png" href="img/diabetes.png"/>
+	  <link rel="icon" type="image/png" href="img/diabetes.png"/>
+    </head>
+
+    <body>
+    	<header>
+    		<nav> 
+				<div class="nav-wrapper">
+			      <a href="#" class="brand-logo center">GlucoCheck</a>
+			    </div>
+	    	</nav>
+	    </header>
+
+	   <div id="slide-out" class="sidenav sidenav-fixed">
+	    	<br><br>
+	    	<h5 class="center">Index</h5>
+		    <ol type="1">
+		      <li><a href="chapter1.html">Package Description</a></li>
+		      <li><a href="chapter2.html">Constants</a></li>
+		      <li><a href="chapter3.html">Core Methods</a></li>
+		      <ol>
+		      	<li><a href="chapter3.html#chp3.1">Training the Model</a></li>
+		      	<li><a href="chapter3.html#chp3.2">Impute Data</a></li>
+		      	<li><a href="chapter3.html#chp3.3">Describe Data</a></li>
+		      	<li><a href="chapter3.html#chp3.4">Describe Individual</a></li>
+		      	<li><a href="chapter3.html#chp3.5">Plot Individual</a></li>
+		      </ol>
+		      <li><a href="chapter4.html">Helper Methods</a></li>
+		      <ol>
+		      	<li><a href="chapter4.html#chp4.1">Smoothing</a></li>
+		      	<li><a href="chapter4.html#chp4.2">Subsampling</a></li>
+		      	<li><a href="chapter4.html#chp4.3">Convert Units</a></li>
+		      	<li><a href="chapter4.html#chp4.4">Only Complete days</a></li>
+		      	<li><a href="chapter4.html#chp4.5">Day & Night Mean</a></li>
+		      	<li><a href="chapter4.html#chp4.6">Hourly Sampling</a></li>
+		      </ol>
+		      <li><a href="chapter5.html">Inner Methods</a></li>
+		      <ol>
+		      	<li><a href="chapter5.html#chp5.1">Plot Imputed Values</a></li>
+		      	<li><a href="chapter5.html#chp5.2">Detect Gap</a></li>
+		      	<li><a href="chapter5.html#chp5.3">Preprocess Date</a></li>
+		      </ol>
+		      <li><a href="chapter6.html">Glucose Variability Indices</a></li>
+		      <ol>
+		      	<li><a href="chapter6.html#chp6.1">All Indices</a></li>
+		      	<li><a href="chapter6.html#chp6.2">Individual Indices</a></li>
+		      	<li><a href="chapter6.html#chp6.3">MAGE</a></li>
+		      	<li><a href="chapter6.html#chp6.4">GFI</a></li>
+		      	<li><a href="chapter6.html#chp6.5">BGRI</a></li>
+		      	<li><a href="chapter6.html#chp6.6">GRADE</a></li>
+		      	<li><a href="chapter6.html#chp6.7">J Index</a></li>
+		      	<li><a href="chapter6.html#chp6.8">M - Value</a></li>
+		      	<li><a href="chapter6.html#chp6.9">MAG</a></li>
+		      	<li><a href="chapter6.html#chp6.10">GVP</a></li>
+		      	<li><a href="chapter6.html#chp6.11">GMI</a></li>
+		      	<li><a href="chapter6.html#chp6.12">LAGE</a></li>
+		      	<li><a href="chapter6.html#chp6.13">Estimated hbA1c</a></li>
+		      	<li><a href="chapter6.html#chp6.14">Summary Statistices</a></li>
+		      	<li><a href="chapter6.html#chp6.15">SD of ROC</a></li>
+		      	<li><a href="chapter6.html#chp6.16">PGS</a></li>
+		      	<li><a href="chapter6.html#chp6.17">Distance Travelled</a></li>
+		      	<li><a href="chapter6.html#chp6.18">Time in Range</a></li>
+		      	<li><a href="chapter6.html#chp6.19">Variability Episodes</a></li>
+		      	<li><a href="chapter6.html#chp6.20">IGC</a></li>
+		      	<li><a href="chapter6.html#chp6.21">GLI</a></li>
+		      	<li><a href="chapter6.html#chp6.22">ADRR</a></li>
+		      	<li><a href="chapter6.html#chp6.23">MODD</a></li>
+		      	<li><a href="chapter6.html#chp6.24">CONGAn</a></li>
+
+		      </ol>
+		      <li><a href="chapter7.html">Error Metrics</a></li>
+		      <ol>
+		      	<li><a href="chapter7.html#chp7.1">Get All Metrics</a></li>
+		      	<li><a href="chapter7.html#chp7.2">Index of Agreement</a></li>
+		      	<li><a href="chapter7.html#chp7.3">RMSE</a></li>
+		      	<li><a href="chapter7.html#chp7.4">MAD</a></li>
+		      	<li><a href="chapter7.html#chp7.5">MAPE</a></li>
+		      	
+		      </ol>
+		      <br><br><br>
+		    </ol>
+	    </div>
+	    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons large">chevron_right</i></a>
+    	
+	    
+
+	    <div class="content">
+	    	<div class="inner" style="padding-left: 5%; padding-right: 10%">
+	    		<p >
+
+	    			<h5 id='chp2'>2. Constants </h5>
+	    			<p>
+						Constants are defined to store data. We have two defined constants, one to store our data and the other to store the metadata.<br>
+						These constants are used to feed data to our learning model and to calculate teh glucose variability indices.<br><br>
+						<table class="highlight responsive-table container">
+							<caption class="center"><b><u><br><br>Constants<br><br></u></b></caption>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Description</th>
+									<th>Datatype</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>consolidatedData</td>
+									<td>Stores data accumulated from the CGMAnalysis package, Gluvarpro package, and the CGMAnalyzer packagedataset.</td>
+									<td>pandas Dataframe</td>
+								</tr>
+								<tr>
+									<td>consolidated_meta</td>
+									<td>Stores metadata for the data in 'consolidatedData'</td>
+									<td>pandas Dataframe</td>
+								</tr>
+							</tbody>
+						</table>
+						<br><br>
+						<b>Example:</b> Viewing the 'consolidatedData' constant data<br>
+						<img class="materialboxed" src="img/2_1.png"><br><br><hr><br><br>
+						<b>Example:</b> Viewing the 'consolidated_meta' constant data<br>
+						<img class="materialboxed" src="img/2_2.png">
+	    			</p>
+
+	    			<br><br><hr><br><br>
+	    			</p>
+
+	    			<div>
+	    				<div class="right">
+	    					<a class="waves-effect waves-light btn-small grey" href="chapter3.html"><i class="material-icons right">arrow_right</i>Next</a>
+	    				</div>
+	    				<div class="left">
+	    					<a class="waves-effect waves-light btn-small grey" href="chapter2.html"><i class="material-icons left">arrow_left</i>Previous</a>
+	    				</div>
+	    				<br><br>
+	    			</div>
+
+
+	    			<br><br>
+
+	    	</div>
+	    	
+	    </div>
+  
+		<footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l10 s12 offset-l1">
+                <p class="grey-text text-lighten-4">Developed at the National Scenter for Supercomputing Applications at the University of Illinois, Urbana-Champaign.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2020 Copyright
+            <a class="grey-text text-lighten-4 right" href="#!">Author</a>
+            </div>
+          </div>
+        </footer>
+
+		<!--JavaScript at end of body for optimized loading-->
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+
+  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+  // var collapsibleElem = document.querySelector('.collapsible');
+  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+$(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+        
+      
+    </script>
+    </body>
+  </html>
