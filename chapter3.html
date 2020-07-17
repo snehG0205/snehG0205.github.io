@@ -53,9 +53,22 @@
     <body>
     	<header>
     		<nav> 
-				<div class="nav-wrapper">
+				<div class="container nav-wrapper">
 			      <a href="index.html" class="brand-logo center">GlucoCheck</a>
+            <div class="row right">
+              <div class="col s12">
+                <div class="row">
+                  <div class="input-field col s12 white-text">
+                    <i class="material-icons prefix">search</i>
+                    <input type="text" id="autocomplete-input" class="autocomplete white-text">
+                    <label for="autocomplete-input">Search</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 			    </div>
+          
 	    	</nav>
 	    </header>
 
@@ -421,7 +434,148 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function(){
     $('.materialboxed').materialbox();
   });
+        $(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
         
+
+        $(document).ready(function(){
+    $('input.autocomplete').autocomplete({
+      data: {
+        "Package": null,
+        "Install": null,
+        "Class": null,
+        "Object": null,
+        "Dependency": null,
+        "Required": null,
+        "Python": null,
+        "GlucoCheck":null,
+        "Core" :null,
+        "Train": null,
+        "Model": null,
+        "Learning": null,
+        "LSTM": null,
+        "Long short term memory": null,
+        "Impute": null,
+        "Predict": null,
+        "Describe": null,
+        "Plot": null,
+        "Data": null,
+        "Constant": null,
+        "Hall": null,
+        "Links": null,
+        "Helper":null,
+        "Smoothing": null,
+        "Subsampling": null,
+        "Complete Days": null,
+        "Full Days": null,
+        "Units": null,
+        "Convert Units": null,
+        "Mean": null,
+        "Day Mean": null,
+        "Night Mean": null,
+        "Sampling": null,
+        "Hourly Sampling": null,
+        "Inner":  null,
+        "Gap": null,
+        "Detect Gap": null,
+        "Date": null,
+        "Preprocess": null,
+        "Date Preprocess": null,
+        "Error": null,
+        "Error Metrics": null,
+        "IOA": null,
+        "Index of Agreement": null,
+        "MAD": null,
+        "Mean Absolute Deviation": null,
+        "MAPE": null,
+        "Mean Absolute Percentage Error": null,
+        "RMSE": null,
+        "Root Mean Square Error": null,
+        "Variability": null,
+        "Variability Indices": null,
+        "ADRR":null,
+        "BGRI":null,
+        "CONGAn":null,
+        "DT":null,
+        "EhbA1c":null,
+        "GFI":null,
+        "GRADE":null,
+        "GVP":null,
+        "GMI":null,
+        "GLI":null,
+        "IGC":null,
+        "J-Index":null,
+        "LAGE":null,
+        "MAGE":null,
+        "M-Value":null,
+        "MAG":null,
+        "MODD":null,
+        "MAD":null,
+        "PGS":null,
+        "SDROC":null,
+        "TIR":null,
+        "VE":null,
+        "Summary Statistics":null,
+        "Average Daily Risk Range":null,
+        "Blood Glucose Risk Index":null,
+        "Continuous Overlapping Net Glycemic Action":null,
+        "Distance Travelled":null,
+        "Estimated HbA1c":null,
+        "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation":null,
+        "Glucose Liability Index":null,
+        "Glucose Management Indicator":null,
+        "Glycaemic Risk Assessment Diabetes Equation":null,
+        "Glycemic Variability Percentage":null,
+        "Index of Glycemic Control":null,
+        "Largest Amplitude of Glycemic Excursions":null,
+        "Mean Absolute Difference":null,
+        "Mean Absolute Glucose Change":null,
+        "Mean Amplitude Glycemic Excursions":null,
+        "Mean of Daily Differences":null,
+        "Personal Glycemic State":null,
+        "Standard Deviation of the Glucose Rate of Change":null,
+        "Time in Range":null,
+        "Variability Episodes":null
+
+
+      },
+        onAutocomplete: function(val) {
+           // Callback function when value is autcompleted.
+           // Grabbing input after autocomplete is done
+           var value = $('input.autocomplete').val();
+           if(value == "Package" || value == "Install" || value == "Class" || value == "Description" || value == "Object" || value == "Dependency" || value == "Required" || value == "Python"){
+               var link = window.open('chapter1.html');
+               link.location;
+           } else if(value == "GlucoCheck"){
+               var link = window.open('index.html');
+               link.location;
+           } else if (value == "Core" || value == "Train" || value == "Model" || value == "Learning" || value == "LSTM" || value == "Long short term memory" || value == "Impute" || value == "Predict" || value == "Describe" || value == "Plot") {
+               var link = window.open('chapter3.html');
+               link.location;
+           } else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
+               var link = window.open('chapter2.html');
+               link.location;
+           } else if (value == "Helper" || value == "Units" || value == "Convert Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Sampling" || value == "Hourly Sampling") {
+               var link = window.open('chapter4.html');
+               link.location;
+           } else if (value == "Inner" || value == "Gap" || value == "Detect Gap" || value == "Date" || value == "Preprocess" || value == "Date Preprocess") {
+               var link = window.open('chapter5.html');
+               link.location;
+           } else if (value == "Variability" || value == "Variability Indices" || value == "ADRR" || value == "BGRI" || value == "CONGAn" || value == "DT" || value == "EhbA1c" || value == "GFI" || value == "GRADE" || value == "GVP" || value == "GMI" || value == "GLI" || value == "IGC" || value == "J-Index" || value == "LAGE" || value == "MAGE" || value == "M-Value" || value == "MAG" || value == "MODD" || value == "MAD" || value == "PGS" || value == "SDROC" || value == "TIR" || value == "VE" || value == "Summary Statistics" || value == "Average Daily Risk Range" || value == "Blood Glucose Risk Index" || value == "Continuous Overlapping Net Glycemic Action" || value == "Distance Travelled" || value == "Estimated HbA1c" || value == "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation" || value == "Glucose Liability Index" || value == "Glucose Management Indicator" || value == "Glycaemic Risk Assessment Diabetes Equation" || value == "Glycemic Variability Percentage" || value == "Index of Glycemic Control" || value == "Largest Amplitude of Glycemic Excursions" || value == "Mean Absolute Difference" || value == "Mean Absolute Glucose Change" || value == "Mean Amplitude Glycemic Excursions" || value == "Mean of Daily Differences" || value == "Personal Glycemic State" || value == "Standard Deviation of the Glucose Rate of Change" || value == "Time in Range" || value == "Variability Episodes" ) {
+               var link = window.open('chapter6.html');
+               link.location;
+           }else if (value == "Error" || value == "Error Metrics" || value == "IOA" || value == "MAD" || value == "MAPE" || value == "RMSE" || value == "Index of Agreement" || value == "Mean Absolute Deviation" || value == "Mean Absolute Percentage Error" || value == "Root Mean Square Error") {
+               var link = window.open('chapter7.html');
+               link.location;
+           }
+
+
+
+        },
+
+    });
+});
       
     </script>
     </body>
