@@ -323,7 +323,7 @@ $(document).ready(function(){
   });
         
 
-        $(document).ready(function(){
+   $(document).ready(function(){
     $('input.autocomplete').autocomplete({
       data: {
         "Package": null,
@@ -431,26 +431,195 @@ $(document).ready(function(){
            if(value == "Package" || value == "Install" || value == "Class" || value == "Description" || value == "Object" || value == "Dependency" || value == "Required" || value == "Python"){
                var link = window.open('chapter1.html');
                link.location;
-           } else if(value == "GlucoCheck"){
+           } 
+           else if(value == "GlucoCheck"){
                var link = window.open('index.html');
                link.location;
-           } else if (value == "Core" || value == "Train" || value == "Model" || value == "Learning" || value == "LSTM" || value == "Long short term memory" || value == "Impute" || value == "Predict" || value == "Describe" || value == "Plot") {
+           } 
+           else if (value == "Core" || value == "Model" || value == "Learning" || value == "LSTM" || value == "Long short term memory" || value == "Predict") {
                var link = window.open('chapter3.html');
                link.location;
-           } else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
+           } 
+           else if (value == "Train") {
+               var link = window.open('chapter3.html#chp3.1');
+               link.location;
+           } 
+           else if (value == "Impute") {
+               var link = window.open('chapter3.html#chp3.2');
+               link.location;
+           } 
+           else if (value == "Describe") {
+               var link = window.open('chapter3.html#chp3.3');
+               link.location;
+           } 
+           else if (value == "Plot") {
+               var link = window.open('chapter3.html#chp3.5');
+               link.location;
+           } 
+           else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
                var link = window.open('chapter2.html');
                link.location;
-           } else if (value == "Helper" || value == "Units" || value == "Convert Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Sampling" || value == "Hourly Sampling") {
+           } 
+           else if (value == "Helper" || value == "Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Days") {
                var link = window.open('chapter4.html');
                link.location;
-           } else if (value == "Inner" || value == "Gap" || value == "Detect Gap" || value == "Date" || value == "Preprocess" || value == "Date Preprocess") {
+           } 
+           else if (value == "Smoothing") {
+               var link = window.open('chapter4.html#chp4.1');
+               link.location;
+           }
+           else if (value == "Subsampling") {
+               var link = window.open('chapter4.html#chp4.2');
+               link.location;
+           } 
+           else if (value == "Convert Units") {
+               var link = window.open('chapter4.html#chp4.3');
+               link.location;
+           } 
+           else if (value == "Complete Days") {
+               var link = window.open('chapter4.html#chp4.4');
+               link.location;
+           } 
+           else if (value == "Day & Night Mean") {
+               var link = window.open('chapter4.html#chp4.5');
+               link.location;
+           } 
+           else if (value == "Hourly Sampling") {
+               var link = window.open('chapter4.html#chp4.6');
+               link.location;
+           } 
+           else if (value == "Inner" || value == "Gap" || value == "Date" || value == "Preprocess") {
                var link = window.open('chapter5.html');
                link.location;
-           } else if (value == "Variability" || value == "Variability Indices" || value == "ADRR" || value == "BGRI" || value == "CONGAn" || value == "DT" || value == "EhbA1c" || value == "GFI" || value == "GRADE" || value == "GVP" || value == "GMI" || value == "GLI" || value == "IGC" || value == "J-Index" || value == "LAGE" || value == "MAGE" || value == "M-Value" || value == "MAG" || value == "MODD" || value == "MAD" || value == "PGS" || value == "SDROC" || value == "TIR" || value == "VE" || value == "Summary Statistics" || value == "Average Daily Risk Range" || value == "Blood Glucose Risk Index" || value == "Continuous Overlapping Net Glycemic Action" || value == "Distance Travelled" || value == "Estimated HbA1c" || value == "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation" || value == "Glucose Liability Index" || value == "Glucose Management Indicator" || value == "Glycaemic Risk Assessment Diabetes Equation" || value == "Glycemic Variability Percentage" || value == "Index of Glycemic Control" || value == "Largest Amplitude of Glycemic Excursions" || value == "Mean Absolute Difference" || value == "Mean Absolute Glucose Change" || value == "Mean Amplitude Glycemic Excursions" || value == "Mean of Daily Differences" || value == "Personal Glycemic State" || value == "Standard Deviation of the Glucose Rate of Change" || value == "Time in Range" || value == "Variability Episodes" ) {
+           } 
+           else if (value == "Detect Gap") {
+               var link = window.open('chapter5.html#chp5.2');
+               link.location;
+           } 
+           else if (value == "Date Preprocess") {
+               var link = window.open('chapter5.html#chp5.3');
+               link.location;
+           } 
+           else if (value == "Variability" || value == "Variability Indices") {
                var link = window.open('chapter6.html');
                link.location;
-           }else if (value == "Error" || value == "Error Metrics" || value == "IOA" || value == "MAD" || value == "MAPE" || value == "RMSE" || value == "Index of Agreement" || value == "Mean Absolute Deviation" || value == "Mean Absolute Percentage Error" || value == "Root Mean Square Error") {
+           }
+           else if (value == "ADRR" || value == "Average Daily Risk Range") {
+               var link = window.open('chapter6.html#chp6.3');
+               link.location;
+           }
+           else if (value == "BGRI" || value == "Blood Glucose Risk Index") {
+               var link = window.open('chapter6.html#chp6.4');
+               link.location;
+           }
+           else if (value == "CONGAn" || value == "Continuous Overlapping Net Glycemic Action") {
+               var link = window.open('chapter6.html#chp6.5');
+               link.location;
+           }
+           else if (value == "DT" || value == "Distance Travelled") {
+               var link = window.open('chapter6.html#chp6.6');
+               link.location;
+           }
+           else if (value == "DT" || value == "Distance Travelled") {
+               var link = window.open('chapter6.html#chp6.6');
+               link.location;
+           }
+           else if (value == "EhbA1c" || value == "Estimated HbA1c") {
+               var link = window.open('chapter6.html#chp6.7');
+               link.location;
+           }
+           else if (value == "GFI" || value == "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation") {
+               var link = window.open('chapter6.html#chp6.8');
+               link.location;
+           }
+           else if (value == "GRADE" || value == "Glycaemic Risk Assessment Diabetes Equation") {
+               var link = window.open('chapter6.html#chp6.11');
+               link.location;
+           }
+           else if (value == "GVP" || value == "Glycemic Variability Percentage") {
+               var link = window.open('chapter6.html#chp6.12');
+               link.location;
+           }
+           else if (value == "GMI" || value == "Glucose Management Indicator") {
+               var link = window.open('chapter6.html#chp6.10');
+               link.location;
+           }
+           else if (value == "GLI" || value == "Glucose Liability Index") {
+               var link = window.open('chapter6.html#chp6.9');
+               link.location;
+           }
+           else if (value == "IGC" || value == "Index of Glycemic Control") {
+               var link = window.open('chapter6.html#chp6.13');
+               link.location;
+           }
+           else if (value == "J-Index") {
+               var link = window.open('chapter6.html#chp6.14');
+               link.location;
+           }
+           else if (value == "LAGE" || value == "Largest Amplitude of Glycemic Excursions") {
+               var link = window.open('chapter6.html#chp6.15');
+               link.location;
+           }
+           else if (value == "M-Value") {
+               var link = window.open('chapter6.html#chp6.16');
+               link.location;
+           }
+           else if (value == "MAD" || value == "Mean Absolute Difference") {
+               var link = window.open('chapter6.html#chp6.17');
+               link.location;
+           }
+           else if (value == "MAG" || value == "Mean Absolute Glucose Change") {
+               var link = window.open('chapter6.html#chp6.18');
+               link.location;
+           }
+           else if (value == "MAGE" || value == "Mean Amplitude Glycemic Excursions") {
+               var link = window.open('chapter6.html#chp6.19');
+               link.location;
+           }
+           else if (value == "MODD" || value == "Mean of Daily Differences") {
+               var link = window.open('chapter6.html#chp6.20');
+               link.location;
+           }
+           else if (value == "PGS" || value == "Personal Glycemic State") {
+               var link = window.open('chapter6.html#chp6.21');
+               link.location;
+           }
+           else if (value == "SDROC" || value == "Standard Deviation of the Glucose Rate of Change") {
+               var link = window.open('chapter6.html#chp6.22');
+               link.location;
+           }
+           else if (value == "Summary Statistics") {
+               var link = window.open('chapter6.html#chp6.23');
+               link.location;
+           }
+           else if (value == "TIR" ||  value == "Time in Range") {
+               var link = window.open('chapter6.html#chp6.24');
+               link.location;
+           }
+           else if (value == "Variability Episodes") {
+               var link = window.open('chapter6.html#chp6.25');
+               link.location;
+           }
+
+
+           else if (value == "Error" || value == "Error Metrics") {
                var link = window.open('chapter7.html');
+               link.location;
+           }
+           else if (value == "IOA" || value == "Index of Agreement") {
+               var link = window.open('chapter7.html#chp7.2');
+               link.location;
+           }
+           else if (value == "MAD" || value == "Mean Absolute Deviation") {
+               var link = window.open('chapter7.html#chp7.3');
+               link.location;
+           }
+           else if (value == "MAPE" || value == "Mean Absolute Percentage Error") {
+               var link = window.open('chapter7.html#chp7.3');
+               link.location;
+           }
+           else if (value == "RMSE" || value == "Root Mean Square Error") {
+               var link = window.open('chapter7.html#chp7.3');
                link.location;
            }
 
@@ -459,7 +628,7 @@ $(document).ready(function(){
         },
 
     });
-});       
+});
       
     </script>
     </body>

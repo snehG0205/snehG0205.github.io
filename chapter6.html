@@ -400,6 +400,7 @@
 							<b>References:</b>
 							<ol>
 								<li>D. Rodbard. Glucose variability: a review of clinical applications and research developments. Diabetes technology & therapeutics, 20(S2):S2–5, 2018.</li>
+								<li>Characterizing Blood Glucose Variability Using New Metrics with Continuous Glucose Monitoring Data</li>
 								
 							</ol><br><br>
 							<b>Example:</b> An individual's average distance travelled<br>
@@ -587,7 +588,7 @@
 	    				<h6>6(k) Glycaemic Risk Assessment Diabetes Equation</h6>
 	    				
 	    				<p>
-	    					GRADE is a score derived to summarize the degree of risk associated with a certain glucose profile. Qualitative risk scoring for a wide range of glucose levels inclusive of marked hypoglycemia and hyperglycemia is obtained based on a committee of diabetes practitioners. The calculated score can range from 0 -- meaning no risk to 50 -- meaning maximal risk. The structure of the formula is designed to give a continuous curvilinear approximation with a nadir at 4.96 mmol/L (90 mg/dL) and high adverse weighting for both hyper- and hypoglycemia. The contribution of hypoglycemia, euglycemia, and hyperglycemia to the GRADE score are expressed as percentages: e.g. GRADE (hypoglycemia %, euglycemia %, hyperglycemia %), which are defined as: <3.9 mmol/L (70 mg/dL) hypoglycaemia; 3.9 - 7.8mmol/L (70–140 mg/dL) euglycemia; and >7.8 mml/L (140 mg/dL) hyperglycemia. Takes in a sequence of continuous glucose values and computes Glycaemic Risk Assessment Diabetes Equation (GRADE) score. This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					GRADE is a score derived to summarize the degree of risk associated with a certain glucose profile. Qualitative risk scoring for a wide range of glucose levels inclusive of marked hypoglycemia and hyperglycemia is obtained based on a committee of diabetes practitioners. The calculated score can range from 0 -- meaning no risk to 50 -- meaning maximal risk. The structure of the formula is designed to give a continuous curvilinear approximation with a nadir at 4.96 mmol/L (90 mg/dL) and high adverse weighting for both hyper- and hypoglycemia. The contribution of hypoglycemia, euglycemia, and hyperglycemia to the GRADE score are expressed as percentages: e.g. GRADE (hypoglycemia %, euglycemia %, hyperglycemia %), which are defined as: <3.9 mmol/L (70 mg/dL) hypoglycaemia; 3.9 - 7.8mmol/L (70–140 mg/dL) euglycemia; and >7.8 mml/L (140 mg/dL) hyperglycemia. Takes in a sequence of continuous glucose values and computes Glycaemic Risk Assessment Diabetes Equation (GRADE) score. This function accepts data given either in mmol/L or mg/dL and converts it to mmols before applying the formula.<br><br>
 	    					<b>Method Signature:</b> def grade(self, x, units)<br><br>
 	    					
 	    					<b>Function Parameters:</b><br>
@@ -624,7 +625,7 @@
 								<li>Service FJ (2013). “Glucose variability.” Diabetes, 62(5), 1398.</li>
 								<li>KHill N, Hindmarsh P, Stevens R, Stratton I, Levy J, Matthews D (2007). “A method for assessing quality of control from glucose profiles.” Diabetic medicine, 24(7), 753–758.</li>
 							</ol><br><br>
-							<b>Example:</b> The GRAGE value for an individual<br>
+							<b>Example:</b> The GRADE value for an individual<br>
 							<img class="materialboxed" src="img/6_11.png">
 	    				<br><br>
 	    			</p>
@@ -1019,7 +1020,7 @@
 	    				<h6>6(t) Mean of Daily Differences</h6>
 	    				
 	    				<p>
-	    					Mean difference between glucose values obtained at the same time of day on two consecutive days under standardized conditions. Takes in a sequence of continuous glucose values and computes mean absolute glucose change (MAG). This function accepts data given either in mmol/L or mg/dL.<br><br>
+	    					MODD is the mean of all valid absolute value differences between glucose concentrations measured at the same time of day on two consecutive days. Final MODD value is given average of all MODD pairs. This function accepts data given either in mmol/L or mg/dL.<br><br>
 	    					<b>Method Signature:</b> def modd(self, x)<br>
 	    					
 	    					<br><br><b>Function Parameters:</b><br>
@@ -1049,9 +1050,10 @@
 							<b>References:</b>
 							<ol>
 								<li>“C. McDonnell, S. Donath, S. Vidmar, G. Werther, and F. Cameron. A novel approach to continuous glucose analysis utilizing glycemic variation. Diabetes technology & therapeutics, 7(2):253–263, 2005”.</li>
+								<li>Rawlings, Renata A., Hang Shi, Lo-Hua Yuan, William Brehm, Rodica Pop-Busui, and Patrick W. Nelson. "Translating Glucose Variability Metrics into the Clinic via C ontinuous G lucose M onitoring: AG raphical U ser I nterface for D iabetes E valuation (CGM-GUIDE©)." Diabetes technology & therapeutics 13, no. 12 (2011): 1241-1248.</li>
 								
 							</ol><br><br>
-							<b>Example:</b> An individual's MAD value<br>
+							<b>Example:</b> An individual's MODD value<br>
 							<img class="materialboxed" src="img/6_20.png">
 	    				<br><br>
 	    			</p>
@@ -1351,7 +1353,7 @@ $(document).ready(function(){
   });
         
 
-        $(document).ready(function(){
+$(document).ready(function(){
     $('input.autocomplete').autocomplete({
       data: {
         "Package": null,
@@ -1459,26 +1461,195 @@ $(document).ready(function(){
            if(value == "Package" || value == "Install" || value == "Class" || value == "Description" || value == "Object" || value == "Dependency" || value == "Required" || value == "Python"){
                var link = window.open('chapter1.html');
                link.location;
-           } else if(value == "GlucoCheck"){
+           } 
+           else if(value == "GlucoCheck"){
                var link = window.open('index.html');
                link.location;
-           } else if (value == "Core" || value == "Train" || value == "Model" || value == "Learning" || value == "LSTM" || value == "Long short term memory" || value == "Impute" || value == "Predict" || value == "Describe" || value == "Plot") {
+           } 
+           else if (value == "Core" || value == "Model" || value == "Learning" || value == "LSTM" || value == "Long short term memory" || value == "Predict") {
                var link = window.open('chapter3.html');
                link.location;
-           } else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
+           } 
+           else if (value == "Train") {
+               var link = window.open('chapter3.html#chp3.1');
+               link.location;
+           } 
+           else if (value == "Impute") {
+               var link = window.open('chapter3.html#chp3.2');
+               link.location;
+           } 
+           else if (value == "Describe") {
+               var link = window.open('chapter3.html#chp3.3');
+               link.location;
+           } 
+           else if (value == "Plot") {
+               var link = window.open('chapter3.html#chp3.5');
+               link.location;
+           } 
+           else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
                var link = window.open('chapter2.html');
                link.location;
-           } else if (value == "Helper" || value == "Units" || value == "Convert Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Sampling" || value == "Hourly Sampling") {
+           } 
+           else if (value == "Helper" || value == "Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Days") {
                var link = window.open('chapter4.html');
                link.location;
-           } else if (value == "Inner" || value == "Gap" || value == "Detect Gap" || value == "Date" || value == "Preprocess" || value == "Date Preprocess") {
+           } 
+           else if (value == "Smoothing") {
+               var link = window.open('chapter4.html#chp4.1');
+               link.location;
+           }
+           else if (value == "Subsampling") {
+               var link = window.open('chapter4.html#chp4.2');
+               link.location;
+           } 
+           else if (value == "Convert Units") {
+               var link = window.open('chapter4.html#chp4.3');
+               link.location;
+           } 
+           else if (value == "Complete Days") {
+               var link = window.open('chapter4.html#chp4.4');
+               link.location;
+           } 
+           else if (value == "Day & Night Mean") {
+               var link = window.open('chapter4.html#chp4.5');
+               link.location;
+           } 
+           else if (value == "Hourly Sampling") {
+               var link = window.open('chapter4.html#chp4.6');
+               link.location;
+           } 
+           else if (value == "Inner" || value == "Gap" || value == "Date" || value == "Preprocess") {
                var link = window.open('chapter5.html');
                link.location;
-           } else if (value == "Variability" || value == "Variability Indices" || value == "ADRR" || value == "BGRI" || value == "CONGAn" || value == "DT" || value == "EhbA1c" || value == "GFI" || value == "GRADE" || value == "GVP" || value == "GMI" || value == "GLI" || value == "IGC" || value == "J-Index" || value == "LAGE" || value == "MAGE" || value == "M-Value" || value == "MAG" || value == "MODD" || value == "MAD" || value == "PGS" || value == "SDROC" || value == "TIR" || value == "VE" || value == "Summary Statistics" || value == "Average Daily Risk Range" || value == "Blood Glucose Risk Index" || value == "Continuous Overlapping Net Glycemic Action" || value == "Distance Travelled" || value == "Estimated HbA1c" || value == "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation" || value == "Glucose Liability Index" || value == "Glucose Management Indicator" || value == "Glycaemic Risk Assessment Diabetes Equation" || value == "Glycemic Variability Percentage" || value == "Index of Glycemic Control" || value == "Largest Amplitude of Glycemic Excursions" || value == "Mean Absolute Difference" || value == "Mean Absolute Glucose Change" || value == "Mean Amplitude Glycemic Excursions" || value == "Mean of Daily Differences" || value == "Personal Glycemic State" || value == "Standard Deviation of the Glucose Rate of Change" || value == "Time in Range" || value == "Variability Episodes" ) {
+           } 
+           else if (value == "Detect Gap") {
+               var link = window.open('chapter5.html#chp5.2');
+               link.location;
+           } 
+           else if (value == "Date Preprocess") {
+               var link = window.open('chapter5.html#chp5.3');
+               link.location;
+           } 
+           else if (value == "Variability" || value == "Variability Indices") {
                var link = window.open('chapter6.html');
                link.location;
-           }else if (value == "Error" || value == "Error Metrics" || value == "IOA" || value == "MAD" || value == "MAPE" || value == "RMSE" || value == "Index of Agreement" || value == "Mean Absolute Deviation" || value == "Mean Absolute Percentage Error" || value == "Root Mean Square Error") {
+           }
+           else if (value == "ADRR" || value == "Average Daily Risk Range") {
+               var link = window.open('chapter6.html#chp6.3');
+               link.location;
+           }
+           else if (value == "BGRI" || value == "Blood Glucose Risk Index") {
+               var link = window.open('chapter6.html#chp6.4');
+               link.location;
+           }
+           else if (value == "CONGAn" || value == "Continuous Overlapping Net Glycemic Action") {
+               var link = window.open('chapter6.html#chp6.5');
+               link.location;
+           }
+           else if (value == "DT" || value == "Distance Travelled") {
+               var link = window.open('chapter6.html#chp6.6');
+               link.location;
+           }
+           else if (value == "DT" || value == "Distance Travelled") {
+               var link = window.open('chapter6.html#chp6.6');
+               link.location;
+           }
+           else if (value == "EhbA1c" || value == "Estimated HbA1c") {
+               var link = window.open('chapter6.html#chp6.7');
+               link.location;
+           }
+           else if (value == "GFI" || value == "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation") {
+               var link = window.open('chapter6.html#chp6.8');
+               link.location;
+           }
+           else if (value == "GRADE" || value == "Glycaemic Risk Assessment Diabetes Equation") {
+               var link = window.open('chapter6.html#chp6.11');
+               link.location;
+           }
+           else if (value == "GVP" || value == "Glycemic Variability Percentage") {
+               var link = window.open('chapter6.html#chp6.12');
+               link.location;
+           }
+           else if (value == "GMI" || value == "Glucose Management Indicator") {
+               var link = window.open('chapter6.html#chp6.10');
+               link.location;
+           }
+           else if (value == "GLI" || value == "Glucose Liability Index") {
+               var link = window.open('chapter6.html#chp6.9');
+               link.location;
+           }
+           else if (value == "IGC" || value == "Index of Glycemic Control") {
+               var link = window.open('chapter6.html#chp6.13');
+               link.location;
+           }
+           else if (value == "J-Index") {
+               var link = window.open('chapter6.html#chp6.14');
+               link.location;
+           }
+           else if (value == "LAGE" || value == "Largest Amplitude of Glycemic Excursions") {
+               var link = window.open('chapter6.html#chp6.15');
+               link.location;
+           }
+           else if (value == "M-Value") {
+               var link = window.open('chapter6.html#chp6.16');
+               link.location;
+           }
+           else if (value == "MAD" || value == "Mean Absolute Difference") {
+               var link = window.open('chapter6.html#chp6.17');
+               link.location;
+           }
+           else if (value == "MAG" || value == "Mean Absolute Glucose Change") {
+               var link = window.open('chapter6.html#chp6.18');
+               link.location;
+           }
+           else if (value == "MAGE" || value == "Mean Amplitude Glycemic Excursions") {
+               var link = window.open('chapter6.html#chp6.19');
+               link.location;
+           }
+           else if (value == "MODD" || value == "Mean of Daily Differences") {
+               var link = window.open('chapter6.html#chp6.20');
+               link.location;
+           }
+           else if (value == "PGS" || value == "Personal Glycemic State") {
+               var link = window.open('chapter6.html#chp6.21');
+               link.location;
+           }
+           else if (value == "SDROC" || value == "Standard Deviation of the Glucose Rate of Change") {
+               var link = window.open('chapter6.html#chp6.22');
+               link.location;
+           }
+           else if (value == "Summary Statistics") {
+               var link = window.open('chapter6.html#chp6.23');
+               link.location;
+           }
+           else if (value == "TIR" ||  value == "Time in Range") {
+               var link = window.open('chapter6.html#chp6.24');
+               link.location;
+           }
+           else if (value == "Variability Episodes") {
+               var link = window.open('chapter6.html#chp6.25');
+               link.location;
+           }
+
+
+           else if (value == "Error" || value == "Error Metrics") {
                var link = window.open('chapter7.html');
+               link.location;
+           }
+           else if (value == "IOA" || value == "Index of Agreement") {
+               var link = window.open('chapter7.html#chp7.2');
+               link.location;
+           }
+           else if (value == "MAD" || value == "Mean Absolute Deviation") {
+               var link = window.open('chapter7.html#chp7.3');
+               link.location;
+           }
+           else if (value == "MAPE" || value == "Mean Absolute Percentage Error") {
+               var link = window.open('chapter7.html#chp7.3');
+               link.location;
+           }
+           else if (value == "RMSE" || value == "Root Mean Square Error") {
+               var link = window.open('chapter7.html#chp7.3');
                link.location;
            }
 
