@@ -80,27 +80,20 @@
 		      <li><a href="chapter2.html">Constants</a></li>
 		      <li><a href="chapter3.html">Core Methods</a></li>
 		      <ol type="a">
-		      	<li><a href="chapter3.html#chp3.1">Training the Model</a></li>
-		      	<li><a href="chapter3.html#chp3.2">Impute Data</a></li>
-		      	<li><a href="chapter3.html#chp3.3">Describe Data</a></li>
-		      	<li><a href="chapter3.html#chp3.4">Describe Individual</a></li>
-		      	<li><a href="chapter3.html#chp3.5">Plot Individual</a></li>
+		      	<li><a href="chapter3.html#chp3.1">Describe Data</a></li>
+		      	<li><a href="chapter3.html#chp3.2">Plot Individual</a></li>
+		      	<li><a href="chapter3.html#chp3.3">Bar Plots</a></li>
+		      	<li><a href="chapter3.html#chp3.4">Histogram Plots</a></li>
+		      	<li><a href="chapter3.html#chp3.5">Glucose Indices</a></li>
 		      </ol>
-		      <li><a href="chapter4.html">Helper Methods</a></li>
+		      <li><a href="chapter4.html">Imputations</a></li>
 		      <ol type="a">
-		      	<li><a href="chapter4.html#chp4.1">Smoothing</a></li>
-		      	<li><a href="chapter4.html#chp4.2">Subsampling</a></li>
-		      	<li><a href="chapter4.html#chp4.3">Convert Units</a></li>
-		      	<li><a href="chapter4.html#chp4.4">Only Complete days</a></li>
-		      	<li><a href="chapter4.html#chp4.5">Day & Night Mean</a></li>
-		      	<li><a href="chapter4.html#chp4.6">Hourly Sampling</a></li>
+		      	<li><a href="chapter4.html#chp4.1">Linear Imputations</a></li>
+		      	<li><a href="chapter4.html#chp4.2">Spline Imputations</a></li>
+		      	<li><a href="chapter4.html#chp4.3">LSTM Imputations</a></li>
 		      </ol>
-		        <li><a href="chapter5.html">Inner Methods</a></li>
-		      <ol type="a">
-		      	<li><a href="chapter5.html#chp5.1">Plot Imputed Values</a></li>
-		      	<li><a href="chapter5.html#chp5.2">Detect Gap</a></li>
-		      	<li><a href="chapter5.html#chp5.3">Preprocess Date</a></li>
-		      </ol>
+		      <li><a href="chapter5.html">Classification</a></li>
+		      
 		      <li><a href="chapter6.html">Glucose Variability Indices</a></li>
 		      <ol type="a">
 		      	<li><a href="chapter6.html#chp6.1">All Indices</a></li>
@@ -139,6 +132,17 @@
 		      	<li><a href="chapter7.html#chp7.5">RMSE</a></li>
 
 		      </ol>
+		      <li><a href="chapter8.html">Helper Methods</a></li>
+		      <ol type="a">
+		      	<li><a href="chapter8.html#chp8.1">Convert Units</a></li>
+		      	<li><a href="chapter8.html#chp8.2">Trim Days</a></li>
+		      	<li><a href="chapter8.html#chp8.3">Split Individual</a></li>
+		      	<li><a href="chapter8.html#chp8.4">Subsampling</a></li>
+		      	<li><a href="chapter8.html#chp8.5">Hourly Samples</a></li>
+		      	<li><a href="chapter8.html#chp8.8">Smoothing</a></li>
+		      	<li><a href="chapter8.html#chp8.7">Gap Detection</a></li>
+
+		      </ol>
 		      <br><br><br>
 		    </ol>
 	    </div>
@@ -152,16 +156,184 @@
 
 	    			<h5 id='chp3'>3. Core Methods </h5>
 	    			<p>
-	    				This section contains the methods that the user will use to implement the basic functionality of the package.<br>
-	    				The methods cover everything from training a Long Short Term Memory (LSTM) model and perform imputations for missing data. It also contains supporting methods that calculates an analytical and visual description of the data.
+	    				This section contains the methods that the user will use to implement the basic functionality of the package. All the methods that the user will implement are listed here.<br>
+	    				This methods documented in this section are used to calculate an analytical description of the data and visualize the data as well as the description parameters.
 	    			</p>
 	    			<p id="chp3.1"><br>
-	    				<h6>3(a) Training the Model</h6>
+	    				<h6>3(a) Describe Data</h6>
 	    				
 	    				<p>
-	    					This method is used to train the LSTM imputation model on data. The default data set for the training includes data from the CGMAnalysis package, Gluvarpro package, and the CGMAnalyzer package. We have also included the OHIO university dataset in the training, however, due to a data sharing agreement, this data is not made available for use.
-	    					<br>The user may specify their own data if they wish to.<br><br>
-	    					<b>Method Signature:</b> def train(self, data)<br><br>
+	    					This method provides a statistical description of the default data used for training the model in the form of a consolidated table. This data has been trimmed to have only complete days with no missing values. This description table is saved as a CSV file for future reference.<br><br>
+	    					<b>Method Signature:</b> def dataDescribe(self, data)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>data </td>
+										<td>The default dataset (CSV file) includes data from the CGMAnalysis package, Gluvarpro package, CGMAnalyzer package and the Ohio University with the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> A tabular representation of the statistical analysis of the consolidated data. This table is also saved as a csv file.<br><br>
+							<b>Example:</b> A statistical description of the data<br><br>
+							<img class="materialboxed" src="img/describe.png">
+	    			</p>
+	    			<br><br>
+	    			</p>
+	    			<p id="chp3.2"><br>
+	    				<h6>3(b) Plot Individual</h6>
+	    				
+	    				<p>
+	    					This method plots the graph of the Glucose Values of a single Subject ID. The subject ID can be found as a part of the description of the data. The default data includes data from the CGMAnalysis package, Gluvarpro package, and the CGMAnalyzer package dataset. The user may specify their own data if they wish to. The subject ID is a part of the data supplied by the user. <br><br>
+	    					<b>Method Signature:</b> def plotIndividual(self, uid, data, date)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>uid </td>
+										<td>The subject ID of the user to plot</td>
+										<td>string</td>
+									</tr>
+									<tr>
+										<td>data </td>
+										<td>The default dataset (CSV file) includes data from the CGMAnalysis package, Gluvarpro package, CGMAnalyzer package and the Ohio University with the following format:<br>
+											Display Time -> object<br>
+											GlucoseValue -> float64<br>
+											subjectId  -> object<br>
+										</td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>date <i>*optional*</i> </td>
+										<td>The date for which to plot</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> A line graph of the Subject ID's Glucose Value fluctuations with respect to the timestamp<br><br>
+							<b>Example:</b> Plotting an individual's complete trajectory<br><br>
+							<img class="materialboxed" src="img/plotIndividual.png"><br><br>
+							<b>Example:</b> Plotting an individual's trajectory for a day<br><br>
+							<img class="materialboxed" src="img/plotIndividualDay.png">
+	    				</p>
+	    				<br><br>
+	    			</p>
+	    			<p id="chp3.3"><br>
+	    				<h6>3(c) Bar Plots</h6>
+	    				
+	    				<p>
+	    					This method is used to plot barplots they wish to. The plots are for columns in the data desription table. <br><br>
+	    					<b>Method Signature:</b> def barplots(self, data_description, plot_name, save_value)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>data_description </td>
+										<td>the dataframe generated by the dataDescribe function </td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>plot_name: </td>
+										<td>name of the column whos data we wish to visualize</td>
+										<td>string</td>
+									</tr>
+									<tr>
+										<td>save_value <i>*optional*</i> </td>
+										<td>Indicator variable on whether to save the plot or not. 1 indicates save, 0 indicates not to save Default is 0.</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> A bar plot of the column selected by the user<br><br>
+							<b>Example:</b> Bar plot for '% of missing values'<br><br>
+							<img class="materialboxed" src="img/barplot.png"><br><br>
+	    				</p>
+	    				<br><br>
+	    			</p>
+	    			<p id="chp3.4"><br>
+	    				<h6>3(d) Histogram Plots</h6>
+	    				
+	    				<p>
+	    					This method is used to plot histogram they wish to. The plots are for columns in the data desription table. <br><br>
+	    					<b>Method Signature:</b> def histograms(self, data_description, plot_name, save_value)<br><br>
+	    					
+	    					<b>Function Parameters:</b><br>
+	    					<table class="highlight responsive-table container ">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Datatype</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>data_description </td>
+										<td>the dataframe generated by the dataDescribe function </td>
+										<td>pandas Dataframe</td>
+									</tr>
+									<tr>
+										<td>plot_name: </td>
+										<td>name of the column whos data we wish to visualize</td>
+										<td>string</td>
+									</tr>
+									<tr>
+										<td>save_value <i>*optional*</i> </td>
+										<td>Indicator variable on whether to save the plot or not. 1 indicates save, 0 indicates not to save Default is 0.</td>
+										<td>string</td>
+									</tr>
+								</tbody>
+							</table>
+							<br><br>
+							<b>Return:</b> A histograms of the column selected by the user<br><br>
+							<b>Example:</b> Histograms for '# of missing values'<br><br>
+							<img class="materialboxed" src="img/histogram.png"><br><br>
+	    				</p>
+	    				<br><br>
+	    			</p>
+	    			<p id="chp3.5"><br>
+	    				<h6>3(e) All Indices</h6>
+	    				
+	    				<p>
+	    					This method provides a consolidated  table of all the glucose variability indices of all the individuals in the default data (The default data set for the training includes data from the CGMAnalysis package, Gluvarpro package, CGMAnalyzer package, and the Ohio University dataset).<br><br>
+	    					<b>Method Signature:</b> def gvIndices(self, data )<br><br>
+	    					
 	    					<b>Function Parameters:</b><br>
 	    					<table class="highlight responsive-table container ">
 								<thead>
@@ -185,197 +357,16 @@
 								</tbody>
 							</table>
 							<br><br>
-							<b>Return:</b>The output is a model trained on the supplied data that can be used to perform imputations imputations<br><br>
-							<b>Example:</b> Training the LSTM model<br><br>
-							<img class="materialboxed" src="img/3_1.png">
-
-	    				</p>
-	    				<br><br>
-	    			</p>
-	    			<p id="chp3.2"><br>
-	    				<h6>3(b) Impute Data</h6>
-	    				
-	    				<p>
-	    					This method performs the imputations on gaps present in the individual's glucose values using the trained LSTM model. It saves the imputed values in a directory and displays the path for the file. The function also returns a visual representation of the imputed data.<br><br>
-	    					<b>Method Signature:</b> def impute(self, test_data, flag)<br><br>
-	    					
-	    					<b>Function Parameters:</b><br>
-	    					<table class="highlight responsive-table container ">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Datatype</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>test_data </td>
-										<td>the dataset (CSV file) entered by the user with a gap that needs to be imputed. It should have the following format:<br>
-											Display Time -> object<br>
-											GlucoseValue -> float64<br>
-											subjectId  -> object<br>
-										</td>
-										<td>pandas Dataframe</td>
-									</tr>
-									<tr>
-										<td>flag</td>
-										<td>A flag variable to decide whether to return the imputed values as a pandas data frame (flag=1)  or to save the imputed values as a CSV file and plot the graph for it (flag=0).</td>
-										<td>integer</td>
-									</tr>
-								</tbody>
-							</table>
-							<br><br>
-							<b>Return:</b> The imputed values as a pandas data frame (flag=1)  or  the imputed values saved as a csv file and a line graph for it<br><br>
-							<b>Example:</b> Example of data with gaps <br><br>
-							<img class="materialboxed" src="img/gap_example.png"><br><br>
-							<b>Example:</b> Example of imputed data <br><br>
-							<img class="materialboxed" src="img/imputed.png"><br><br>
-							<b>Example:</b> Comparison of real and predicted values<br><br>
-							<img class="materialboxed" src="img/3_2_1.png"><br><br>
-							<b>Example:</b> Accessing the imputed values (as a pandas dataframe)<br><br>
-							<img class="materialboxed" src="img/3_2_3.png"><br><br>
-	    				</p>
-	    				<br><br>
-	    			</p>
-	    			<p id="chp3.3"><br>
-	    				<h6>3(c) Describe Data</h6>
-	    				
-	    				<p>
-	    					This method provides a statistical description of the default data used for training the model in the form of a consolidated table. This data has been trimmed to have only complete days with no missing values. This description table is saved as a CSV file for future reference.<br><br>
-	    					<b>Method Signature:</b> def dataDescribe(self, data, meta)<br><br>
-	    					
-	    					<b>Function Parameters:</b><br>
-	    					<table class="highlight responsive-table container ">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Datatype</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>data </td>
-										<td>The default dataset (CSV file) includes data from the CGMAnalysis package, Gluvarpro package, CGMAnalyzer package and the Ohio University with the following format:<br>
-											Display Time -> object<br>
-											GlucoseValue -> float64<br>
-											subjectId  -> object<br>
-										</td>
-										<td>pandas Dataframe</td>
-									</tr>
-									<tr>
-										<td>meta</td>
-										<td>The dataset (CSV file) with the metadata about the status of the individuals in the following format:<br>
-											ID -> object<br>
-											status -> object<br>
-										</td> 
-										<td>pandas Dataframe</td>
-									</tr>
-								</tbody>
-							</table>
-							<br><br>
-							<b>Return:</b> A tabular and graphical representation of the statistical analysis of the consolidated data. This table is also saved as a csv file.<br><br>
-							<b>Example:</b> A statistical description of the data<br><br>
-							<img class="materialboxed" src="img/3_3.png">
-	    				</p>
-	    				<br><br>
-	    			</p>
-	    			<p id="chp3.4"><br>
-	    				<h6>3(d) Describe Individual</h6>
-	    				
-	    				<p>
-	    					This method provides a statistical description of the default individual data based on the subject ID passed. This data has been trimmed to have only complete days with no missing values.<br><br>
-	    					<b>Method Signature:</b> def individualDescribe(self, uid, data, meta)<br><br>
-	    					
-	    					<b>Function Parameters:</b><br>
-	    					<table class="highlight responsive-table container ">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Datatype</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>uid </td>
-										<td>The subject ID of the user to plot</td>
-										<td>string</td>
-									</tr>
-									<tr>
-										<td>data </td>
-										<td>The default dataset (CSV file) includes data from the CGMAnalysis package, Gluvarpro package, CGMAnalyzer package and the Ohio University with the following format:<br>
-											Display Time -> object<br>
-											GlucoseValue -> float64<br>
-											subjectId  -> object<br>
-										</td>
-										<td>pandas Dataframe</td>
-									</tr>
-									<tr>
-										<td>meta</td>
-										<td>The dataset (CSV file) with the metadata about the status of the individuals in the following format:<br>
-											ID -> object<br>
-											status -> object<br>
-										</td> 
-										<td>pandas Dataframe</td>
-									</tr>
-								</tbody>
-							</table>
-							<br><br>
-							<b>Return:</b> A tabular representation of the statistical analysis of the individual's data. <br><br>
-							<b>Example:</b> A description of an individuals data<br><br>
-							<img class="materialboxed" src="img/3_4.png">
-	    				</p>
-	    				<br><br>
-	    			</p>
-	    			<p id="chp3.5"><br>
-	    				<h6>3(e) Plot Individual</h6>
-	    				
-	    				<p>
-	    					This method plots the graph of the Glucose Values of a single Subject ID. The subject ID can be found as a part of the description of the data. The default data includes data from the CGMAnalysis package, Gluvarpro package, and the CGMAnalyzer package dataset. The user may specify their own data if they wish to. The subject ID is a part of the data supplied by the user. <br><br>
-	    					<b>Method Signature:</b> def plotIndividual(self, uid, data)<br><br>
-	    					
-	    					<b>Function Parameters:</b><br>
-	    					<table class="highlight responsive-table container ">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Datatype</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>uid </td>
-										<td>The subject ID of the user to plot</td>
-										<td>string</td>
-									</tr>
-									<tr>
-										<td>data </td>
-										<td>The default dataset (CSV file) includes data from the CGMAnalysis package, Gluvarpro package, CGMAnalyzer package and the Ohio University with the following format:<br>
-											Display Time -> object<br>
-											GlucoseValue -> float64<br>
-											subjectId  -> object<br>
-										</td>
-										<td>pandas Dataframe</td>
-									</tr>
-								</tbody>
-							</table>
-							<br><br>
-							<b>Return:</b> A line graph of the Subject ID's Glucose Value fluctuations with respect to the timestamp<br><br>
-							<b>Example:</b><br><br>
-							<img class="materialboxed" src="img/3_5.png">
-	    				</p>
-	    				<br><br>
+							<b>Return:</b>A consolidated table of all the glucose variability indices of all the individuals. This table is also saved as a CSV file.<br><br>
+							
+							<b>Example:</b>All individuals' variability indices<br>
+							<img class="materialboxed" src="img/indices.png">
+		    				<br><br>
+		    			</p>
 	    			</p>
 
-	    			<br><br><hr><br><br>
-	    			</p>
+	    		</p>
+	    		<br><br><hr><br><br>
 
 	    			<div>
 	    				<div class="right">
@@ -399,7 +390,7 @@
           <div class="container">
             <div class="row">
               <div class="col l10 s12 offset-l1">
-                <p class="grey-text text-lighten-4">Developed at the National Scenter for Supercomputing Applications at the University of Illinois, Urbana-Champaign.</p>
+                <p class="grey-text text-lighten-4 center">Developed at the National Scenter for Supercomputing Applications at the University of Illinois, Urbana-Champaign.</p>
               </div>
             </div>
           </div>
@@ -416,157 +407,334 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 		<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-  });
+			document.addEventListener('DOMContentLoaded', function() {
+			    var elems = document.querySelectorAll('.sidenav');
+			    var instances = M.Sidenav.init(elems, options);
+			  });
 
-  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-  // var collapsibleElem = document.querySelector('.collapsible');
-  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+			  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+			  // var collapsibleElem = document.querySelector('.collapsible');
+			  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
 
-  // Or with jQuery
+			  // Or with jQuery
 
-  $(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
+			  $(document).ready(function(){
+			    $('.sidenav').sidenav();
+			  });
 
-$(document).ready(function(){
-    $('.materialboxed').materialbox();
-  });
-        $(document).ready(function(){
-    $('.materialboxed').materialbox();
-  });
+			$(document).ready(function(){
+			    $('.materialboxed').materialbox();
+			  });
+			        $(document).ready(function(){
+			    $('.materialboxed').materialbox();
+			  });
         
 
-        $(document).ready(function(){
-    $('input.autocomplete').autocomplete({
-      data: {
-        "Package": null,
-        "Install": null,
-        "Class": null,
-        "Object": null,
-        "Dependency": null,
-        "Required": null,
-        "Python": null,
-        "GlucoCheck":null,
-        "Core" :null,
-        "Train": null,
-        "Model": null,
-        "Learning": null,
-        "LSTM": null,
-        "Long short term memory": null,
-        "Impute": null,
-        "Predict": null,
-        "Describe": null,
-        "Plot": null,
-        "Data": null,
-        "Constant": null,
-        "Hall": null,
-        "Links": null,
-        "Helper":null,
-        "Smoothing": null,
-        "Subsampling": null,
-        "Complete Days": null,
-        "Full Days": null,
-        "Units": null,
-        "Convert Units": null,
-        "Mean": null,
-        "Day Mean": null,
-        "Night Mean": null,
-        "Sampling": null,
-        "Hourly Sampling": null,
-        "Inner":  null,
-        "Gap": null,
-        "Detect Gap": null,
-        "Date": null,
-        "Preprocess": null,
-        "Date Preprocess": null,
-        "Error": null,
-        "Error Metrics": null,
-        "IOA": null,
-        "Index of Agreement": null,
-        "MAD": null,
-        "Mean Absolute Deviation": null,
-        "MAPE": null,
-        "Mean Absolute Percentage Error": null,
-        "RMSE": null,
-        "Root Mean Square Error": null,
-        "Variability": null,
-        "Variability Indices": null,
-        "ADRR":null,
-        "BGRI":null,
-        "CONGAn":null,
-        "DT":null,
-        "EhbA1c":null,
-        "GFI":null,
-        "GRADE":null,
-        "GVP":null,
-        "GMI":null,
-        "GLI":null,
-        "IGC":null,
-        "J-Index":null,
-        "LAGE":null,
-        "MAGE":null,
-        "M-Value":null,
-        "MAG":null,
-        "MODD":null,
-        "MAD":null,
-        "PGS":null,
-        "SDROC":null,
-        "TIR":null,
-        "VE":null,
-        "Summary Statistics":null,
-        "Average Daily Risk Range":null,
-        "Blood Glucose Risk Index":null,
-        "Continuous Overlapping Net Glycemic Action":null,
-        "Distance Travelled":null,
-        "Estimated HbA1c":null,
-        "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation":null,
-        "Glucose Liability Index":null,
-        "Glucose Management Indicator":null,
-        "Glycaemic Risk Assessment Diabetes Equation":null,
-        "Glycemic Variability Percentage":null,
-        "Index of Glycemic Control":null,
-        "Largest Amplitude of Glycemic Excursions":null,
-        "Mean Absolute Difference":null,
-        "Mean Absolute Glucose Change":null,
-        "Mean Amplitude Glycemic Excursions":null,
-        "Mean of Daily Differences":null,
-        "Personal Glycemic State":null,
-        "Standard Deviation of the Glucose Rate of Change":null,
-        "Time in Range":null,
-        "Variability Episodes":null
+			        $(document).ready(function(){
+			    $('input.autocomplete').autocomplete({
+			      data: {
+			        "Package": null,
+			        "Install": null,
+			        "Class": null,
+			        "Object": null,
+			        "Dependency": null,
+			        "Required": null,
+			        "Python": null,
+			        "GlucoCheck":null,
+			        "Core" :null,
+			        "Train": null,
+			        "Model": null,
+			        "Learning": null,
+			        "LSTM": null,
+			        "Long short term memory": null,
+			        "Impute": null,
+			        "Predict": null,
+			        "Describe": null,
+			        "Plot": null,
+			        "Data": null,
+			        "Constant": null,
+			        "Hall": null,
+			        "Links": null,
+			        "Helper":null,
+			        "Smoothing": null,
+			        "Subsampling": null,
+			        "Complete Days": null,
+			        "Full Days": null,
+			        "Units": null,
+			        "Convert Units": null,
+			        "Mean": null,
+			        "Day Mean": null,
+			        "Night Mean": null,
+			        "Sampling": null,
+			        "Hourly Sampling": null,
+			        "Inner":  null,
+			        "Gap": null,
+			        "Detect Gap": null,
+			        "Date": null,
+			        "Preprocess": null,
+			        "Date Preprocess": null,
+			        "Error": null,
+			        "Error Metrics": null,
+			        "IOA": null,
+			        "Index of Agreement": null,
+			        "MAD": null,
+			        "Mean Absolute Deviation": null,
+			        "MAPE": null,
+			        "Mean Absolute Percentage Error": null,
+			        "RMSE": null,
+			        "Root Mean Square Error": null,
+			        "Variability": null,
+			        "Variability Indices": null,
+			        "ADRR":null,
+			        "BGRI":null,
+			        "CONGAn":null,
+			        "DT":null,
+			        "EhbA1c":null,
+			        "GFI":null,
+			        "GRADE":null,
+			        "GVP":null,
+			        "GMI":null,
+			        "GLI":null,
+			        "IGC":null,
+			        "J-Index":null,
+			        "LAGE":null,
+			        "MAGE":null,
+			        "M-Value":null,
+			        "MAG":null,
+			        "MODD":null,
+			        "MAD":null,
+			        "PGS":null,
+			        "SDROC":null,
+			        "TIR":null,
+			        "VE":null,
+			        "Summary Statistics":null,
+			        "Average Daily Risk Range":null,
+			        "Blood Glucose Risk Index":null,
+			        "Continuous Overlapping Net Glycemic Action":null,
+			        "Distance Travelled":null,
+			        "Estimated HbA1c":null,
+			        "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation":null,
+			        "Glucose Liability Index":null,
+			        "Glucose Management Indicator":null,
+			        "Glycaemic Risk Assessment Diabetes Equation":null,
+			        "Glycemic Variability Percentage":null,
+			        "Index of Glycemic Control":null,
+			        "Largest Amplitude of Glycemic Excursions":null,
+			        "Mean Absolute Difference":null,
+			        "Mean Absolute Glucose Change":null,
+			        "Mean Amplitude Glycemic Excursions":null,
+			        "Mean of Daily Differences":null,
+			        "Personal Glycemic State":null,
+			        "Standard Deviation of the Glucose Rate of Change":null,
+			        "Time in Range":null,
+			        "Variability Episodes":null
 
 
-      },
-        onAutocomplete: function(val) {
+			      },
+			        onAutocomplete: function(val) {
            // Callback function when value is autcompleted.
            // Grabbing input after autocomplete is done
            var value = $('input.autocomplete').val();
            if(value == "Package" || value == "Install" || value == "Class" || value == "Description" || value == "Object" || value == "Dependency" || value == "Required" || value == "Python"){
                var link = window.open('chapter1.html');
                link.location;
-           } else if(value == "GlucoCheck"){
+           } 
+           else if(value == "GlucoCheck"){
                var link = window.open('index.html');
                link.location;
-           } else if (value == "Core" || value == "Train" || value == "Model" || value == "Learning" || value == "LSTM" || value == "Long short term memory" || value == "Impute" || value == "Predict" || value == "Describe" || value == "Plot") {
+           } 
+           else if (value == "Core" || value == "Plots") {
                var link = window.open('chapter3.html');
                link.location;
-           } else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
+           } 
+           else if (value == "Describe") {
+               var link = window.open('chapter3.html#chp3.1');
+               link.location;
+           } 
+           else if (value == "Plot") {
+               var link = window.open('chapter3.html#chp3.2');
+               link.location;
+           } 
+           else if (value == "Bar Plot") {
+               var link = window.open('chapter3.html#chp3.3');
+               link.location;
+           } 
+           else if (value == "Histogram") {
+               var link = window.open('chapter3.html#chp3.4');
+               link.location;
+           } 
+           else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
                var link = window.open('chapter2.html');
                link.location;
-           } else if (value == "Helper" || value == "Units" || value == "Convert Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Sampling" || value == "Hourly Sampling") {
+           } 
+           else if (value == "Imputation" ) {
                var link = window.open('chapter4.html');
                link.location;
-           } else if (value == "Inner" || value == "Gap" || value == "Detect Gap" || value == "Date" || value == "Preprocess" || value == "Date Preprocess") {
+           } 
+           else if (value == "Classification" ) {
                var link = window.open('chapter5.html');
                link.location;
-           } else if (value == "Variability" || value == "Variability Indices" || value == "ADRR" || value == "BGRI" || value == "CONGAn" || value == "DT" || value == "EhbA1c" || value == "GFI" || value == "GRADE" || value == "GVP" || value == "GMI" || value == "GLI" || value == "IGC" || value == "J-Index" || value == "LAGE" || value == "MAGE" || value == "M-Value" || value == "MAG" || value == "MODD" || value == "MAD" || value == "PGS" || value == "SDROC" || value == "TIR" || value == "VE" || value == "Summary Statistics" || value == "Average Daily Risk Range" || value == "Blood Glucose Risk Index" || value == "Continuous Overlapping Net Glycemic Action" || value == "Distance Travelled" || value == "Estimated HbA1c" || value == "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation" || value == "Glucose Liability Index" || value == "Glucose Management Indicator" || value == "Glycaemic Risk Assessment Diabetes Equation" || value == "Glycemic Variability Percentage" || value == "Index of Glycemic Control" || value == "Largest Amplitude of Glycemic Excursions" || value == "Mean Absolute Difference" || value == "Mean Absolute Glucose Change" || value == "Mean Amplitude Glycemic Excursions" || value == "Mean of Daily Differences" || value == "Personal Glycemic State" || value == "Standard Deviation of the Glucose Rate of Change" || value == "Time in Range" || value == "Variability Episodes" ) {
+           } 
+           else if (value == "Helper" || value == "Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Days") {
+               var link = window.open('chapter8.html');
+               link.location;
+           } 
+           else if (value == "Smoothing") {
+               var link = window.open('chapter8.html#chp8.3');
+               link.location;
+           }
+           else if (value == "Subsampling") {
+               var link = window.open('chapter8.html#chp8.4');
+               link.location;
+           } 
+           else if (value == "Convert Units") {
+               var link = window.open('chapter8.html#chp8.1');
+               link.location;
+           } 
+           else if (value == "Complete Days") {
+               var link = window.open('chapter8.html#chp8.2');
+               link.location;
+           } 
+           else if (value == "Smoothing") {
+               var link = window.open('chapter8.html#chp8.6');
+               link.location;
+           } 
+           else if (value == "Hourly Sampling") {
+               var link = window.open('chapter8.html#chp8.5');
+               link.location;
+           } 
+           else if (value == "Inner" || value == "Gap" || value == "Date" || value == "Preprocess") {
+               var link = window.open('chapter5.html');
+               link.location;
+           } 
+           else if (value == "Detect Gap") {
+               var link = window.open('chapter5.html#chp5.2');
+               link.location;
+           } 
+           else if (value == "Date Preprocess") {
+               var link = window.open('chapter5.html#chp5.3');
+               link.location;
+           } 
+           else if (value == "Variability" || value == "Variability Indices") {
                var link = window.open('chapter6.html');
                link.location;
-           }else if (value == "Error" || value == "Error Metrics" || value == "IOA" || value == "MAD" || value == "MAPE" || value == "RMSE" || value == "Index of Agreement" || value == "Mean Absolute Deviation" || value == "Mean Absolute Percentage Error" || value == "Root Mean Square Error") {
+           }
+           else if (value == "ADRR" || value == "Average Daily Risk Range") {
+               var link = window.open('chapter6.html#chp6.3');
+               link.location;
+           }
+           else if (value == "BGRI" || value == "Blood Glucose Risk Index") {
+               var link = window.open('chapter6.html#chp6.4');
+               link.location;
+           }
+           else if (value == "CONGAn" || value == "Continuous Overlapping Net Glycemic Action") {
+               var link = window.open('chapter6.html#chp6.5');
+               link.location;
+           }
+           else if (value == "DT" || value == "Distance Travelled") {
+               var link = window.open('chapter6.html#chp6.6');
+               link.location;
+           }
+           else if (value == "DT" || value == "Distance Travelled") {
+               var link = window.open('chapter6.html#chp6.6');
+               link.location;
+           }
+           else if (value == "EhbA1c" || value == "Estimated HbA1c") {
+               var link = window.open('chapter6.html#chp6.7');
+               link.location;
+           }
+           else if (value == "GFI" || value == "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation") {
+               var link = window.open('chapter6.html#chp6.8');
+               link.location;
+           }
+           else if (value == "GRADE" || value == "Glycaemic Risk Assessment Diabetes Equation") {
+               var link = window.open('chapter6.html#chp6.11');
+               link.location;
+           }
+           else if (value == "GVP" || value == "Glycemic Variability Percentage") {
+               var link = window.open('chapter6.html#chp6.12');
+               link.location;
+           }
+           else if (value == "GMI" || value == "Glucose Management Indicator") {
+               var link = window.open('chapter6.html#chp6.10');
+               link.location;
+           }
+           else if (value == "GLI" || value == "Glucose Liability Index") {
+               var link = window.open('chapter6.html#chp6.9');
+               link.location;
+           }
+           else if (value == "IGC" || value == "Index of Glycemic Control") {
+               var link = window.open('chapter6.html#chp6.13');
+               link.location;
+           }
+           else if (value == "J-Index") {
+               var link = window.open('chapter6.html#chp6.14');
+               link.location;
+           }
+           else if (value == "LAGE" || value == "Largest Amplitude of Glycemic Excursions") {
+               var link = window.open('chapter6.html#chp6.15');
+               link.location;
+           }
+           else if (value == "M-Value") {
+               var link = window.open('chapter6.html#chp6.16');
+               link.location;
+           }
+           else if (value == "MAD" || value == "Mean Absolute Difference") {
+               var link = window.open('chapter6.html#chp6.17');
+               link.location;
+           }
+           else if (value == "MAG" || value == "Mean Absolute Glucose Change") {
+               var link = window.open('chapter6.html#chp6.18');
+               link.location;
+           }
+           else if (value == "MAGE" || value == "Mean Amplitude Glycemic Excursions") {
+               var link = window.open('chapter6.html#chp6.19');
+               link.location;
+           }
+           else if (value == "MODD" || value == "Mean of Daily Differences") {
+               var link = window.open('chapter6.html#chp6.20');
+               link.location;
+           }
+           else if (value == "PGS" || value == "Personal Glycemic State") {
+               var link = window.open('chapter6.html#chp6.21');
+               link.location;
+           }
+           else if (value == "SDROC" || value == "Standard Deviation of the Glucose Rate of Change") {
+               var link = window.open('chapter6.html#chp6.22');
+               link.location;
+           }
+           else if (value == "Summary Statistics") {
+               var link = window.open('chapter6.html#chp6.23');
+               link.location;
+           }
+           else if (value == "TIR" ||  value == "Time in Range") {
+               var link = window.open('chapter6.html#chp6.24');
+               link.location;
+           }
+           else if (value == "Variability Episodes") {
+               var link = window.open('chapter6.html#chp6.25');
+               link.location;
+           }
+
+
+           else if (value == "Error" || value == "Error Metrics") {
                var link = window.open('chapter7.html');
+               link.location;
+           }
+           else if (value == "IOA" || value == "Index of Agreement") {
+               var link = window.open('chapter7.html#chp7.2');
+               link.location;
+           }
+           else if (value == "MAD" || value == "Mean Absolute Deviation") {
+               var link = window.open('chapter7.html#chp7.3');
+               link.location;
+           }
+           else if (value == "MAPE" || value == "Mean Absolute Percentage Error") {
+               var link = window.open('chapter7.html#chp7.3');
+               link.location;
+           }
+           else if (value == "RMSE" || value == "Root Mean Square Error") {
+               var link = window.open('chapter7.html#chp7.3');
                link.location;
            }
 

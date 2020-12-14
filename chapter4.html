@@ -45,7 +45,7 @@
 		  	background-color: #000;
 		  }
       </style>
-      <title>Helper Methods</title>
+      <title>Imputations</title>
       <link rel="icon" type="image/png" href="img/diabetes.png"/>
 	  <link rel="icon" type="image/png" href="img/diabetes.png"/>
     </head>
@@ -80,27 +80,20 @@
 		      <li><a href="chapter2.html">Constants</a></li>
 		      <li><a href="chapter3.html">Core Methods</a></li>
 		      <ol type="a">
-		      	<li><a href="chapter3.html#chp3.1">Training the Model</a></li>
-		      	<li><a href="chapter3.html#chp3.2">Impute Data</a></li>
-		      	<li><a href="chapter3.html#chp3.3">Describe Data</a></li>
-		      	<li><a href="chapter3.html#chp3.4">Describe Individual</a></li>
-		      	<li><a href="chapter3.html#chp3.5">Plot Individual</a></li>
+		      	<li><a href="chapter3.html#chp3.1">Describe Data</a></li>
+		      	<li><a href="chapter3.html#chp3.2">Plot Individual</a></li>
+		      	<li><a href="chapter3.html#chp3.3">Bar Plots</a></li>
+		      	<li><a href="chapter3.html#chp3.4">Histogram Plots</a></li>
+		      	<li><a href="chapter3.html#chp3.5">Glucose Indices</a></li>
 		      </ol>
-		      <li><a href="chapter4.html">Helper Methods</a></li>
+		      <li><a href="chapter4.html">Imputations</a></li>
 		      <ol type="a">
-		      	<li><a href="chapter4.html#chp4.1">Smoothing</a></li>
-		      	<li><a href="chapter4.html#chp4.2">Subsampling</a></li>
-		      	<li><a href="chapter4.html#chp4.3">Convert Units</a></li>
-		      	<li><a href="chapter4.html#chp4.4">Only Complete days</a></li>
-		      	<li><a href="chapter4.html#chp4.5">Day & Night Mean</a></li>
-		      	<li><a href="chapter4.html#chp4.6">Hourly Sampling</a></li>
+		      	<li><a href="chapter4.html#chp4.1">Linear Imputations</a></li>
+		      	<li><a href="chapter4.html#chp4.2">Spline Imputations</a></li>
+		      	<li><a href="chapter4.html#chp4.3">LSTM Imputations</a></li>
 		      </ol>
-		        <li><a href="chapter5.html">Inner Methods</a></li>
-		      <ol type="a">
-		      	<li><a href="chapter5.html#chp5.1">Plot Imputed Values</a></li>
-		      	<li><a href="chapter5.html#chp5.2">Detect Gap</a></li>
-		      	<li><a href="chapter5.html#chp5.3">Preprocess Date</a></li>
-		      </ol>
+		      <li><a href="chapter5.html">Classification</a></li>
+		      
 		      <li><a href="chapter6.html">Glucose Variability Indices</a></li>
 		      <ol type="a">
 		      	<li><a href="chapter6.html#chp6.1">All Indices</a></li>
@@ -139,6 +132,17 @@
 		      	<li><a href="chapter7.html#chp7.5">RMSE</a></li>
 
 		      </ol>
+		      <li><a href="chapter8.html">Helper Methods</a></li>
+		      <ol type="a">
+		      	<li><a href="chapter8.html#chp8.1">Convert Units</a></li>
+		      	<li><a href="chapter8.html#chp8.2">Trim Days</a></li>
+		      	<li><a href="chapter8.html#chp8.3">Split Individual</a></li>
+		      	<li><a href="chapter8.html#chp8.4">Subsampling</a></li>
+		      	<li><a href="chapter8.html#chp8.5">Hourly Samples</a></li>
+		      	<li><a href="chapter8.html#chp8.8">Smoothing</a></li>
+		      	<li><a href="chapter8.html#chp8.7">Gap Detection</a></li>
+
+		      </ol>
 		      <br><br><br>
 		    </ol>
 	    </div>
@@ -147,20 +151,16 @@
 	    
 
 	    <div class="content">
-	    	<div class="inner" style="padding-left: 5%; padding-right: 5%">
+	    	<div class="inner" style="padding-left: 5%; padding-right: 10%">
+	    		<p>
 
-	    			<h5 id='chp4'>4. Helper Methods </h5>
+	    			<h5 id='chp4'>4. Imputations</h5>
 	    			<p>
-	    				These methods are used for internal processing. They are called by other functions in the class, especislly the variability indices that require data to be formatted in specific ways, for example, sampled at specific intervals or have the glucose values in a specific units.
-	    			</p>
-	    			<p id="chp4.1"><br>
-	    				<h6>4(a) Smoothing</h6>
-	    				
-	    				<p>
-	    					This method performs a rolling-mean smoothening for a time-series to improve MAGE calculation. Rolling means (or moving averages) are generally used to smooth out short-term fluctuations in time series data and highlight long-term trends. This prevents tiny irrelevant excursions from adding noise to the MAGE score<br><br>
-	    					<b>Method Signature:</b> def smoothing(self, data)<br><br>
-	    					
-	    					<b>Function Parameters:</b><br>
+	    				This section describes the impute method. We pass the data with a gap to this method and based on the size of the gap (detected using the method describes in section <a href="chapter8.html#chp8.7">8.7</a>) it performs the appropriate imputation.<br><br>
+
+	    				<b>Method Signature:</b> def impute(self, dataWithMissing)<br><br>
+
+	    				<b>Function Parameters:</b><br>
 	    					<table class="highlight responsive-table container ">
 								<thead>
 									<tr>
@@ -172,8 +172,8 @@
 
 								<tbody>
 									<tr>
-										<td>data</td>
-										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
+										<td>dataWithMissing</td>
+										<td>the dataset (CSV file) entered by the user with the gap. It should have the following format:<br>
 											Display Time -> object<br>
 											GlucoseValue -> float64<br>
 											subjectId  -> object<br>
@@ -183,199 +183,54 @@
 								</tbody>
 							</table>
 							<br><br>
-							<b>Return:</b>A pandas DataFrame with smoothened glucose values<br><br>
-							<b>Example:</b> Smoothening values<br><br>
-							<img class="materialboxed" src="img/4_1.png">
-	    				</p>
+							<b>Return:</b> A pandas DataFrame with gaps imputed<br><br>
+							<b>Example:</b> Calling the impute method for all cases.<br><br>
+							<img class="materialboxed" src="img/impute.png">
 	    				<br><br>
 	    			</p>
-	    			<p id="chp4.2"><br>
-	    				<h6>4(b) Subsampling</h6>
+	    			</p>
+	    			<p id="chp4.1"><br>
+	    				<h6>4(a) Linear Imputations</h6>
 	    				
 	    				<p>
-	    					This function subsamples a time-series at 15 minute intervals. Our consolidated data is sampled at separate intervals such as 3-minutes, 5-minutes, 10-minutes and 15-minutes. Subsampling data at regular intervals ensured data is uniform.<br><br>
-	    					<b>Method Signature:</b> def subSample(self, data)<br><br>
+	    					When the gap size is less than 5 values, we use a linear imputation model. Linear interpolation is a method of curve fitting using linear polynomials to construct new data points within the range of a discrete set of known data points. Linear method ignore the index and treat the values as equally spaced.<br><br>
 	    					
-	    					<b>Function Parameters:</b><br>
-	    					<table class="highlight responsive-table container ">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Datatype</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>data</td>
-										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
-											Display Time -> object<br>
-											GlucoseValue -> float64<br>
-											subjectId  -> object<br>
-										</td>
-										<td>pandas Dataframe</td>
-									</tr>
-								</tbody>
-							</table>
-							<br><br>
-							<b>Return:</b>A pandas DataFrame with reading at 15 minute intervals<br><br>
-							<b>Example:</b> A subsampled example<br><br>
-							<img class="materialboxed" src="img/4_2.png">
+							<b>Example:</b> Linear Imputations being carried out<br><br>
+							<img class="materialboxed" src="img/linear.png">
+							<b>Example:</b> Comparing the two trajectories<br><br>
+							<img class="materialboxed" src="img/linearCompare.png">
+	    			</p>
+	    			<br><br>
+	    			</p>
+	    			<p id="chp4.2"><br>
+	    				<h6>4(b) Spline Imputations</h6>
+	    				
+	    				<p>
+	    					When the gap size is less than 15 values, we use a spline imputation model. A spline is a special function defined piecewise by polynomials. In interpolating problems, spline interpolation is often preferred to polynomial interpolation because it yields similar results, even when using low degree polynomials <br><br>
+	    					
+							<b>Example:</b> Spline Imputations being carried out<br><br>
+							<img class="materialboxed" src="img/spline.png">
+							<b>Example:</b> Comparing the two trajectories<br><br>
+							<img class="materialboxed" src="img/splineCompare.png">
 	    				</p>
 	    				<br><br>
 	    			</p>
 	    			<p id="chp4.3"><br>
-	    				<h6>4(c) Convert Units</h6>
+	    				<h6>4(c) LSTM Imputations</h6>
 	    				
 	    				<p>
-	    					This function converts glucose values into the desired unit of measurement. The conversion is between mmg/l to mmol/l and vice-versa<br><br>
-	    					<b>Method Signature:</b> def convertUnits(self, data, unit)<br><br>
+	    					When the gap size is less than 5 values, we use an LSTM imputation model. <br><br>
 	    					
-	    					<b>Function Parameters:</b><br>
-	    					<table class="highlight responsive-table container ">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Datatype</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>data</td>
-										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
-											Display Time -> object<br>
-											GlucoseValue -> float64<br>
-											subjectId  -> object<br>
-										</td>
-										<td>pandas Dataframe</td>
-									</tr>
-									<tr>
-										<td>units</td>
-										<td>It is the desired unit of conversion</td>
-										<td>string</td>
-									</tr>
-								</tbody>
-							</table>
-							<br><br>
-							<b>Return:</b>The individual time series desired unit of glucose value<br><br>
-							<b>Example:</b> Converting mg data to mmol.<br><br>
-							<img class="materialboxed" src="img/4_3.png">
+	    					<b>Example:</b> LSTM Imputations being carried out<br><br>
+							<img class="materialboxed" src="img/lstm.png">
+							<b>Example:</b> Comparing the two trajectories<br><br>
+							<img class="materialboxed" src="img/lstmCompare.png">
 	    				</p>
-	    				<br><br>
-	    			</p>
-	    			<p id="chp4.4"><br>
-	    				<h6>4(d) Only Complete Days</h6>
-	    				
-	    				<p>
-							Our individual's data start and stop at random times. We use this function for trimming an individual's glucose values to only consist of full days.<br><br>
-	    					<b>Method Signature:</b> def fullDaysOnly(self, data)<br><br>
-	    					
-	    					<b>Function Parameters:</b><br>
-	    					<table class="highlight responsive-table container ">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Datatype</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>data</td>
-										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
-											Display Time -> object<br>
-											GlucoseValue -> float64<br>
-											subjectId  -> object<br>
-										</td>
-										<td>pandas Dataframe</td>
-									</tr>
-								</tbody>
-							</table>
-							<br><br>
-							<b>Return:</b>The individuals time series with data only for full days<br><br>
-							<b>Example:</b> An individual with only full days' data<br><br>
-							<img class="materialboxed" src="img/4_4.png">
-	    				</p>
-	    				<br><br>
-	    			</p>
-	    			<p id="chp4.5"><br>
-	    				<h6>4(e) Day & Night Mean</h6>
-	    				
-	    				<p>
-	    					This function calculates the daytime and nighttime mean glucose values of every individual separately.<br><br>
-	    					<b>Method Signature:</b> def meanCalculations(self, data)<br>
-	    					<br><br>
-	    					<b>Function Parameters:</b><br>
-	    					<table class="highlight responsive-table container ">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Datatype</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>data</td>
-										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
-											Display Time -> object<br>
-											GlucoseValue -> float64<br>
-											subjectId  -> object<br>
-										</td>
-										<td>pandas Dataframe</td>
-									</tr>
-								</tbody>
-							</table>
-							<br><br>
-							<b>Return:</b>Two values each for daytime and nighttime mean averaged out over the days in the individuals readings<br><br>
-							<b>Example:</b> An individual's daytime and night time mean<br><br>
-							<img class="materialboxed" src="img/4_5.png">
-	    				</p>
-	    				<br><br>
-	    			</p>
-	    			<p id="chp4.6"><br>
-	    				<h6>4(f) Hourly Sampling</h6>
-	    				
-	    				<p>
-	    					Some glucose variability indices require data to be sampled by the hour. This function subsamples a time-series at 1-hour intervals.<br><br>
-	    					<b>Method Signature:</b> def hourlySamples(self, df)<br><br>
-	    					
-	    					<b>Function Parameters:</b><br>
-	    					<table class="highlight responsive-table container ">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Datatype</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr>
-										<td>data</td>
-										<td>the dataset (CSV file) entered by the user to train the model. It should have the following format:<br>
-											Display Time -> object<br>
-											GlucoseValue -> float64<br>
-											subjectId  -> object<br>
-										</td>
-										<td>pandas Dataframe</td>
-									</tr>
-								</tbody>
-							</table>
-							<br><br>
-							<b>Return:</b>A pandas DataFrame with reading at 1-hour intervals<br><br>
-							<b>Example:</b> An individual sampled at one hour interval.<br><br>
-							<img class="materialboxed" src="img/4_6.png">
 	    				<br><br>
 	    			</p>
 	    			
-	    			<br><br><hr><br><br>
-	    			</p>
+	    		</p>
+	    		<br><br><hr><br><br>
 
 	    			<div>
 	    				<div class="right">
@@ -399,7 +254,7 @@
           <div class="container">
             <div class="row">
               <div class="col l10 s12 offset-l1">
-                <p class="grey-text text-lighten-4">Developed at the National Scenter for Supercomputing Applications at the University of Illinois, Urbana-Champaign.</p>
+                <p class="grey-text text-lighten-4 center">Developed at the National Scenter for Supercomputing Applications at the University of Illinois, Urbana-Champaign.</p>
               </div>
             </div>
           </div>
@@ -416,131 +271,131 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 		<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-  });
+			document.addEventListener('DOMContentLoaded', function() {
+			    var elems = document.querySelectorAll('.sidenav');
+			    var instances = M.Sidenav.init(elems, options);
+			  });
 
-  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-  // var collapsibleElem = document.querySelector('.collapsible');
-  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+			  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+			  // var collapsibleElem = document.querySelector('.collapsible');
+			  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
 
-  // Or with jQuery
+			  // Or with jQuery
 
-  $(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
+			  $(document).ready(function(){
+			    $('.sidenav').sidenav();
+			  });
 
-$(document).ready(function(){
-    $('.materialboxed').materialbox();
-  });
-      $(document).ready(function(){
-    $('.materialboxed').materialbox();
-  });
+			$(document).ready(function(){
+			    $('.materialboxed').materialbox();
+			  });
+			        $(document).ready(function(){
+			    $('.materialboxed').materialbox();
+			  });
         
 
-        $(document).ready(function(){
-    $('input.autocomplete').autocomplete({
-      data: {
-        "Package": null,
-        "Install": null,
-        "Class": null,
-        "Object": null,
-        "Dependency": null,
-        "Required": null,
-        "Python": null,
-        "GlucoCheck":null,
-        "Core" :null,
-        "Train": null,
-        "Model": null,
-        "Learning": null,
-        "LSTM": null,
-        "Long short term memory": null,
-        "Impute": null,
-        "Predict": null,
-        "Describe": null,
-        "Plot": null,
-        "Data": null,
-        "Constant": null,
-        "Hall": null,
-        "Links": null,
-        "Helper":null,
-        "Smoothing": null,
-        "Subsampling": null,
-        "Complete Days": null,
-        "Full Days": null,
-        "Units": null,
-        "Convert Units": null,
-        "Mean": null,
-        "Day Mean": null,
-        "Night Mean": null,
-        "Sampling": null,
-        "Hourly Sampling": null,
-        "Inner":  null,
-        "Gap": null,
-        "Detect Gap": null,
-        "Date": null,
-        "Preprocess": null,
-        "Date Preprocess": null,
-        "Error": null,
-        "Error Metrics": null,
-        "IOA": null,
-        "Index of Agreement": null,
-        "MAD": null,
-        "Mean Absolute Deviation": null,
-        "MAPE": null,
-        "Mean Absolute Percentage Error": null,
-        "RMSE": null,
-        "Root Mean Square Error": null,
-        "Variability": null,
-        "Variability Indices": null,
-        "ADRR":null,
-        "BGRI":null,
-        "CONGAn":null,
-        "DT":null,
-        "EhbA1c":null,
-        "GFI":null,
-        "GRADE":null,
-        "GVP":null,
-        "GMI":null,
-        "GLI":null,
-        "IGC":null,
-        "J-Index":null,
-        "LAGE":null,
-        "MAGE":null,
-        "M-Value":null,
-        "MAG":null,
-        "MODD":null,
-        "MAD":null,
-        "PGS":null,
-        "SDROC":null,
-        "TIR":null,
-        "VE":null,
-        "Summary Statistics":null,
-        "Average Daily Risk Range":null,
-        "Blood Glucose Risk Index":null,
-        "Continuous Overlapping Net Glycemic Action":null,
-        "Distance Travelled":null,
-        "Estimated HbA1c":null,
-        "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation":null,
-        "Glucose Liability Index":null,
-        "Glucose Management Indicator":null,
-        "Glycaemic Risk Assessment Diabetes Equation":null,
-        "Glycemic Variability Percentage":null,
-        "Index of Glycemic Control":null,
-        "Largest Amplitude of Glycemic Excursions":null,
-        "Mean Absolute Difference":null,
-        "Mean Absolute Glucose Change":null,
-        "Mean Amplitude Glycemic Excursions":null,
-        "Mean of Daily Differences":null,
-        "Personal Glycemic State":null,
-        "Standard Deviation of the Glucose Rate of Change":null,
-        "Time in Range":null,
-        "Variability Episodes":null
+			        $(document).ready(function(){
+			    $('input.autocomplete').autocomplete({
+			      data: {
+			        "Package": null,
+			        "Install": null,
+			        "Class": null,
+			        "Object": null,
+			        "Dependency": null,
+			        "Required": null,
+			        "Python": null,
+			        "GlucoCheck":null,
+			        "Core" :null,
+			        "Train": null,
+			        "Model": null,
+			        "Learning": null,
+			        "LSTM": null,
+			        "Long short term memory": null,
+			        "Impute": null,
+			        "Predict": null,
+			        "Describe": null,
+			        "Plot": null,
+			        "Data": null,
+			        "Constant": null,
+			        "Hall": null,
+			        "Links": null,
+			        "Helper":null,
+			        "Smoothing": null,
+			        "Subsampling": null,
+			        "Complete Days": null,
+			        "Full Days": null,
+			        "Units": null,
+			        "Convert Units": null,
+			        "Mean": null,
+			        "Day Mean": null,
+			        "Night Mean": null,
+			        "Sampling": null,
+			        "Hourly Sampling": null,
+			        "Inner":  null,
+			        "Gap": null,
+			        "Detect Gap": null,
+			        "Date": null,
+			        "Preprocess": null,
+			        "Date Preprocess": null,
+			        "Error": null,
+			        "Error Metrics": null,
+			        "IOA": null,
+			        "Index of Agreement": null,
+			        "MAD": null,
+			        "Mean Absolute Deviation": null,
+			        "MAPE": null,
+			        "Mean Absolute Percentage Error": null,
+			        "RMSE": null,
+			        "Root Mean Square Error": null,
+			        "Variability": null,
+			        "Variability Indices": null,
+			        "ADRR":null,
+			        "BGRI":null,
+			        "CONGAn":null,
+			        "DT":null,
+			        "EhbA1c":null,
+			        "GFI":null,
+			        "GRADE":null,
+			        "GVP":null,
+			        "GMI":null,
+			        "GLI":null,
+			        "IGC":null,
+			        "J-Index":null,
+			        "LAGE":null,
+			        "MAGE":null,
+			        "M-Value":null,
+			        "MAG":null,
+			        "MODD":null,
+			        "MAD":null,
+			        "PGS":null,
+			        "SDROC":null,
+			        "TIR":null,
+			        "VE":null,
+			        "Summary Statistics":null,
+			        "Average Daily Risk Range":null,
+			        "Blood Glucose Risk Index":null,
+			        "Continuous Overlapping Net Glycemic Action":null,
+			        "Distance Travelled":null,
+			        "Estimated HbA1c":null,
+			        "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation":null,
+			        "Glucose Liability Index":null,
+			        "Glucose Management Indicator":null,
+			        "Glycaemic Risk Assessment Diabetes Equation":null,
+			        "Glycemic Variability Percentage":null,
+			        "Index of Glycemic Control":null,
+			        "Largest Amplitude of Glycemic Excursions":null,
+			        "Mean Absolute Difference":null,
+			        "Mean Absolute Glucose Change":null,
+			        "Mean Amplitude Glycemic Excursions":null,
+			        "Mean of Daily Differences":null,
+			        "Personal Glycemic State":null,
+			        "Standard Deviation of the Glucose Rate of Change":null,
+			        "Time in Range":null,
+			        "Variability Episodes":null
 
 
-      },
-        onAutocomplete: function(val) {
+			      },
+			        onAutocomplete: function(val) {
            // Callback function when value is autcompleted.
            // Grabbing input after autocomplete is done
            var value = $('input.autocomplete').val();
@@ -552,56 +407,64 @@ $(document).ready(function(){
                var link = window.open('index.html');
                link.location;
            } 
-           else if (value == "Core" || value == "Model" || value == "Learning" || value == "LSTM" || value == "Long short term memory" || value == "Predict") {
+           else if (value == "Core" || value == "Plots") {
                var link = window.open('chapter3.html');
                link.location;
            } 
-           else if (value == "Train") {
+           else if (value == "Describe") {
                var link = window.open('chapter3.html#chp3.1');
                link.location;
            } 
-           else if (value == "Impute") {
+           else if (value == "Plot") {
                var link = window.open('chapter3.html#chp3.2');
                link.location;
            } 
-           else if (value == "Describe") {
+           else if (value == "Bar Plot") {
                var link = window.open('chapter3.html#chp3.3');
                link.location;
            } 
-           else if (value == "Plot") {
-               var link = window.open('chapter3.html#chp3.5');
+           else if (value == "Histogram") {
+               var link = window.open('chapter3.html#chp3.4');
                link.location;
            } 
            else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
                var link = window.open('chapter2.html');
                link.location;
            } 
-           else if (value == "Helper" || value == "Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Days") {
+           else if (value == "Imputation" ) {
                var link = window.open('chapter4.html');
                link.location;
            } 
+           else if (value == "Classification" ) {
+               var link = window.open('chapter5.html');
+               link.location;
+           } 
+           else if (value == "Helper" || value == "Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Days") {
+               var link = window.open('chapter8.html');
+               link.location;
+           } 
            else if (value == "Smoothing") {
-               var link = window.open('chapter4.html#chp4.1');
+               var link = window.open('chapter8.html#chp8.3');
                link.location;
            }
            else if (value == "Subsampling") {
-               var link = window.open('chapter4.html#chp4.2');
+               var link = window.open('chapter8.html#chp8.4');
                link.location;
            } 
            else if (value == "Convert Units") {
-               var link = window.open('chapter4.html#chp4.3');
+               var link = window.open('chapter8.html#chp8.1');
                link.location;
            } 
            else if (value == "Complete Days") {
-               var link = window.open('chapter4.html#chp4.4');
+               var link = window.open('chapter8.html#chp8.2');
                link.location;
            } 
-           else if (value == "Day & Night Mean") {
-               var link = window.open('chapter4.html#chp4.5');
+           else if (value == "Smoothing") {
+               var link = window.open('chapter8.html#chp8.6');
                link.location;
            } 
            else if (value == "Hourly Sampling") {
-               var link = window.open('chapter4.html#chp4.6');
+               var link = window.open('chapter8.html#chp8.5');
                link.location;
            } 
            else if (value == "Inner" || value == "Gap" || value == "Date" || value == "Preprocess") {

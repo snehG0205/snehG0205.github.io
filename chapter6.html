@@ -80,27 +80,20 @@
 		      <li><a href="chapter2.html">Constants</a></li>
 		      <li><a href="chapter3.html">Core Methods</a></li>
 		      <ol type="a">
-		      	<li><a href="chapter3.html#chp3.1">Training the Model</a></li>
-		      	<li><a href="chapter3.html#chp3.2">Impute Data</a></li>
-		      	<li><a href="chapter3.html#chp3.3">Describe Data</a></li>
-		      	<li><a href="chapter3.html#chp3.4">Describe Individual</a></li>
-		      	<li><a href="chapter3.html#chp3.5">Plot Individual</a></li>
+		      	<li><a href="chapter3.html#chp3.1">Describe Data</a></li>
+		      	<li><a href="chapter3.html#chp3.2">Plot Individual</a></li>
+		      	<li><a href="chapter3.html#chp3.3">Bar Plots</a></li>
+		      	<li><a href="chapter3.html#chp3.4">Histogram Plots</a></li>
+		      	<li><a href="chapter3.html#chp3.5">Glucose Indices</a></li>
 		      </ol>
-		      <li><a href="chapter4.html">Helper Methods</a></li>
+		      <li><a href="chapter4.html">Imputations</a></li>
 		      <ol type="a">
-		      	<li><a href="chapter4.html#chp4.1">Smoothing</a></li>
-		      	<li><a href="chapter4.html#chp4.2">Subsampling</a></li>
-		      	<li><a href="chapter4.html#chp4.3">Convert Units</a></li>
-		      	<li><a href="chapter4.html#chp4.4">Only Complete days</a></li>
-		      	<li><a href="chapter4.html#chp4.5">Day & Night Mean</a></li>
-		      	<li><a href="chapter4.html#chp4.6">Hourly Sampling</a></li>
+		      	<li><a href="chapter4.html#chp4.1">Linear Imputations</a></li>
+		      	<li><a href="chapter4.html#chp4.2">Spline Imputations</a></li>
+		      	<li><a href="chapter4.html#chp4.3">LSTM Imputations</a></li>
 		      </ol>
-		        <li><a href="chapter5.html">Inner Methods</a></li>
-		      <ol type="a">
-		      	<li><a href="chapter5.html#chp5.1">Plot Imputed Values</a></li>
-		      	<li><a href="chapter5.html#chp5.2">Detect Gap</a></li>
-		      	<li><a href="chapter5.html#chp5.3">Preprocess Date</a></li>
-		      </ol>
+		      <li><a href="chapter5.html">Classification</a></li>
+		      
 		      <li><a href="chapter6.html">Glucose Variability Indices</a></li>
 		      <ol type="a">
 		      	<li><a href="chapter6.html#chp6.1">All Indices</a></li>
@@ -137,6 +130,17 @@
 		      	<li><a href="chapter7.html#chp7.3">MAD</a></li>
 		      	<li><a href="chapter7.html#chp7.4">MAPE</a></li>
 		      	<li><a href="chapter7.html#chp7.5">RMSE</a></li>
+
+		      </ol>
+		      <li><a href="chapter8.html">Helper Methods</a></li>
+		      <ol type="a">
+		      	<li><a href="chapter8.html#chp8.1">Convert Units</a></li>
+		      	<li><a href="chapter8.html#chp8.2">Trim Days</a></li>
+		      	<li><a href="chapter8.html#chp8.3">Split Individual</a></li>
+		      	<li><a href="chapter8.html#chp8.4">Subsampling</a></li>
+		      	<li><a href="chapter8.html#chp8.5">Hourly Samples</a></li>
+		      	<li><a href="chapter8.html#chp8.8">Smoothing</a></li>
+		      	<li><a href="chapter8.html#chp8.7">Gap Detection</a></li>
 
 		      </ol>
 		      <br><br><br>
@@ -1312,7 +1316,7 @@
           <div class="container">
             <div class="row">
               <div class="col l10 s12 offset-l1">
-                <p class="grey-text text-lighten-4">Developed at the National Scenter for Supercomputing Applications at the University of Illinois, Urbana-Champaign.</p>
+                <p class="grey-text text-lighten-4 center">Developed at the National Scenter for Supercomputing Applications at the University of Illinois, Urbana-Champaign.</p>
               </div>
             </div>
           </div>
@@ -1466,56 +1470,64 @@ $(document).ready(function(){
                var link = window.open('index.html');
                link.location;
            } 
-           else if (value == "Core" || value == "Model" || value == "Learning" || value == "LSTM" || value == "Long short term memory" || value == "Predict") {
+           else if (value == "Core" || value == "Plots") {
                var link = window.open('chapter3.html');
                link.location;
            } 
-           else if (value == "Train") {
+           else if (value == "Describe") {
                var link = window.open('chapter3.html#chp3.1');
                link.location;
            } 
-           else if (value == "Impute") {
+           else if (value == "Plot") {
                var link = window.open('chapter3.html#chp3.2');
                link.location;
            } 
-           else if (value == "Describe") {
+           else if (value == "Bar Plot") {
                var link = window.open('chapter3.html#chp3.3');
                link.location;
            } 
-           else if (value == "Plot") {
-               var link = window.open('chapter3.html#chp3.5');
+           else if (value == "Histogram") {
+               var link = window.open('chapter3.html#chp3.4');
                link.location;
            } 
            else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
                var link = window.open('chapter2.html');
                link.location;
            } 
-           else if (value == "Helper" || value == "Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Days") {
+           else if (value == "Imputation" ) {
                var link = window.open('chapter4.html');
                link.location;
            } 
+           else if (value == "Classification" ) {
+               var link = window.open('chapter5.html');
+               link.location;
+           } 
+           else if (value == "Helper" || value == "Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Days") {
+               var link = window.open('chapter8.html');
+               link.location;
+           } 
            else if (value == "Smoothing") {
-               var link = window.open('chapter4.html#chp4.1');
+               var link = window.open('chapter8.html#chp8.3');
                link.location;
            }
            else if (value == "Subsampling") {
-               var link = window.open('chapter4.html#chp4.2');
+               var link = window.open('chapter8.html#chp8.4');
                link.location;
            } 
            else if (value == "Convert Units") {
-               var link = window.open('chapter4.html#chp4.3');
+               var link = window.open('chapter8.html#chp8.1');
                link.location;
            } 
            else if (value == "Complete Days") {
-               var link = window.open('chapter4.html#chp4.4');
+               var link = window.open('chapter8.html#chp8.2');
                link.location;
            } 
-           else if (value == "Day & Night Mean") {
-               var link = window.open('chapter4.html#chp4.5');
+           else if (value == "Smoothing") {
+               var link = window.open('chapter8.html#chp8.6');
                link.location;
            } 
            else if (value == "Hourly Sampling") {
-               var link = window.open('chapter4.html#chp4.6');
+               var link = window.open('chapter8.html#chp8.5');
                link.location;
            } 
            else if (value == "Inner" || value == "Gap" || value == "Date" || value == "Preprocess") {
