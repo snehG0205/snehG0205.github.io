@@ -1,464 +1,537 @@
-
 <!DOCTYPE html>
-  <html>
+<html>
     <head>
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <meta name="theme-color" content="#2196F3">
+        <title>Sneh Gajiwala</title>
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-      <style type="text/css">
-      	
-
-
-	    body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1 0 auto;
-  }
-		  nav{
-		  	background-color: #808080;
-		  }
-
-		  .page-footer{
-		  	background-color: #808080;
-
-		  }
-
-		  .footer-copyright{
-		  	background-color: #000;
-		  }
-      </style>
-      <title>GlucoCheck</title>
-      <link rel="icon" type="image/png" href="img/diabetes.png"/>
-	  <link rel="icon" type="image/png" href="img/diabetes.png"/>
-    <meta charset="utf-8">
-    <meta name="keywords" content="Glucose, Diabetes, Python">
+        <!-- CSS  -->
+        <link href="min/plugin-min.css" type="text/css" rel="stylesheet">
+        <link href="min/custom-min.css" type="text/css" rel="stylesheet" >
     </head>
+    <body id="top" class="scrollspy">
 
-    <body>
-    	<header>
-    		<nav> 
-				<div class="container nav-wrapper">
-			      <a href="index.html" class="brand-logo center">GlucoCheck</a>
-            <div class="row right">
-              <div class="col s12">
-                <div class="row">
-                  <div class="input-field col s12 white-text">
-                    <i class="material-icons prefix">search</i>
-                    <input type="text" id="autocomplete-input" class="autocomplete white-text">
-                    <label for="autocomplete-input">Search</label>
-                  </div>
+        <!-- Pre Loader -->
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+         
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
+
+        <!--Navigation-->
+        <div class="navbar-fixed">
+            <nav id="nav_f" class="default_color" role="navigation">
+                <div class="container">
+                    <div class="nav-wrapper">
+                    <a href="#intro" id="logo-container" class="brand-logo">Sneh Gajiwala</a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="#education">Education</a></li>
+                            <li><a href="#skills">Skills</a></li>
+                            <li><a href="#experience">Experience</a></li>
+                            <li><a href="#projects">Projects</a></li>
+                            <li><a href="#recommendations">Recommendations</a></li>
+                            
+                            
+                        </ul>
+                        <ul id="nav-mobile" class="side-nav">
+                            <li><a href="#education">Education</a></li>
+                            <li><a href="#skills">Skills</a></li>
+                            <li><a href="#experience">Experience</a></li>
+                            <li><a href="#projects">Projects</a></li>
+                            <li><a href="#recommendations">Recommendations</a></li>
+                            
+                            
+                        </ul>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                    </div>
                 </div>
-              </div>
-            </div>
+            </nav>
+        </div>
 
-			    </div>
-          
-	    	</nav>
-	    </header>
-      
-	    
-	    
-
-	    <div class="content">
-	    	<div class="inner" style="padding-bottom: 5%; padding-left: 10%; padding-right: 10%">
-	    		<p>
-	    			<h5 class="center">GlucoCheck</h5>
-	    			<br><br>
-	    			<p class="container" style="text-align: justify;">
-	    				Continuous glucose monitoring (CGM) is a key in diabetes care and management asmore traditional measures of glucose control, such as single point estimates ofmonthly/weekly glucose averages are note able to provide information about day to daychanges in sugar levels. Although few computational packages exist for summarymeasure computation, non of them provide explicit guidance on how to deal with CGMtime series data. Thus, a computational package with user-friendly pipeline calledglucoCheckwas developed in python to enable overall analysis of CGM data - from datacleaning, imputation to clustering and extraction of glucose variability indices.
-
-	    				<br><br>
-	    				Continuous glucose monitoring (CGM) is a key component in treatment  and self-care strategies development of diabetic individuals .Today, various wearable and implantable devices are available on the market (..) that can track continuous glucose levels throughout several days so that trends and patterns of glucose dys-regulation could be summarised and timely decisions about necessary medications and lifestyle changes could be made. Although this system has a huge clinical application -- management of diabetes, it is also an important research platform, which generates a considerable amount of data:  a single sensor can provide up to 14 weeks of glucose readings, which are reported every e.g. 1/5/15min across $N$ number of individuals, resulting in time series data. In research settings this data can be used e.g.: (a) to better understand the onset of pre-diabetes so that new policies aiming at prevention of progression to type II diabetes could be developed; (b) study the impact of various diets on sugar levels; or (c) to better understand how glucose regulation changes during the course of entire pregnancy and better understand  the onset of pregnancy related (gestational) diabetes.
-
-
-	    			</p>
-	    		</p>
-	    		<br><br><hr><br><br>
-
-	    			<div>
-	    				<div class="right">
-	    					<a class="waves-effect waves-light btn-small grey" href="chapter1.html"><i class="material-icons right">arrow_right</i>Next</a>
-	    				</div>
-	    				<!-- <div class="left">
-	    					<a class="waves-effect waves-light btn-small grey" href="index.html"><i class="material-icons left">arrow_left</i>Previous</a>
-	    				</div> -->
-	    				<br><br>
-	    			</div>
-
-
-	    			
-	    	</div>
-	    	
-	    	
-	    </div>
-	    
-  
-		<footer class="page-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col l10 s12 offset-l1">
-                <p class="grey-text text-lighten-4">Developed at the National Scenter for Supercomputing Applications at the University of Illinois, Urbana-Champaign.</p>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
+        <!--Hero-->
+        <div class="section no-pad-bot" id="index-banner">
             <div class="container">
-            © 2020 Copyright
-            <a class="grey-text text-lighten-4 right" href="https://wiki.ncsa.illinois.edu/pages/viewpage.action?pageId=78686762">NCSA Genomics Team</a>
+                <h1 class="text_h center header cd-headline letters type">
+                    <span>I am a</span> 
+                    <span class="cd-words-wrapper waiting">
+                        <b class="is-visible">Software Developer</b>
+                        <b>Data Scientist</b>
+                        <b>Project Manager</b>
+                    </span>
+                </h1>
             </div>
-          </div>
+        </div>
+
+        <!--Intro-->
+        <div id="intro" class="section scrollspy">
+            <div class="container">
+                <div class="row">
+                    <div  class="col s12">
+                        <h5 class="center header text_h2"> 
+                            I am a second-year graduate student at UIUC pursuing a master’s degree in <span class="span_h2"> Information Management</span>. I am interested in the fields of <span class="span_h2"> data science</span> and <span class="span_h2"> software development</span>. I am actively looking for full-time opportunities in these domains to grow starting in <span class="span_h2"> June 2021.</span>
+                        </h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Education-->
+        <div id="education" class="section scrollspy">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m4 l4">
+                        <div class="center promo promo-example">
+                            <i class="mdi-image-flash-on"></i>
+                            <h5 class="promo-caption">Master's in Information Management</h5>
+                            <p class="light center"><b>Courses:</b> Project Management, UI/UX Engineering, Predictive & Descriptive Statistics, Data Warehousing, Data Mining & Visualization.</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="center promo promo-example">
+                            <i class="mdi-social-group"></i>
+                            <h5 class="promo-caption">Bachelor's in Information Technology</h5>
+                            <p class="light center"><b>Courses:</b> Data Structures, Object Oriented Programming, Web Development, Database Management, Distributed Systems, Big Data.</p>
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="center promo promo-example">
+                            <i class="mdi-hardware-desktop-windows"></i>
+                            <h5 class="promo-caption">Diploma in Information Technology</h5>
+                            <p class="light center"><b>Courses:</b> Data Structures, Object Oriented Programming, Web Development, Database Management, Distributed Systems, Big Data .</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Skills-->
+        <div id="skills" class="section scrollspy">
+            <div class="container">
+                <h2 class="header text_b">Technical Skills </h2>
+                <div class="row">
+                    <div  class="col s12">
+                        <h5 class="text_h2"> 
+                            <span class="span_h2">Advanced</span>: Python, R, SQL, HTML, CSS, JavaScript, PHP, Tableau, PowerBi, Apache Superset, Looker, Amazon Web Services (AWS)
+                            <br>
+                            <span class="span_h2">Intermediate</span>: Java, MongoDB, Talend, Google Cloud Platform (GCP), PostgreSQL, NoSQL, CI/CD integration
+                            <br>
+                            <span class="span_h2">Basic</span>: SparkSQL, Hadoop, Hive, MapReduce, REST, Swift, Docker, Django, d3.js, AngularJS, ReactJS, NodeJS, MS Azure, ELK stack
+                        </h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--experience-->
+        <div class="section scrollspy" id="experience">
+            <div class="container">
+                <h2 class="header text_b">Experience </h2>
+                <div class="row">
+
+                    <div class="col s12 m4 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="img/project4.jpg">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">AGCO<i class="mdi-navigation-more-vert right"></i></span>
+                                <p><a href="#">Advanced Analytics Intern</a></p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">AGCO<i class="mdi-navigation-close right"></i></span>
+                                
+                                <p>
+                                    <ul>
+                                        <li>
+                                            Point 1
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Point 2
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Point 3
+                                        </li>
+                                    </ul>
+
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="img/project1.jpg">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">NCSA<i class="mdi-navigation-more-vert right"></i></span>
+                                <p><a href="#">Research Programmer</a></p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">National Center for Supercomputing Applications<i class="mdi-navigation-close right"></i></span>
+                                
+                                <p>
+                                    <ul>
+                                        <li>
+                                            Developing a package to analyze real-time glucose levels and visualize fluctuation patterns of diabetic, prediabetic or healthy individual
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Performing imputations on missing data with 83.7% accuracy by deploying an LSTM neural network on a supercomputer (Blue Waters)
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Classifying individuals as diabetic, prediabetic or healthy with 87.13% accuracy based on variability indices using spectral clustering
+                                        </li>
+                                    </ul>
+
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="img/project2.jpeg">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">BIG<i class="mdi-navigation-more-vert right"></i></span>
+                                <p><a href="#">Project Manager</a></p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Business Intelligence Group <i class="mdi-navigation-close right"></i></span>
+                                <p>
+                                    <ul>
+                                        <li>
+                                            Leading a team of 7 consultants to provide market and strategy consulting to an AI-based startup in the healthcare retail industry
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Surveying competitors to identify critical drivers, stakeholders & key performance indicators (KPIs) to propose a market entry strategy 
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Creating communication channels using SCRUM practices to manage efficient task delegation across a globally distributed team
+                                        </li>
+
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="img/project3.png">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">SipScience <i class="mdi-navigation-more-vert right"></i></span>
+                                <p><a href="#">Data Science Intern</a></p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">SipScience <i class="mdi-navigation-close right"></i></span>
+                                <p>
+                                    <ul>
+                                        <li>
+                                            Collaborated with a team of 4 members to design and deploy a classification model and data utilization pipelines on a GCP instance
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Automated collecting big data for ETL and feature engineering to create operational dashboards of POS data using Apache Superset
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Achieved 93.1% accuracy to identify data as food or beverage with an NLP based model using TF-IDF vectorizer and RF classifier
+                                        </li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="img/project5.png">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">AltQue <i class="mdi-navigation-more-vert right"></i></span>
+                                <p><a href="#">Technology Consulting Intern</a></p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">AltQue <i class="mdi-navigation-close right"></i></span>
+                                <p>
+                                    <ul>
+                                        <li>
+                                            Worked with promising start-ups to transform idea into product in different domains and provide business centric consulting 
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Assisted the core team in conducting risk analysis with respect to competitors and possible collaborations for market entry strategy
+                                        </li>
+                                        
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--projects-->
+        <div class="section scrollspy" id="projects">
+            <div class="container">
+                <h2 class="header text_b">Projects </h2>
+                <div class="row">
+
+                    <div class="col s12 m4 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="img/project4.jpg">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">WNV Forecasting Challenge<i class="mdi-navigation-more-vert right"></i></span>
+                                <p><a href="#">Project Lead</a></p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">West Nile Virus Forecasting Challenge by CDC <i class="mdi-navigation-close right"></i></span>
+                                
+                                <p>
+                                    <ul>
+                                        <li>
+                                            Collaborated with a team of 3 to predict the number of West Nile virus neuroinvasive disease cases in the US for all regions in 2020
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Collected, cleaned & preprocessed historic data on spread and various healthcare, social & economic conditions to identify a causality
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Deployed a Vector Autoregressive model on AWS Sagemaker in association with AWS S3 for data storage and accessibility 
+                                        </li>
+                                        <li>
+                                            Projected number of WNV cases for 2020 in 3109 counties by relating consequential factors affecting healthcare and transmission
+                                        </li>
+                                    </ul>
+
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="img/project1.jpg">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">Statistical Analysis of Sales Data <i class="mdi-navigation-more-vert right"></i></span>
+                                <p><a href="#">Software Developer</a></p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Statistical Analysis of Sales Data <i class="mdi-navigation-close right"></i></span>
+                                
+                                <p>
+                                    <ul>
+                                        <li>
+                                            Performed geospatial analysis to assist the marketing team in prioritizing limited spend on high impact and profitable demographics 
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Improved sales by 43% by interpreting insights to infer a prioritized list of zip codes for industry segments by identifying the KPIs
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Preprocessed and analyzed over 5Mn records of sales data with over 100 retail sectors for all regions in the US by zip code
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Created analytical dashboards using Tableau to comprehend associations of various socio-economic factors that drive sales in region 
+                                        </li>
+                                        
+                                    </ul>
+
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="img/project2.jpeg">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">Weather & Traffic Predictor<i class="mdi-navigation-more-vert right"></i></span>
+                                <p><a href="#">Software Developer</a></p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Weather & Traffic Predictor<i class="mdi-navigation-close right"></i></span>
+                                <p>
+                                    <ul>
+                                        <li>
+                                            Enabled the user to save valuable time in planning commute for the week by factoring the travel time with an error rate of 12.5%
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Developed an RNN model that demonstrates the correlation of the weather on the traffic to predict travel time between two points
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Using ARIMA predicted the weather based on available trends and an RF classifier to anticipate traffic based on the weather in Python 
+                                        </li>
+                                        <br>
+                                        <li>
+                                            Designed a web portal using HTML, CSS & ReactJS to display results that can be embedded into websites and mobile applications
+                                        </li>
+
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Parallax-->
+        <div class="parallax-container">
+            <div class="parallax"><img src="img/parallax1.png"></div>
+        </div>
+
+        <!--Recommendations-->
+        <div class="section scrollspy" id="recommendations">
+            <div class="container">
+                <h2 class="header text_b"> Recommendations </h2>
+                <div class="row">
+                    <div class="col s12 m4 l4">
+                        <div class="card card-avatar">
+                            <div class="waves-effect waves-block waves-light">
+                                <img class="activator" src="img/avatar1.png">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">Prof. Song <br/>
+                                    <small><em><a class="red-text text-darken-1" href="#">Director, BIG</a></em></small></span>
+                                <p>
+                                    Sneh is second year grad student at the University of Illinois, Urbana-Champaign pursuing a master’s degree in Information Management. His interest in the fields of data science and business intelligence is evident in his projects that have circled around machine learning and data analytics with the goal to learn something new; while having tangible results too. Sneh currently works at the National Center for Supercomputing Applications in Champaign, Illinois. He is a part of the project where we use telemetry data to analyze the fluctuation in an individual’s blood glucose levels to identify their diabetic status. 
+                     
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4 l4">
+                        <div class="card card-avatar">
+                            <div class="waves-effect waves-block waves-light">
+                                <img class="activator" src="img/avatar2.png">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">Justina<br/>
+                                    <small><em><a class="red-text text-darken-1" href="#">NCSA</a></em></small>
+                                </span>
+                                <p>
+                                    Sneh is second year grad student at the University of Illinois, Urbana-Champaign pursuing a master’s degree in Information Management. His interest in the fields of data science and business intelligence is evident in his projects that have circled around machine learning and data analytics with the goal to learn something new; while having tangible results too. Sneh currently works at the National Center for Supercomputing Applications in Champaign, Illinois. He is a part of the project where we use telemetry data to analyze the fluctuation in an individual’s blood glucose levels to identify their diabetic status. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4 l4">
+                        <div class="card card-avatar">
+                            <div class="waves-effect waves-block waves-light">
+                                <img class="activator" src="img/avatar3.png">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">
+                                    Julian Smith <br/>
+                                    <small><em><a class="red-text text-darken-1" href="#">CTO, SipScience</a></em></small></span>
+                                <p>
+                                   Sneh is second year grad student at the University of Illinois, Urbana-Champaign pursuing a master’s degree in Information Management. His interest in the fields of data science and business intelligence is evident in his projects that have circled around machine learning and data analytics with the goal to learn something new; while having tangible results too. Sneh currently works at the National Center for Supercomputing Applications in Champaign, Illinois. He is a part of the project where we use telemetry data to analyze the fluctuation in an individual’s blood glucose levels to identify their diabetic status. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <footer id="contact" class="page-footer default_color scrollspy">
+            <div class="container">  
+                <div class="row">
+                    <div class="col l6 s12">
+                        <form class="col s12" action="contact.php" method="post">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <i class="mdi-action-account-circle prefix white-text"></i>
+                                    <input id="icon_prefix" name="name" type="text" class="validate white-text">
+                                    <label for="icon_prefix" class="white-text">First Name</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="mdi-communication-email prefix white-text"></i>
+                                    <input id="icon_email" name="email" type="email" class="validate white-text">
+                                    <label for="icon_email" class="white-text">Email-id</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <i class="mdi-editor-mode-edit prefix white-text"></i>
+                                    <textarea id="icon_prefix2" name="message" class="materialize-textarea white-text"></textarea>
+                                    <label for="icon_prefix2" class="white-text">Message</label>
+                                </div>
+                                <div class="col offset-s7 s5">
+                                    <button class="btn waves-effect waves-light red darken-1" type="submit">Submit
+                                        <i class="mdi-content-send right white-text"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">sbg5@illinois.edu</h5>
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">Connect</h5>
+                        <ul>
+                            <br>
+                            <li>
+                                <a class="white-text" href="github.com/snehG0205">
+                                    <i class="small fa fa-github-square white-text"></i> Github
+                                </a>
+                            </li>
+                            <br>
+                            <li>
+                                <a class="white-text" href="linkedin.com/in/sneh-gajiwala p">
+                                    <i class="small fa fa-linkedin-square white-text"></i> Linkedin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright default_color">
+                <div class="container">
+                    Made by <a class="white-text" href="">Sneh Gajiwala</a>. 
+                </div>
+            </div>
         </footer>
 
-		<!--JavaScript at end of body for optimized loading-->
-		<!-- Compiled and minified JavaScript -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-		<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-  });
+        <!--  Scripts-->
+        <script src="min/plugin-min.js"></script>
+        <script src="min/custom-min.js"></script>
 
-  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-  // var collapsibleElem = document.querySelector('.collapsible');
-  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-
-  // Or with jQuery
-
-  $(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
-
-$(document).ready(function(){
-    $('.materialboxed').materialbox();
-  });
-        
-
-  $(document).ready(function(){
-    $('input.autocomplete').autocomplete({
-      data: {
-        "Package": null,
-        "Install": null,
-        "Class": null,
-        "Object": null,
-        "Dependency": null,
-        "Required": null,
-        "Python": null,
-        "GlucoCheck":null,
-        "Core" :null,
-        "Train": null,
-        "Model": null,
-        "Learning": null,
-        "LSTM": null,
-        "Long short term memory": null,
-        "Impute": null,
-        "Predict": null,
-        "Describe": null,
-        "Plot": null,
-        "Data": null,
-        "Constant": null,
-        "Hall": null,
-        "Links": null,
-        "Helper":null,
-        "Smoothing": null,
-        "Subsampling": null,
-        "Complete Days": null,
-        "Full Days": null,
-        "Units": null,
-        "Convert Units": null,
-        "Mean": null,
-        "Day Mean": null,
-        "Night Mean": null,
-        "Sampling": null,
-        "Hourly Sampling": null,
-        "Inner":  null,
-        "Gap": null,
-        "Detect Gap": null,
-        "Date": null,
-        "Preprocess": null,
-        "Date Preprocess": null,
-        "Error": null,
-        "Error Metrics": null,
-        "IOA": null,
-        "Index of Agreement": null,
-        "MAD": null,
-        "Mean Absolute Deviation": null,
-        "MAPE": null,
-        "Mean Absolute Percentage Error": null,
-        "RMSE": null,
-        "Root Mean Square Error": null,
-        "Variability": null,
-        "Variability Indices": null,
-        "ADRR":null,
-        "BGRI":null,
-        "CONGAn":null,
-        "DT":null,
-        "EhbA1c":null,
-        "GFI":null,
-        "GRADE":null,
-        "GVP":null,
-        "GMI":null,
-        "GLI":null,
-        "IGC":null,
-        "J-Index":null,
-        "LAGE":null,
-        "MAGE":null,
-        "M-Value":null,
-        "MAG":null,
-        "MODD":null,
-        "MAD":null,
-        "PGS":null,
-        "SDROC":null,
-        "TIR":null,
-        "VE":null,
-        "Summary Statistics":null,
-        "Average Daily Risk Range":null,
-        "Blood Glucose Risk Index":null,
-        "Continuous Overlapping Net Glycemic Action":null,
-        "Distance Travelled":null,
-        "Estimated HbA1c":null,
-        "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation":null,
-        "Glucose Liability Index":null,
-        "Glucose Management Indicator":null,
-        "Glycaemic Risk Assessment Diabetes Equation":null,
-        "Glycemic Variability Percentage":null,
-        "Index of Glycemic Control":null,
-        "Largest Amplitude of Glycemic Excursions":null,
-        "Mean Absolute Difference":null,
-        "Mean Absolute Glucose Change":null,
-        "Mean Amplitude Glycemic Excursions":null,
-        "Mean of Daily Differences":null,
-        "Personal Glycemic State":null,
-        "Standard Deviation of the Glucose Rate of Change":null,
-        "Time in Range":null,
-        "Variability Episodes":null
-
-
-      },
-        onAutocomplete: function(val) {
-           // Callback function when value is autcompleted.
-           // Grabbing input after autocomplete is done
-           var value = $('input.autocomplete').val();
-           if(value == "Package" || value == "Install" || value == "Class" || value == "Description" || value == "Object" || value == "Dependency" || value == "Required" || value == "Python"){
-               var link = window.open('chapter1.html');
-               link.location;
-           } 
-           else if(value == "GlucoCheck"){
-               var link = window.open('index.html');
-               link.location;
-           } 
-           else if (value == "Core" || value == "Plots") {
-               var link = window.open('chapter3.html');
-               link.location;
-           } 
-           else if (value == "Describe") {
-               var link = window.open('chapter3.html#chp3.1');
-               link.location;
-           } 
-           else if (value == "Plot") {
-               var link = window.open('chapter3.html#chp3.2');
-               link.location;
-           } 
-           else if (value == "Bar Plot") {
-               var link = window.open('chapter3.html#chp3.3');
-               link.location;
-           } 
-           else if (value == "Histogram") {
-               var link = window.open('chapter3.html#chp3.4');
-               link.location;
-           } 
-           else if (value == "Data" || value == "Constant" || value == "Hall" || value == "Links") {
-               var link = window.open('chapter2.html');
-               link.location;
-           } 
-           else if (value == "Imputation" ) {
-               var link = window.open('chapter4.html');
-               link.location;
-           } 
-           else if (value == "Classification" ) {
-               var link = window.open('chapter5.html');
-               link.location;
-           } 
-           else if (value == "Helper" || value == "Units" || value == "Mean" || value == "Day Mean" || value == "Night Mean" || value == "Sampling" || value == "Days") {
-               var link = window.open('chapter8.html');
-               link.location;
-           } 
-           else if (value == "Smoothing") {
-               var link = window.open('chapter8.html#chp8.3');
-               link.location;
-           }
-           else if (value == "Subsampling") {
-               var link = window.open('chapter8.html#chp8.4');
-               link.location;
-           } 
-           else if (value == "Convert Units") {
-               var link = window.open('chapter8.html#chp8.1');
-               link.location;
-           } 
-           else if (value == "Complete Days") {
-               var link = window.open('chapter8.html#chp8.2');
-               link.location;
-           } 
-           else if (value == "Smoothing") {
-               var link = window.open('chapter8.html#chp8.6');
-               link.location;
-           } 
-           else if (value == "Hourly Sampling") {
-               var link = window.open('chapter8.html#chp8.5');
-               link.location;
-           } 
-           else if (value == "Inner" || value == "Gap" || value == "Date" || value == "Preprocess") {
-               var link = window.open('chapter5.html');
-               link.location;
-           } 
-           else if (value == "Detect Gap") {
-               var link = window.open('chapter5.html#chp5.2');
-               link.location;
-           } 
-           else if (value == "Date Preprocess") {
-               var link = window.open('chapter5.html#chp5.3');
-               link.location;
-           } 
-           else if (value == "Variability" || value == "Variability Indices") {
-               var link = window.open('chapter6.html');
-               link.location;
-           }
-           else if (value == "ADRR" || value == "Average Daily Risk Range") {
-               var link = window.open('chapter6.html#chp6.3');
-               link.location;
-           }
-           else if (value == "BGRI" || value == "Blood Glucose Risk Index") {
-               var link = window.open('chapter6.html#chp6.4');
-               link.location;
-           }
-           else if (value == "CONGAn" || value == "Continuous Overlapping Net Glycemic Action") {
-               var link = window.open('chapter6.html#chp6.5');
-               link.location;
-           }
-           else if (value == "DT" || value == "Distance Travelled") {
-               var link = window.open('chapter6.html#chp6.6');
-               link.location;
-           }
-           else if (value == "DT" || value == "Distance Travelled") {
-               var link = window.open('chapter6.html#chp6.6');
-               link.location;
-           }
-           else if (value == "EhbA1c" || value == "Estimated HbA1c") {
-               var link = window.open('chapter6.html#chp6.7');
-               link.location;
-           }
-           else if (value == "GFI" || value == "Glucose Fluctuation Index and Glucose Coefficient of Fluctuation") {
-               var link = window.open('chapter6.html#chp6.8');
-               link.location;
-           }
-           else if (value == "GRADE" || value == "Glycaemic Risk Assessment Diabetes Equation") {
-               var link = window.open('chapter6.html#chp6.11');
-               link.location;
-           }
-           else if (value == "GVP" || value == "Glycemic Variability Percentage") {
-               var link = window.open('chapter6.html#chp6.12');
-               link.location;
-           }
-           else if (value == "GMI" || value == "Glucose Management Indicator") {
-               var link = window.open('chapter6.html#chp6.10');
-               link.location;
-           }
-           else if (value == "GLI" || value == "Glucose Liability Index") {
-               var link = window.open('chapter6.html#chp6.9');
-               link.location;
-           }
-           else if (value == "IGC" || value == "Index of Glycemic Control") {
-               var link = window.open('chapter6.html#chp6.13');
-               link.location;
-           }
-           else if (value == "J-Index") {
-               var link = window.open('chapter6.html#chp6.14');
-               link.location;
-           }
-           else if (value == "LAGE" || value == "Largest Amplitude of Glycemic Excursions") {
-               var link = window.open('chapter6.html#chp6.15');
-               link.location;
-           }
-           else if (value == "M-Value") {
-               var link = window.open('chapter6.html#chp6.16');
-               link.location;
-           }
-           else if (value == "MAD" || value == "Mean Absolute Difference") {
-               var link = window.open('chapter6.html#chp6.17');
-               link.location;
-           }
-           else if (value == "MAG" || value == "Mean Absolute Glucose Change") {
-               var link = window.open('chapter6.html#chp6.18');
-               link.location;
-           }
-           else if (value == "MAGE" || value == "Mean Amplitude Glycemic Excursions") {
-               var link = window.open('chapter6.html#chp6.19');
-               link.location;
-           }
-           else if (value == "MODD" || value == "Mean of Daily Differences") {
-               var link = window.open('chapter6.html#chp6.20');
-               link.location;
-           }
-           else if (value == "PGS" || value == "Personal Glycemic State") {
-               var link = window.open('chapter6.html#chp6.21');
-               link.location;
-           }
-           else if (value == "SDROC" || value == "Standard Deviation of the Glucose Rate of Change") {
-               var link = window.open('chapter6.html#chp6.22');
-               link.location;
-           }
-           else if (value == "Summary Statistics") {
-               var link = window.open('chapter6.html#chp6.23');
-               link.location;
-           }
-           else if (value == "TIR" ||  value == "Time in Range") {
-               var link = window.open('chapter6.html#chp6.24');
-               link.location;
-           }
-           else if (value == "Variability Episodes") {
-               var link = window.open('chapter6.html#chp6.25');
-               link.location;
-           }
-
-
-           else if (value == "Error" || value == "Error Metrics") {
-               var link = window.open('chapter7.html');
-               link.location;
-           }
-           else if (value == "IOA" || value == "Index of Agreement") {
-               var link = window.open('chapter7.html#chp7.2');
-               link.location;
-           }
-           else if (value == "MAD" || value == "Mean Absolute Deviation") {
-               var link = window.open('chapter7.html#chp7.3');
-               link.location;
-           }
-           else if (value == "MAPE" || value == "Mean Absolute Percentage Error") {
-               var link = window.open('chapter7.html#chp7.3');
-               link.location;
-           }
-           else if (value == "RMSE" || value == "Root Mean Square Error") {
-               var link = window.open('chapter7.html#chp7.3');
-               link.location;
-           }
-
-
-
-        },
-
-    });
-});
-      
-    </script>
     </body>
-  </html>
+</html>
