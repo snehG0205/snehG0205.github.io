@@ -1,529 +1,1534 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Sneh Gajiwala</title>
-  <meta name="description" content="Portfolio of Sneh Gajiwala — Data science and analytics leader with 5+ years of experience in product management, integration strategy, fraud prevention, and business intelligence. Showcasing impactful projects in AI, predictive modeling, process optimization, and customer experience." >
-  <meta name="keywords" content="Sneh Gajiwala, data science, analytics, product management, business intelligence, AI, machine learning, predictive modeling, fraud detection, integration management, process optimization, customer experience, Tableau, Airflow, SQL, technical consulting" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sneh Gajiwala — Data Science & Product Leadership</title>
+  <meta name="description" content="Portfolio of Sneh Gajiwala — Data science and analytics leader building AI systems, driving integrations, and turning data into measurable impact.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306071a' rx='4'/%3E%3Ctext x='4' y='22' font-family='monospace' font-weight='700' font-size='14' fill='white'%3ESG%3C/text%3E%3Ccircle cx='28.5' cy='21' r='2.5' fill='%233b82f6'/%3E%3C/svg%3E">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <!-- Favicons -->
-  <link href="assets/img/icon.png" rel="icon">
-  <link href="assets/img/icon.png" rel="apple-touch-icon">
+    :root {
+      --bg:    #07091e;
+      --bg2:   #0d1028;
+      --bg3:   #111432;
+      --glass: rgba(255,255,255,0.04);
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+      --blue:        #3b82f6;
+      --blue-dim:    rgba(59,130,246,0.16);
+      --blue-glow:   rgba(59,130,246,0.35);
+      --violet:      #6366f1;
+      --violet-dim:  rgba(99,102,241,0.16);
+      --violet-glow: rgba(99,102,241,0.35);
+      --cyan:        #0ea5e9;
+      --cyan-dim:    rgba(14,165,233,0.16);
+      --cyan-glow:   rgba(14,165,233,0.35);
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+      --text:   #eef0fa;
+      --muted:  #7880a8;
+      --border: rgba(255,255,255,0.07);
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+      --ff-h: 'Playfair Display', Georgia, serif;
+      --ff-b: 'Outfit', sans-serif;
+      --ff-m: 'Space Mono', monospace;
+    }
 
+    html { scroll-behavior: smooth; }
 
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-b);
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      padding-bottom: 50px; /* room for fixed marquee ticker */
+    }
+
+    ::selection { background: var(--blue); color: #fff; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--violet)); }
+
+    /* ── CANVAS ──────────────────────────────────────────────── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── GLOW BLOBS ──────────────────────────────────────────── */
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(110px);
+      pointer-events: none;
+      z-index: 1;
+      animation: breathe 9s ease-in-out infinite;
+    }
+    .g1 { background: radial-gradient(ellipse, rgba(239,68,68,0.38) 0%, rgba(251,146,60,0.18) 55%, transparent 100%);   width: 900px; height: 900px; top: -300px; right: -200px; }
+    .g2 { background: radial-gradient(ellipse, rgba(234,179,8,0.32) 0%, rgba(202,138,4,0.16) 55%, transparent 100%);   width: 700px; height: 700px; bottom: 10%;  left: -180px; animation-delay: -3.5s; }
+    .g3 { background: radial-gradient(ellipse, rgba(16,185,129,0.28) 0%, rgba(52,211,153,0.14) 55%, transparent 100%);  width: 600px; height: 600px; top: 38%;    right: 8%;    animation-delay: -6s; }
+    .g4 { background: radial-gradient(ellipse, rgba(251,191,36,0.26) 0%, rgba(245,158,11,0.12) 55%, transparent 100%);  width: 500px; height: 500px; top: 65%;    left: 25%;    animation-delay: -9s; }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.12); }
+    }
+
+    /* ── GRAIN ───────────────────────────────────────────────── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* all content above effects */
+    section, #stats, .marquee-wrap, footer { position: relative; z-index: 10; }
+
+    /* ── TOP NAV ─────────────────────────────────────────────── */
+    #topnav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    #topnav.scrolled {
+      background: rgba(6,7,26,0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-color: var(--border);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      padding: 0 8vw;
+    }
+    .nav-logo {
+      font-family: var(--ff-m);
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+    }
+    .logo-dot { color: var(--blue); }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      padding: 9px 22px;
+      border: 1px solid var(--blue-glow);
+      color: var(--blue);
+      font-family: var(--ff-m);
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .nav-cta:hover { background: var(--blue-dim); box-shadow: 0 0 24px var(--blue-dim); }
+
+    /* ── DOT NAV ─────────────────────────────────────────────── */
+    .dot-nav {
+      position: fixed;
+      top: 50%;
+      right: 28px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 999;
+    }
+    .dot-nav a {
+      display: block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: 0.35;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .dot-nav a:hover, .dot-nav a.active {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+    .dot-nav a.active { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+    .dot-nav a::after {
+      content: attr(data-label);
+      position: absolute;
+      right: 18px; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--ff-m);
+      font-size: 10px;
+      color: var(--blue);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .dot-nav a:hover::after { opacity: 1; }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 8vw 80px;
+    }
+    .hero-eyebrow {
+      font-family: var(--ff-m);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-name {
+      font-family: var(--ff-h);
+      font-size: clamp(60px, 12vw, 136px);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.4s forwards;
+    }
+    .name-line1 { display: block; color: #fff; }
+    .name-line2 {
+      display: block;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 50%, var(--cyan) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradShift 7s ease infinite;
+      padding-bottom: 0.14em; /* room for j/g descenders under tight line-height */
+    }
+    @keyframes gradShift {
+      0%, 100% { background-position: 0% 50%; }
+      50%       { background-position: 100% 50%; }
+    }
+    .hero-role {
+      margin-top: 32px;
+      font-family: var(--ff-m);
+      font-size: 14px;
+      color: var(--muted);
+      min-height: 22px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s forwards;
+    }
+    .hero-desc {
+      margin-top: 20px;
+      max-width: 560px;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.78;
+      color: rgba(232,234,246,0.58);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.85s forwards;
+    }
+    .hero-ctas {
+      margin-top: 44px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.9s 1.05s forwards;
+    }
+    .hero-scroll {
+      margin-top: 60px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--ff-m);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeIn 1s 1.4s forwards;
+    }
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 36px; height: 1px;
+      background: var(--muted);
+    }
+
+    /* ── BUTTONS ─────────────────────────────────────────────── */
+    .btn-primary {
+      padding: 13px 32px;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      color: #fff;
+      font-family: var(--ff-m);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-primary:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(59,130,246,0.28);
+    }
+    .btn-secondary {
+      padding: 13px 32px;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--ff-m);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--blue-glow);
+      color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    /* ── STATS ───────────────────────────────────────────────── */
+    #stats {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 8vw;
+      background: rgba(13,16,40,0.80);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--ff-h);
+      font-size: 50px;
+      font-weight: 700;
+      line-height: 1;
+      display: block;
+    }
+    .c-blue   { color: var(--blue); }
+    .c-violet { color: var(--violet); }
+    .c-cyan   { color: var(--cyan); }
+    .stat-label {
+      font-family: var(--ff-m);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* ── SECTIONS ────────────────────────────────────────────── */
+    section { padding: 100px 8vw; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+    .section-num {
+      font-family: var(--ff-h);
+      font-size: 80px;
+      font-weight: 900;
+      line-height: 1;
+      user-select: none;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.28;
+    }
+    .section-title {
+      font-family: var(--ff-h);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 6px;
+      margin-left: 12px;
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────────── */
+    #about { background: rgba(7,9,30,0.76); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.88;
+      color: rgba(232,234,246,0.78);
+      margin-bottom: 20px;
+    }
+    .about-text p strong { color: #fff; font-weight: 600; }
+    .about-details { margin-top: 36px; display: flex; flex-direction: column; gap: 10px; }
+    .detail-row { display: flex; gap: 12px; font-size: 12px; }
+    .detail-key {
+      color: var(--blue);
+      min-width: 80px;
+      font-family: var(--ff-m);
+      font-size: 11px;
+    }
+    .detail-val { color: var(--muted); }
+    .detail-val a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .detail-val a:hover { color: var(--blue); }
+
+    .skills-glass {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .skill-group-label {
+      font-family: var(--ff-m);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 12px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      font-family: var(--ff-m);
+      font-size: 11px;
+      color: var(--text);
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .skill-tag:hover {
+      border-color: rgba(139,92,246,0.4);
+      color: var(--violet);
+      background: var(--violet-dim);
+    }
+
+    /* ── MARQUEE ─────────────────────────────────────────────── */
+    .marquee-wrap {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      overflow: hidden;
+      padding: 13px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(7,9,30,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      white-space: nowrap;
+      animation: marquee 55s linear infinite;
+    }
+    .marquee-track span {
+      font-family: var(--ff-m);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0 20px;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .marquee-track span:hover { color: var(--text); }
+    .marquee-sep { color: var(--blue) !important; padding: 0 4px !important; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── EXPERIENCE ──────────────────────────────────────────── */
+    #experience { background: rgba(17,20,50,0.75); }
+    .exp-stack { display: flex; flex-direction: column; gap: 14px; }
+    .exp-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 28px 32px 28px 36px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
+    }
+    .exp-card.visible { opacity: 1; transform: translateY(0); }
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--card-color, var(--blue));
+    }
+    .exp-card:hover {
+      border-color: var(--card-color, var(--blue));
+      box-shadow: 0 0 40px rgba(0,0,0,0.3), inset 0 0 60px rgba(0,0,0,0.1);
+    }
+    .exp-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .exp-role {
+      font-family: var(--ff-h);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .exp-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .exp-company { font-size: 16px; font-weight: 500; color: var(--muted); }
+    .exp-date {
+      font-family: var(--ff-m);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--card-color, var(--blue));
+      background: var(--card-color-dim, var(--blue-dim));
+      padding: 3px 10px;
+    }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .exp-bullets li {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(232,234,246,0.7);
+      padding-left: 24px;
+      position: relative;
+      line-height: 1.65;
+    }
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--card-color, var(--blue));
+      font-family: var(--ff-m);
+      font-size: 14px;
+    }
+
+    /* ── EDUCATION ───────────────────────────────────────────── */
+    #education { background: rgba(7,9,30,0.75); }
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .edu-card {
+      background: rgba(7,9,30,0.80);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.5s ease;
+    }
+    .edu-card.visible { opacity: 1; transform: translateY(0); }
+    .edu-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--edu-color, var(--blue));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .edu-card:hover::after { transform: scaleX(1); }
+    .edu-degree {
+      font-family: var(--ff-h);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .edu-school {
+      font-family: var(--ff-m);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--edu-color, var(--blue));
+      margin-bottom: 6px;
+    }
+    .edu-years { font-size: 15px; color: var(--muted); margin-bottom: 14px; }
+    .edu-focus { font-size: 16px; font-weight: 300; color: rgba(232,234,246,0.48); line-height: 1.6; }
+
+    /* ── PUBLICATIONS ────────────────────────────────────────── */
+    #publications { background: rgba(13,16,40,0.75); }
+    .pub-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+    .pub-item {
+      background: rgba(13,16,40,0.80);
+      padding: 28px 36px;
+      display: flex;
+      align-items: baseline;
+      gap: 40px;
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: all 0.5s ease;
+    }
+    .pub-item.visible { opacity: 1; transform: translateX(0); }
+    .pub-item:hover { background: rgba(59,130,246,0.06); }
+    .pub-num {
+      font-family: var(--ff-h);
+      font-size: 32px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.45;
+      min-width: 44px;
+      flex-shrink: 0;
+    }
+    .pub-title {
+      font-family: var(--ff-h);
+      font-size: 21px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      text-decoration: none;
+      display: block;
+      transition: color 0.2s;
+    }
+    .pub-title:hover { color: var(--blue); }
+    .pub-abstract {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.72;
+      color: rgba(238,240,250,0.52);
+      margin: 8px 0 12px;
+      max-width: 680px;
+    }
+    .pub-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pub-meta { font-family: var(--ff-m); font-size: 14px; color: var(--muted); }
+    .pub-link {
+      font-family: var(--ff-m);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .pub-link:hover { opacity: 0.65; }
+
+    /* ── CONTACT ─────────────────────────────────────────────── */
+    #contact {
+      background: rgba(7,9,30,0.76);
+      text-align: center;
+      padding: 120px 8vw;
+    }
+    .contact-eyebrow {
+      font-family: var(--ff-m);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+    .contact-heading {
+      font-family: var(--ff-h);
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 44px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 50%, var(--cyan) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradShift 7s ease infinite;
+    }
+    .contact-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .contact-link {
+      padding: 14px 36px;
+      font-family: var(--ff-m);
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .contact-link.primary {
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      color: #fff;
+    }
+    .contact-link.primary:hover {
+      opacity: 0.85;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(59,130,246,0.25);
+    }
+    .contact-link.secondary { border: 1px solid var(--border); color: var(--text); }
+    .contact-link.secondary:hover {
+      border-color: var(--cyan-glow);
+      color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 8vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--ff-m);
+      font-size: 14px;
+      color: var(--muted);
+      background: rgba(7,9,30,0.88);
+      position: relative;
+      z-index: 10;
+    }
+    footer span { letter-spacing: 0.1em; }
+
+    /* ── RECOMMENDATIONS ────────────────────────────────────── */
+    #recommendations { background: rgba(17,20,50,0.75); }
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .rec-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 28px 28px 24px 32px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
+    }
+    .rec-card.visible { opacity: 1; transform: translateY(0); }
+    .rec-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--rc, var(--blue));
+    }
+    .rec-card:hover { border-color: var(--rc, var(--blue)); }
+    .rec-quote {
+      font-family: var(--ff-h);
+      font-size: 52px;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--rc, var(--blue)), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.35;
+      margin-bottom: 10px;
+      user-select: none;
+    }
+    .rec-text {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.78;
+      color: rgba(232,234,246,0.75);
+      font-style: italic;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .rec-person { border-top: 1px solid var(--border); padding-top: 16px; }
+    .rec-name {
+      font-family: var(--ff-h);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .rec-meta {
+      font-family: var(--ff-m);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .rec-tag {
+      font-size: 10px;
+      font-family: var(--ff-m);
+      letter-spacing: 0.08em;
+      color: var(--rc, var(--blue));
+      background: var(--rc-dim, var(--blue-dim));
+      padding: 2px 8px;
+    }
+
+    /* ── CURSOR ──────────────────────────────────────────────── */
+    .cursor {
+      display: inline-block;
+      width: 2px; height: 14px;
+      background: var(--blue);
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── KEYFRAMES ───────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .dot-nav { display: none; }
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 0; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 24px; }
+      .rec-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 72px 6vw; }
+      .pub-item { flex-direction: column; gap: 8px; }
+      .hero-name { font-size: 52px; }
+      .nav-cta { display: none; }
+      .exp-card { padding: 20px 20px 20px 24px; }
+    }
+  </style>
 </head>
+<body>
 
-<body class="index-page">
+  <canvas id="bg-canvas"></canvas>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="glow g3"></div>
+  <div class="glow g4"></div>
+  <div class="grain"></div>
 
-  <header id="header" class="header dark-background d-flex flex-column">
-    <i class="header-toggle d-xl-none bi bi-list"></i>
-
-    <div class="profile-img">
-      <img src="assets/img/profile-img.jpg" alt="" class="img-fluid rounded-circle">
+  <!-- TOP NAV -->
+  <header id="topnav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero">SG<span class="logo-dot">.</span></a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#publications">Publications</a>
+        <a href="#recommendations">Recommendations</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+      <a href="#contact" class="nav-cta">Get In Touch</a>
     </div>
-
-    <a href="index.html" class="logo d-flex align-items-center justify-content-center">
-      <!-- Uncomment the line below if you also wish to use an image logo -->
-      <!-- <img src="assets/img/logo.png" alt=""> -->
-      <h1 class="sitename">Sneh Gajiwala</h1>
-    </a>
-
-    <div class="social-links text-center">
-      <a href="mailto:sneh.gajiwala@gmail.com" class="google-plus"><i class="bi bi-envelope"></i></a>
-      <a href="https://www.linkedin.com/in/sneh-gajiwala/" class="linkedin"><i class="bi bi-linkedin"></i></a>
-    </div>
-
-    <nav id="navmenu" class="navmenu">
-      <ul>
-        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
-        <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
-        <li><a href="#skills"><i class="bi bi-gear-wide-connected navicon"></i> Skills</a></li>
-        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
-        <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
-      </ul>
-    </nav>
-
   </header>
 
-  <main class="main">
+  <!-- DOT NAV -->
+  <nav class="dot-nav" aria-label="Page sections">
+    <a href="#hero"         data-label="Home"         class="active"></a>
+    <a href="#about"        data-label="About"></a>
+    <a href="#experience"   data-label="Experience"></a>
+    <a href="#education"    data-label="Education"></a>
+    <a href="#publications"    data-label="Publications"></a>
+    <a href="#recommendations" data-label="Recommendations"></a>
+    <a href="#contact"         data-label="Contact"></a>
+  </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow">Data Science &amp; Product Leadership</p>
+    <h1 class="hero-name">
+      <span class="name-line1">Sneh</span>
+      <span class="name-line2">Gajiwala.</span>
+    </h1>
+    <p class="hero-role" id="typewriter"><span class="cursor"></span></p>
+    <p class="hero-desc">
+      Data science and analytics leader with 6+ years of experience building AI systems,
+      driving product integrations, and turning complex data into measurable business impact.
+    </p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-primary">View Experience</a>
+      <a href="#contact"    class="btn-secondary">Get In Touch</a>
+    </div>
+    <div class="hero-scroll">Scroll to explore</div>
+  </section>
 
-      <img src="assets/img/ss.jpg" alt="" data-aos="fade-in" class="">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <h2>Sneh Gajiwala</h2>
-        <p>I'm a <span class="typed" data-typed-items="Data Scientist., Product Manager., Integration Manager., Implementation Consultant.">Data Scientist.</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+  <!-- STATS -->
+  <div id="stats">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-num c-blue counter" data-target="6">0</span>
+        <p class="stat-label">Years Experience</p>
       </div>
-
-    </section><!-- /Hero Section -->
-
-    <!-- About Section -->
-    <section id="about" class="about section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>About</h2>
-        <p>With a foundation in data science and technical integration, I bring a product-oriented mindset to every role I take on. From managing consulting engagements at OneTrust to integrations at DoorDash to finally leading servicing strategies at Discover, my career has been built around transforming ideas into impactful products. I specialize in 0-to-1 product initiatives, cross-functional collaboration, and data-driven decision-making.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4 justify-content-center">
-          <div class="col-lg-4">
-            <img src="assets/img/profile-img.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 content">
-            <h2>Data, Product &amp; Integration Leader.</h2>
-            <p class="fst-italic py-3">
-              Data science and analytics leader with 5+ years of experience driving product integrations, reporting, and process optimization—bringing proven expertise in product ownership, integration management, and technical consulting to deliver measurable business impact.
-            </p>
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <!-- <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>1 May 1995</span></li> -->
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span><a href="https://snehg0205.github.io/">snehg0205.github.io</a></span></li>
-                  <!-- <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+1 217 819 8163</span></li> -->
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Chicago, IL, USA</span></li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
-                  <!-- <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li> -->
-                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>MS in Information Management</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span><a href="mailto:sneh.gajiwala@gmail.com">sneh.gajiwala@gmail.com</a></span>
-                  <li><i class="bi bi-chevron-right"></i> <strong>LinkedIn:</strong> <span><a href="https://www.linkedin.com/in/sneh-gajiwala/">linkedin.com/in/sneh-gajiwala/</a></span></li>
-                  <!-- <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li> -->
-                </ul>
-              </div>
-            </div>
-            <p class="py-3">
-              I’m eager to apply my background in data science, analytics, and integration management to build innovative product solutions that deliver real impact in fast-paced environments. I’m especially motivated by the chance to bridge technical expertise with customer needs—shaping strategy, improving processes, and driving meaningful outcomes. I enjoy connecting with other product-focused professionals and remain open to new opportunities where I can contribute, grow, and help bring bold ideas to life.
-            </p>
-          </div>
-        </div>
-
+      <div class="stat-item">
+        <span class="stat-num c-violet counter" data-target="5">0</span>
+        <p class="stat-label">Unique Roles</p>
       </div>
-
-    </section><!-- /About Section -->
-
-    <!-- Stats Section -->
-    <section id="stats" class="stats section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item">
-              <i class="bi bi-calendar-plus"></i>
-              <span data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Years of Experience</strong> <span></span></p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item">
-              <i class="bi bi-person-workspace"></i>
-              <span data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Unique roles</strong> <span></span></p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item">
-              <i class="bi bi-window-desktop"></i>
-              <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter">+</span>
-              <p><strong>Diverse Projects</strong> <span></span></p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item">
-              <i class="bi bi-journal-richtext"></i>
-              <span data-purecounter-start="0" data-purecounter-end="3" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Scientific Publications</strong> <span></span></p>
-            </div>
-          </div><!-- End Stats Item -->
-
-        </div>
-
+      <div class="stat-item">
+        <span class="stat-num c-cyan counter" data-target="10" data-suffix="+">0</span>
+        <p class="stat-label">Diverse Projects</p>
       </div>
-
-    </section><!-- /Stats Section -->
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills section light-background">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Skills</h2>
-        <!-- <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p> -->
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row skills-content skills-animation">
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>Python, SQL, Tableau, Excel, GitHub, Postman</span> <i class="val">Advanced</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>AWS, Azure, Databricks, Airflow</span> <i class="val">Intermediate</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-          </div>
-
-          <div class="col-lg-6">
-
-            <div class="progress">
-              <span class="skill"><span>R, SAS, Power BI, Jira</span> <i class="val">Intermediate</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-            <div class="progress">
-              <span class="skill"><span>Predictive Modeling, A/B Testing, Data Visualization, Agile & SCRUM</span> <i class="val">Intermediate</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><!-- End Skills Item -->
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Skills Section -->
-
-    <!-- Resume Section -->
-    <section id="resume" class="resume section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Resume</h2>
-        <!-- <p>Data science & analytics leader with 5+ years of experience driving product integrations, reporting, and process optimization with track record in product ownership, integration management, and technical consulting.</p> -->
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="resume-title">Sumary</h3>
-
-            <div class="resume-item pb-0">
-              <h4>Sneh Gajiwala</h4>
-              <p>Data science & analytics leader with 5+ years of experience driving product integrations, reporting, and process optimization with track record in product ownership, integration management, and technical consulting.</p>
-            </div><!-- Edn Resume Item -->
-
-            <h3 class="resume-title">Contact</h3>
-
-            <div class="resume-item pb-0">
-              <!-- <h4>Sneh Gajiwala</h4> -->
-              <!-- <p><em>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</em></p> -->
-              <ul>
-                <li>Currently in: Chicago, IL</li>
-                <!-- <li>Phone: (217) 819-8163</li> -->
-                <li>Email: <a href="mailto:sneh.gajiwala@gmail.com">sneh.gajiwala@gmail.com</a></li>
-                <li>LinkedIn: <a href="https://www.linkedin.com/in/sneh-gajiwala/">sneh-gajiwala/</a></li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <h3 class="resume-title">Education</h3>
-            <div class="resume-item">
-              <h4>Masters in Information Management</h4>
-              <h5>2019 - 2021</h5>
-              <p><em>University of Illinois, Urbana Champaign</em></p>
-              <p><br>Majored in Data Science, Analytics and Consulting.<br></p>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Bachelor of Engineering Information Technology</h4>
-              <h5>2016 - 2019</h5>
-              <p><em>University of Mumbai, MH, India</em></p>
-              <p><br>Majored in Database Management, Cloud Computing and Data Warehousing.<br></p>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Diploma of Engineering Information Technology</h4>
-              <h5>2013 - 2016</h5>
-              <p><em>Mumbai University, MH, India</em></p>
-              <p><br>Majored in Website Design, Android App Development and Server-side Coding.<br></p>
-            </div><!-- Edn Resume Item -->
-
-            <h3 class="resume-title">Skills</h3>
-            <div class="resume-item">
-              <h4>Languages</h4>
-              <!-- <h5>2019 - 2021</h5> -->
-              <p><em>
-                <ul>
-                  <li>Python</li>
-                  <li>R</li>
-                  <li>SQL</li>
-                  <li>SAS</li>
-                </ul>
-              </em></p>
-              <!-- <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p> -->
-            </div><!-- Edn Resume Item -->
-             <div class="resume-item">
-              <h4>Tools</h4>
-              <!-- <h5>2016 - 2019</h5> -->
-              <p><em>
-                <ul>
-                  <li>Tableau</li>
-                  <li>Power BI</li>
-                  <li>Excel</li>
-                  <li>GitHub</li>
-                  <li>Postman</li>
-                  <li>Jira</li>
-                </ul>
-              </em></p>
-              <!-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> -->
-            </div><!-- Edn Resume Item -->
-            <div class="resume-item">
-              <h4>Cloud & Workflow</h4>
-              <!-- <h5>2013 - 2016</h5> -->
-              <p><em>
-                <ul>
-                  <li>Amazon Web Services</li>
-                  <li>Microsoft Azure</li>
-                  <li>Databricks</li>
-                  <li>Apache Airflow</li>
-                </ul>
-              </em></p>
-              <!-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> -->
-            </div><!-- Edn Resume Item -->
-            <div class="resume-item">
-              <h4>Strategies</h4>
-              <!-- <h5>2013 - 2016</h5> -->
-              <p><em>
-                <ul>
-                  <li>Predictive Modeling</li>
-                  <li>A/B Testing</li>
-                  <li>Data Visualization</li>
-                  <li>Agile & SCRUM</li>
-                </ul>
-              </em></p>
-              <!-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> -->
-            </div><!-- Edn Resume Item -->
-
-             <h3 class="resume-title">Publications</h3>
-            <div class="resume-item">
-              <h4>Predicting Efficiency of Direct Marketing Campaigns</h4>
-              <!-- <h5>2019 - 2021</h5> -->
-              <p><em>
-                <ul>
-                  <li>18th International Conference on Intelligent Systems Design & Application</li><br>
-                  <li>Online ISBN: 978-3-030-16660-1</li><br>
-                </ul>
-              </em></p>
-              <!-- <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p> -->
-            </div><!-- Edn Resume Item -->
-            <div class="resume-item">
-              <h4>Intelligent System for Weather Prediction</h4>
-              <!-- <h5>2016 - 2019</h5> -->
-              <p><em>
-                <ul>
-                  <li>18th International Conference on Intelligent Systems Design & Application</li><br>
-                  <li>Online ISBN: 978-3-030-16657-1</li><br>
-                </ul>
-              </em></p>
-              <!-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> -->
-            </div><!-- Edn Resume Item -->
-            <div class="resume-item">
-              <h4>An Overview of Text Analysis Technologies and Tools</h4>
-              <!-- <h5>2013 - 2016</h5> -->
-              <p><em>
-                <ul>
-                  <li>International Journal of Scientific Research Vol 7 </li><br>
-                  <li>ISSN:2319-7064</li><br>
-                </ul>
-              </em></p>
-              <!-- <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p> -->
-            </div><!-- Edn Resume Item -->
-            
-
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="resume-title">Professional Experience</h3>
-            <div class="resume-item">
-              <h4>Lead Data Scientist</h4>
-              <h5>Feb 2023 - Present</h5>
-              <p><em>Discover Financial Services, Chicago, IL </em></p>
-              <ul>
-                <li>Led development of an LLM-powered voice-response system, expanding self-service coverage by 28%</li>
-                <li>Owned strategy & roadmap for mobile servicing, ensuring legal compliance and 95%+ self-service rate</li>
-                <li>Boosted fraud detection by 25% with real-time predictive transaction models</li>
-                <li>Cut fraud resolution time by 30% through cross-team collaboration</li>
-                <li>Saved $325K annually via automated dashboards (30+ KPIs) built with Airflow & Tableau</li>
-                <li>Drove analytics strategy for customer service optimization, improving satisfaction & compliance</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Partner Integration Specialist</h4>
-              <h5>Jun 2022 - Feb 2023</h5>
-              <p><em>DoorDash, Chicago, IL</em></p>
-              <ul>
-                <li>Designed scalable onboarding pipelines for 30+ merchants supporting 5K+ stores & 10K+ daily orders</li>
-                <li>Built ETL pipelines & optimized data schema for live inventory syncing using Python & AWS</li>
-                <li>Implemented inventory monitoring & alerting systems that minimize order loss by 17%</li>
-                <li>Partnered with engineers & PMs to shorten onboarding time by 20% & improve merchant satisfaction</li>
-                <li>Maintained scalable solutions to ensure seamless integration across growing retail & grocery verticals</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Technical Implementation Consultant</h4>
-              <h5>Jun 2021 - Jun 2022</h5>
-              <p><em>OneTrust, Atlanta, GA</em></p>
-              <ul>
-                <li>Led 30+ client integrations for SaaS privacy & security tools with a 95% satisfaction rate</li>
-                <li>Scoped, planned, & executed implementations with internal & client teams across data privacy, design, A/B testing & development</li>
-                <li>Owned delivery pipelines from planning through deployment including API management & UAT testing</li>
-                <li>Delivered enterprise-grade compliance solutions aligned with global privacy regulations like GDPR & CCPA, improving client trust & scalability</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Data Scientist</h4>
-              <h5>Nov 2019 - May 2021</h5>
-              <p><em>NCSA, Champaign, IL</em></p>
-              <ul>
-                <li>Analyzed 1TB+ telemetry data to identify patterns & anomalies for imputation & prediction</li>
-                <li>Developed a Python library for visualizing glucose fluctuation patterns in diabetic patients</li>
-                <li>Achieved 83.7% accuracy in predicting missing health data & 87% classification accuracy on diabetic status</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <h3 class="resume-title">Internships</h3>
-            <div class="resume-item">
-              <h4>Product Optimization Intern</h4>
-              <h5>Jan 2021 - May 2021</h5>
-              <p><em>Corteva Agrisciences, Champaign, IL </em></p>
-              <ul>
-                <li>Built crop yield projections for Illinois using satellite data, image analysis, and geospatial factors.</li>
-                <li>Automated scheduled data collection jobs to monitor geographic changes and improve predictive accuracy.</li>
-                <li>Collaborated with a globally distributed team to design a scalable ecosystem for geospatial data handling.</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Data Engineering Intern</h4>
-              <h5>Jan 2021 - May 2021</h5>
-              <p><em>AGCO Corp., Champaign, IL</em></p>
-              <ul>
-                <li>Managed terabytes of multisource log data to build ETL pipelines and predictive models for machine service forecasting.</li>
-                <li>Engineered data lake and warehouse pipelines to streamline storage, access, and integration with BI tools.</li>
-                <li>Migrated automated data jobs from AWS Glue to Azure Databricks, reducing operational costs and improving execution.</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-
-            <div class="resume-item">
-              <h4>Product Engineering Intern</h4>
-              <h5>Jun 2020 - Aug 2020</h5>
-              <p><em>SipScience, New York, NY</em></p>
-              <ul>
-                <li>Designed and deployed an automated classification pipeline for point-of-sale data.</li>
-                <li>Contributed to development of SipSync portal for customer and order management, enhancing restaurant operations.</li>
-                <li>Coordinated across development, marketing, and leadership to deliver an optimized MVP 3 weeks ahead of schedule.</li>
-              </ul>
-            </div><!-- Edn Resume Item -->
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Resume Section -->
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-         <div class="row">
-              <div class="col-lg-6">
-                  <i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span><a href="mailto:sneh.gajiwala@gmail.com">sneh.gajiwala@gmail.com</a></span>
-              </div>
-              <div class="col-lg-6">
-                  <i class="bi bi-chevron-right"></i> <strong>LinkedIn:</strong> <span><a href="https://www.linkedin.com/in/sneh-gajiwala/">linkedin.com/in/sneh-gajiwala/</a></span>
-              </div>
-              
-            </div>
-      </div><!-- End Section Title -->
-    </section><!-- /Contact Section -->
-
-  </main>
-
-  <footer id="footer" class="footer position-relative light-background">
-
-    <div class="container">
-      <div class="copyright text-center ">
-        <!-- <p>© <span>Copyright</span> <strong class="px-1 sitename">iPortfolio</strong> <span>All Rights Reserved</span></p> -->
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://www.linkedin.com/in/sneh-gajiwala/">Sneh Gajiwala</a>
+      <div class="stat-item">
+        <span class="stat-num c-blue counter" data-target="3">0</span>
+        <p class="stat-label">Publications</p>
       </div>
     </div>
+  </div>
 
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I build AI systems that actually ship — not prototypes, but <strong>production models with measurable outcomes</strong>.
+          LLM-powered voice agents, real-time fraud detection engines, large-scale data pipelines:
+          I've taken each from zero to live and owned the results.
+        </p>
+        <p>
+          Six years across fintech, logistics, and SaaS have given me a rare combination:
+          enough engineering depth to own the technical stack, enough product instinct to know
+          what's worth building. I specialize in the translation layer — <strong>turning ambiguous business
+          problems into data architecture</strong>, and models into decisions that move KPIs.
+        </p>
+        <p>
+          I don't hand off and walk away. I stay until the dashboard is running, the accuracy
+          is tuned, and the stakeholders can see the impact.
+        </p>
+        <div class="about-details">
+          <div class="detail-row">
+            <span class="detail-key">// location</span>
+            <span class="detail-val">Chicago, IL, USA</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">// email</span>
+            <span class="detail-val"><a href="mailto:sneh.gajiwala@gmail.com">sneh.gajiwala@gmail.com</a></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">// linkedin</span>
+            <span class="detail-val"><a href="https://www.linkedin.com/in/sneh-gajiwala/" target="_blank" rel="noopener">sneh-gajiwala</a></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">// degree</span>
+            <span class="detail-val">MS Information Management, UIUC</span>
+          </div>
+        </div>
+      </div>
+      <div class="skills-glass">
+        <div>
+          <p class="skill-group-label">Languages &amp; Tools</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span><span class="skill-tag">SQL</span>
+            <span class="skill-tag">R</span><span class="skill-tag">SAS</span>
+            <span class="skill-tag">Tableau</span><span class="skill-tag">Power BI</span>
+            <span class="skill-tag">Excel</span><span class="skill-tag">GitHub</span>
+            <span class="skill-tag">Postman</span><span class="skill-tag">Jira</span>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label">Cloud &amp; Infrastructure</p>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span><span class="skill-tag">Azure</span>
+            <span class="skill-tag">Databricks</span><span class="skill-tag">Apache Airflow</span>
+            <span class="skill-tag">Spark</span><span class="skill-tag">Trino</span>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label">Methods</p>
+          <div class="skill-tags">
+            <span class="skill-tag">LLM Systems</span><span class="skill-tag">Predictive Modeling</span>
+            <span class="skill-tag">A/B Testing</span><span class="skill-tag">Data Visualization</span>
+            <span class="skill-tag">Agile / SCRUM</span><span class="skill-tag">ETL Pipelines</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="exp-stack">
+
+      <div class="exp-card" style="--card-color:#3b82f6; --card-color-dim:rgba(59,130,246,0.12);">
+        <div class="exp-header">
+          <h3 class="exp-role">Lead Data Scientist</h3>
+          <div class="exp-meta">
+            <span class="exp-company">Discover Financial Services · Chicago, IL</span>
+            <span class="exp-date">Feb 2023 — Present</span>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Architected and shipped an LLM-powered voice-response system end-to-end — moving 28% of inbound calls to self-service and measurably reducing live-agent dependency at scale across millions of customer interactions</li>
+          <li>Owned the full product roadmap for mobile servicing: from regulatory sign-off to technical delivery, achieving a 95%+ self-service containment rate and ensuring continuous compliance with legal and accessibility mandates</li>
+          <li>Engineered real-time transaction scoring models that detected fraud 25% more accurately, running at sub-100ms inference latency in production and integrated directly into the card authorization pipeline</li>
+          <li>Redesigned the cross-team fraud investigation workflow and built shared tooling that eliminated handoff bottlenecks — compressing case resolution time by 30% without increasing headcount</li>
+          <li>Built an Airflow-orchestrated analytics platform monitoring 30+ KPIs across servicing operations, retiring fragmented manual reporting and saving $325K annually in analyst overhead</li>
+          <li>Defined the analytics strategy for customer service optimization — translating contact-center data into executive-level decisions on staffing, tooling, and compliance posture</li>
+        </ul>
+      </div>
+
+      <div class="exp-card" style="--card-color:#6366f1; --card-color-dim:rgba(99,102,241,0.12);">
+        <div class="exp-header">
+          <h3 class="exp-role">Partner Integration Specialist</h3>
+          <div class="exp-meta">
+            <span class="exp-company">DoorDash · Chicago, IL</span>
+            <span class="exp-date">Jun 2022 — Feb 2023</span>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed and launched scalable merchant onboarding pipelines supporting 30+ enterprise partners, 5,000+ store locations, and 10,000+ daily orders — built to handle catalog complexity and real-time menu state changes</li>
+          <li>Built Python/AWS ETL systems for live inventory synchronization, enabling millisecond-accurate menu availability across millions of daily consumer sessions and eliminating ghost-item orders</li>
+          <li>Developed automated inventory health monitoring that detected stock anomalies before order placement, reducing unfillable order rate by 17% and protecting both merchant and consumer experience</li>
+          <li>Partnered directly with engineering and product leadership to re-engineer the onboarding flow — cutting merchant time-to-live by 20% and driving a measurable lift in post-launch satisfaction scores</li>
+        </ul>
+      </div>
+
+      <div class="exp-card" style="--card-color:#0ea5e9; --card-color-dim:rgba(14,165,233,0.12);">
+        <div class="exp-header">
+          <h3 class="exp-role">Technical Implementation Consultant</h3>
+          <div class="exp-meta">
+            <span class="exp-company">OneTrust · Atlanta, GA</span>
+            <span class="exp-date">Jun 2021 — Jun 2022</span>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Led 30+ end-to-end SaaS implementations for enterprise clients across data privacy, consent management, and security tooling — owning scoping, delivery, and sign-off with a 95% CSAT across the portfolio</li>
+          <li>Managed the full delivery lifecycle for complex integrations spanning REST API configuration, data mapping, A/B test frameworks, and multi-round UAT — often running 4–6 concurrent client workstreams</li>
+          <li>Aligned all implementations with GDPR, CCPA, and global privacy mandates, serving as the primary compliance checkpoint between client engineering teams and OneTrust's legal and product organizations</li>
+          <li>Acted as technical bridge between client engineers and OneTrust product — accelerating issue resolution and surfacing field feedback that directly influenced platform roadmap prioritization</li>
+        </ul>
+      </div>
+
+      <div class="exp-card" style="--card-color:#3b82f6; --card-color-dim:rgba(59,130,246,0.12);">
+        <div class="exp-header">
+          <h3 class="exp-role">Data Scientist</h3>
+          <div class="exp-meta">
+            <span class="exp-company">NCSA · Champaign, IL</span>
+            <span class="exp-date">Nov 2019 — May 2021</span>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Processed and analyzed 1TB+ of continuous glucose monitoring (CGM) telemetry to surface clinically relevant fluctuation patterns and anomalies across diabetic patient populations</li>
+          <li>Developed a reusable Python library for time-series visualization of glucose data — adopted by downstream research teams as a standard analysis tool across ongoing studies</li>
+          <li>Achieved 83.7% accuracy on health data imputation and 87% classification accuracy on diabetic status prediction — results validated through cross-validation and published in peer-reviewed research</li>
+        </ul>
+      </div>
+
+      <div class="exp-card" style="--card-color:#6366f1; --card-color-dim:rgba(99,102,241,0.12);">
+        <div class="exp-header">
+          <h3 class="exp-role">Product Optimization Intern</h3>
+          <div class="exp-meta">
+            <span class="exp-company">Corteva Agrisciences · Champaign, IL</span>
+            <span class="exp-date">Jan 2021 — May 2021</span>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built geospatial crop yield projection models for Illinois using satellite imagery, NDVI analysis, and soil and weather feature engineering — producing localized forecasts at sub-county resolution</li>
+          <li>Automated scheduled satellite data collection jobs that continuously monitored geographic signals, keeping model inputs fresh and improving predictive accuracy over static seasonal baselines</li>
+          <li>Collaborated with globally distributed data science teams to architect a reusable geospatial ingestion pipeline — designed for extensibility across crop types and geographies beyond the initial Illinois scope</li>
+        </ul>
+      </div>
+
+      <div class="exp-card" style="--card-color:#0ea5e9; --card-color-dim:rgba(14,165,233,0.12);">
+        <div class="exp-header">
+          <h3 class="exp-role">Data Engineering Intern</h3>
+          <div class="exp-meta">
+            <span class="exp-company">AGCO Corp. · Champaign, IL</span>
+            <span class="exp-date">Jan 2021 — May 2021</span>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Ingested and structured terabytes of multi-source IoT log data from agricultural machinery, building ETL pipelines and predictive models that surfaced proactive service signals weeks before field failures</li>
+          <li>Architected data lake and warehouse layers that unified fragmented storage, dramatically reduced ad-hoc query times, and enabled BI tools to run directly against clean, normalized tables</li>
+          <li>Migrated scheduled batch jobs from AWS Glue to Azure Databricks — cutting infrastructure cost, increasing nightly processing throughput, and standardizing the team's cloud toolchain</li>
+        </ul>
+      </div>
+
+      <div class="exp-card" style="--card-color:#3b82f6; --card-color-dim:rgba(59,130,246,0.12);">
+        <div class="exp-header">
+          <h3 class="exp-role">Product Engineering Intern</h3>
+          <div class="exp-meta">
+            <span class="exp-company">SipScience · New York, NY</span>
+            <span class="exp-date">Jun 2020 — Aug 2020</span>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed and deployed an automated classification pipeline for raw point-of-sale transaction data — transforming unstructured merchant inputs into structured reporting without manual intervention</li>
+          <li>Contributed to full-stack development of the SipSync merchant portal, building order management, customer data views, and analytics features that formed the product's core operator experience</li>
+          <li>Delivered a fully functional MVP 3 weeks ahead of schedule through tight cross-functional coordination — aligning engineering, design, and product around a shared delivery timeline from day one</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Education</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card" style="--edu-color: var(--blue);">
+        <p class="edu-school">University of Illinois, Urbana-Champaign</p>
+        <h3 class="edu-degree">Masters in Information Management</h3>
+        <p class="edu-years">2019 — 2021</p>
+        <p class="edu-focus">Data Science, Analytics &amp; Consulting</p>
+      </div>
+      <div class="edu-card" style="--edu-color: var(--violet);">
+        <p class="edu-school">University of Mumbai, India</p>
+        <h3 class="edu-degree">Bachelor of Engineering — Information Technology</h3>
+        <p class="edu-years">2016 — 2019</p>
+        <p class="edu-focus">Database Management, Cloud Computing &amp; Data Warehousing</p>
+      </div>
+      <div class="edu-card" style="--edu-color: var(--cyan);">
+        <p class="edu-school">Mumbai University, India</p>
+        <h3 class="edu-degree">Diploma of Engineering — Information Technology</h3>
+        <p class="edu-years">2013 — 2016</p>
+        <p class="edu-focus">Website Design, Android App Development &amp; Server-side Coding</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Publications</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="pub-list">
+      <div class="pub-item">
+        <span class="pub-num">01</span>
+        <div>
+          <a class="pub-title" href="https://link.springer.com/chapter/10.1007/978-3-030-16660-1_34" target="_blank" rel="noopener">Predicting Efficiency of Direct Marketing Campaigns</a>
+          <p class="pub-abstract">Introduces machine learning-based prediction of direct marketing campaign success using Random Forest, KNN, and TensorFlow-based KNN models on real client datasets. Demonstrates how predictive accuracy helps financial institutions identify high-potential clients, improving targeting and campaign ROI.</p>
+          <div class="pub-footer">
+            <span class="pub-meta">18th International Conference on Intelligent Systems Design &amp; Application &nbsp;·&nbsp; ISBN: 978-3-030-16660-1</span>
+            <a class="pub-link" href="https://link.springer.com/chapter/10.1007/978-3-030-16660-1_34" target="_blank" rel="noopener">Read Paper →</a>
+          </div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <span class="pub-num">02</span>
+        <div>
+          <a class="pub-title" href="https://link.springer.com/chapter/10.1007/978-3-030-16657-1_84" target="_blank" rel="noopener">Intelligent System for Weather Prediction</a>
+          <p class="pub-abstract">Proposes a hybrid deep learning model combining ARIMA and LSTM to forecast weather patterns from large-scale observational datasets. Shows that intelligent learning models outperform classical statistical approaches, enabling more accurate daily weather planning.</p>
+          <div class="pub-footer">
+            <span class="pub-meta">18th International Conference on Intelligent Systems Design &amp; Application &nbsp;·&nbsp; ISBN: 978-3-030-16657-1</span>
+            <a class="pub-link" href="https://link.springer.com/chapter/10.1007/978-3-030-16657-1_84" target="_blank" rel="noopener">Read Paper →</a>
+          </div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <span class="pub-num">03</span>
+        <div>
+          <a class="pub-title" href="https://www.ijsr.net/archive/v7i10/ART20191819.pdf" target="_blank" rel="noopener">An Overview of Text Analysis Technologies and Tools</a>
+          <p class="pub-abstract">Surveys the landscape of text analytics — how unstructured data is converted into actionable insights for business intelligence. Reviews core text mining techniques, NLP frameworks, high-end APIs, and keyword search tools adopted across industries.</p>
+          <div class="pub-footer">
+            <span class="pub-meta">International Journal of Scientific Research Vol. 7 &nbsp;·&nbsp; ISSN: 2319-7064</span>
+            <a class="pub-link" href="https://www.ijsr.net/archive/v7i10/ART20191819.pdf" target="_blank" rel="noopener">Read Paper →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOMMENDATIONS -->
+  <section id="recommendations">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Recommendations</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="rec-grid">
+
+      <div class="rec-card" style="--rc:#3b82f6; --rc-dim:rgba(59,130,246,0.12);">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">Sneh and I worked together on the Partner Integrations team at DoorDash. I was so impressed with his technical skills and his ability to tackle hard problems in a fast-paced environment. From building integrations with key partners to creating new dashboards to expand our team's data analytics capabilities, Sneh was able to add value to everything he touched. Having Sneh on your team would be an excellent addition.</p>
+        <div class="rec-person">
+          <span class="rec-name">Angela Campbell</span>
+          <div class="rec-meta">
+            <span>Partner Manager, Strategy &amp; Operations</span>
+            <span class="rec-tag">DoorDash</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rec-card" style="--rc:#3b82f6; --rc-dim:rgba(59,130,246,0.12);">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">Sneh started on my team shortly after I myself joined DoorDash. His technical ability, drive to learn new skills, and willingness to dive headfirst into challenging problems was immediately evident. He quickly was able to learn the ins and outs of the DoorDash infrastructure and served as the technical account manager for a significant number of our high-quality merchants. Additionally, Sneh's technical knowledge was a significant asset to our team — he excels at every task.</p>
+        <div class="rec-person">
+          <span class="rec-name">Thomas Coulter</span>
+          <div class="rec-meta">
+            <span>Manager, New Verticals Partner Integrations</span>
+            <span class="rec-tag">DoorDash</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rec-card" style="--rc:#3b82f6; --rc-dim:rgba(59,130,246,0.12);">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">Sneh was on my team at DoorDash and I cannot say enough about his drive to learn and proficiency with data. He was able to learn a very complex flow in a matter of weeks and use it to build very high-impact integrations for our most valuable merchants. He also up-leveled our knowledge of our own data and built highly functional dashboards that have led to unique insights. Whoever gets to work with Sneh next is very lucky!</p>
+        <div class="rec-person">
+          <span class="rec-name">Katherine Jonas</span>
+          <div class="rec-meta">
+            <span>Sr. Manager, New Verticals Partner Integration</span>
+            <span class="rec-tag">DoorDash</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rec-card" style="--rc:#6366f1; --rc-dim:rgba(99,102,241,0.12);">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">Sneh and I worked together on a complex strategic project where Sneh was the technical lead of a consent management implementation. He was responsible for the initial guidance of the functional and technical requirements of each phase, providing guidance on best practices and developing solutions to varied use cases. The success the client attested to in their first 6 months is largely due to Sneh's ability to keep them on task, help them unpack years of undocumented processes, and understand how the work ties together.</p>
+        <div class="rec-person">
+          <span class="rec-name">Nwabisa S. Johnson</span>
+          <div class="rec-meta">
+            <span>Sr. Strategic Project Manager, Implementation Delivery</span>
+            <span class="rec-tag">OneTrust</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rec-card" style="--rc:#6366f1; --rc-dim:rgba(99,102,241,0.12);">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">Though Sneh and I worked together for a few short months, his passion for his customers and their success was evident throughout. He cares deeply about ensuring his customers are able to maximize their investments and sustain their implementations for the long-term. Sneh is very proactive with undertaking tasks and helping his team. He has the ability to pick up new skills — technical or otherwise — and does not shy away from a challenge. It was a pleasure having him on my team.</p>
+        <div class="rec-person">
+          <span class="rec-name">Sahithya Dhakar</span>
+          <div class="rec-meta">
+            <span>Senior Manager, Technical Implementation</span>
+            <span class="rec-tag">OneTrust</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rec-card" style="--rc:#6366f1; --rc-dim:rgba(99,102,241,0.12);">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">Sneh and I worked in the same team of consultants for over eight months, during which I was frequently impressed by his technical experience and contributions. While supporting a client engagement I led, he effectively leveraged RESTful API, Python, JSON, and CSS knowledge to expedite our early-design stage, identify improvements, and redesign. His contributions were pivotal for laying a winning foundation that still supports the engagement eight months later.</p>
+        <div class="rec-person">
+          <span class="rec-name">Matthew Harrison</span>
+          <div class="rec-meta">
+            <span>Consultant · OneTrust Fellow · CIPM · CDPSE</span>
+            <span class="rec-tag">OneTrust</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rec-card" style="--rc:#6366f1; --rc-dim:rgba(99,102,241,0.12);">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">Sneh and I worked together at OneTrust, and I was lucky to call him my coworker. When I joined the company, Sneh helped me navigate the modules and showed me the ropes of integration. He has excellent technical and troubleshooting skills. During his time at the company, he helped multiple clients implement different modules and applied his technical expertise to integrate between systems. He always went above and beyond for his clients.</p>
+        <div class="rec-person">
+          <span class="rec-name">Camila Arias</span>
+          <div class="rec-meta">
+            <span>Technical Implementation Consultant</span>
+            <span class="rec-tag">OneTrust</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rec-card" style="--rc:#0ea5e9; --rc-dim:rgba(14,165,233,0.12);">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">What I really appreciated about Sneh was his breadth and willingness to do what was needed. All I had to do was ask and Sneh would say, "On it." He helped with Tableau visualizations, data engineering and SQL analysis queries, documented some AWS Glue data flows, and worked to optimize a Glue job written in PySpark. We keep referring back to the workflows Sneh documented and we miss having his help.</p>
+        <div class="rec-person">
+          <span class="rec-name">Clarke Bishop</span>
+          <div class="rec-meta">
+            <span>Fractional CTO · Gen AI &amp; Data Strategy</span>
+            <span class="rec-tag">AGCO</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="contact-eyebrow">Let's connect</p>
+    <h2 class="contact-heading">Get In Touch.</h2>
+    <div class="contact-links">
+      <a href="mailto:sneh.gajiwala@gmail.com" class="contact-link primary">sneh.gajiwala@gmail.com</a>
+      <a href="https://www.linkedin.com/in/sneh-gajiwala/" target="_blank" rel="noopener" class="contact-link secondary">LinkedIn Profile</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2025 Sneh Gajiwala</span>
+    <span>Data Science · Product · Integration</span>
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script>
+    // ── PARTICLE CANVAS ───────────────────────────────────────
+    const canvas = document.getElementById('bg-canvas');
+    const ctx    = canvas.getContext('2d');
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+    // Nebula palette: crimson, orange, gold, amber, emerald
+    const COLS = [
+      '#f43f5e',  // rose-red
+      '#fb923c',  // orange
+      '#fbbf24',  // amber-gold
+      '#facc15',  // yellow-gold
+      '#4ade80',  // bright green
+      '#f97316',  // deep orange
+      '#fde047',  // pale gold
+      '#34d399',  // emerald
+    ];
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    const N = 90, DIST = 140;
+    let mouse = { x: -9999, y: -9999 };
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+
+    class Dot {
+      constructor() {
+        this.reset(true);
+      }
+      reset(init) {
+        this.x  = Math.random() * canvas.width;
+        this.y  = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.56;
+        this.vy = (Math.random() - 0.5) * 0.56;
+        // Mix of pinpoint stars and slightly larger glowing orbs
+        this.r  = Math.random() < 0.25
+                  ? Math.random() * 3.2 + 1.8   // larger glow orb
+                  : Math.random() * 1.4 + 0.5;  // small star
+        this.c  = COLS[Math.floor(Math.random() * COLS.length)];
+        this.a  = Math.random() * 0.45 + 0.18;
+        // Orbs pulse slightly
+        this.pulse = Math.random() * Math.PI * 2;
+        this.pulseSpeed = 0.008 + Math.random() * 0.012;
+      }
+      tick() {
+        const dx = this.x - mouse.x, dy = this.y - mouse.y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+        if (d < 100 && d > 0) { this.x += (dx / d) * 1.6; this.y += (dy / d) * 1.6; }
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height)  this.vy *= -1;
+        this.pulse += this.pulseSpeed;
+      }
+      draw() {
+        const pulsedAlpha = this.a + Math.sin(this.pulse) * 0.08;
+        // Glow halo for larger orbs
+        if (this.r > 1.8) {
+          const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 3.5);
+          grad.addColorStop(0, this.c);
+          grad.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r * 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.globalAlpha = pulsedAlpha * 0.35;
+          ctx.fill();
+        }
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = this.c;
+        ctx.globalAlpha = pulsedAlpha;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    resize();
+    const dots = Array.from({ length: N }, () => new Dot());
+
+    function frame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].tick();
+        dots[i].draw();
+        for (let j = i + 1; j < dots.length; j++) {
+          const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
+          const d  = Math.sqrt(dx * dx + dy * dy);
+          if (d < DIST) {
+            ctx.beginPath();
+            ctx.moveTo(dots[i].x, dots[i].y);
+            ctx.lineTo(dots[j].x, dots[j].y);
+            ctx.strokeStyle = dots[i].c;
+            ctx.globalAlpha = (1 - d / DIST) * 0.08;
+            ctx.lineWidth   = 0.5;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    frame();
+    window.addEventListener('resize', resize);
+    document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+    // ── TYPEWRITER (full line) ────────────────────────────────
+    const LINE = 'Data Scientist.  Product Manager.  Integration Lead.  AI Builder.';
+    const tw   = document.getElementById('typewriter');
+    let ci = 0, del = false;
+
+    function type() {
+      const txt = del ? LINE.slice(0, ci--) : LINE.slice(0, ci++);
+      tw.innerHTML = txt + '<span class="cursor"></span>';
+      if (!del && ci > LINE.length) { setTimeout(() => { del = true; setTimeout(type, 40); }, 2800); return; }
+      if (del  && ci < 0)           { del = false; ci = 0; setTimeout(type, 500); return; }
+      setTimeout(type, del ? 22 : 68);
+    }
+    setTimeout(type, 1200);
+
+    // ── COUNTERS ──────────────────────────────────────────────
+    function runCounters() {
+      document.querySelectorAll('.counter').forEach(el => {
+        const target = +el.dataset.target, sfx = el.dataset.suffix || '';
+        let cur = 0;
+        const step = target / 40;
+        const t = setInterval(() => {
+          cur = Math.min(cur + step, target);
+          el.textContent = Math.floor(cur) + (cur >= target ? sfx : '');
+          if (cur >= target) clearInterval(t);
+        }, 35);
+      });
+    }
+
+    // ── SCROLL REVEAL ─────────────────────────────────────────
+    const revObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.exp-card, .edu-card, .pub-item, .rec-card').forEach(el => revObs.observe(el));
+
+    const statsObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { runCounters(); statsObs.disconnect(); } });
+    }, { threshold: 0.5 });
+    statsObs.observe(document.getElementById('stats'));
+
+    // ── NAV BLUR ON SCROLL ────────────────────────────────────
+    const topnav = document.getElementById('topnav');
+    window.addEventListener('scroll', () => {
+      topnav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── ACTIVE DOT NAV ────────────────────────────────────────
+    const dotLinks = document.querySelectorAll('.dot-nav a');
+    const dotObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          dotLinks.forEach(a => a.classList.remove('active'));
+          const a = document.querySelector(`.dot-nav a[href="#${e.target.id}"]`);
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('section[id]').forEach(s => dotObs.observe(s));
+  </script>
+  <!-- FIXED MARQUEE TICKER -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Python</span><span class="marquee-sep">//</span>
+      <span>LLM Systems</span><span class="marquee-sep">//</span>
+      <span>Predictive Modeling</span><span class="marquee-sep">//</span>
+      <span>Apache Airflow</span><span class="marquee-sep">//</span>
+      <span>Databricks</span><span class="marquee-sep">//</span>
+      <span>Trino</span><span class="marquee-sep">//</span>
+      <span>Azure ML</span><span class="marquee-sep">//</span>
+      <span>A/B Testing</span><span class="marquee-sep">//</span>
+      <span>ETL Pipelines</span><span class="marquee-sep">//</span>
+      <span>GPT-4o</span><span class="marquee-sep">//</span>
+      <span>Fraud Detection</span><span class="marquee-sep">//</span>
+      <span>NLP</span><span class="marquee-sep">//</span>
+      <span>Product Strategy</span><span class="marquee-sep">//</span>
+      <span>Tableau</span><span class="marquee-sep">//</span>
+      <span>Geospatial Analysis</span><span class="marquee-sep">//</span>
+      <span>Data Architecture</span><span class="marquee-sep">//</span>
+      <span>Python</span><span class="marquee-sep">//</span>
+      <span>LLM Systems</span><span class="marquee-sep">//</span>
+      <span>Predictive Modeling</span><span class="marquee-sep">//</span>
+      <span>Apache Airflow</span><span class="marquee-sep">//</span>
+      <span>Databricks</span><span class="marquee-sep">//</span>
+      <span>Trino</span><span class="marquee-sep">//</span>
+      <span>Azure ML</span><span class="marquee-sep">//</span>
+      <span>A/B Testing</span><span class="marquee-sep">//</span>
+      <span>ETL Pipelines</span><span class="marquee-sep">//</span>
+      <span>GPT-4o</span><span class="marquee-sep">//</span>
+      <span>Fraud Detection</span><span class="marquee-sep">//</span>
+      <span>NLP</span><span class="marquee-sep">//</span>
+      <span>Product Strategy</span><span class="marquee-sep">//</span>
+      <span>Tableau</span><span class="marquee-sep">//</span>
+      <span>Geospatial Analysis</span><span class="marquee-sep">//</span>
+      <span>Data Architecture</span><span class="marquee-sep">//</span>
+    </div>
+  </div>
 
 </body>
-
 </html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Sneh Gajiwala</title>
+  <meta name="description" content="Writing by Sneh Gajiwala on data science, LLMs, taxonomy design, and product analytics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306071a' rx='4'/%3E%3Ctext x='4' y='22' font-family='monospace' font-weight='700' font-size='14' fill='white'%3ESG%3C/text%3E%3Ccircle cx='28.5' cy='21' r='2.5' fill='%233b82f6'/%3E%3C/svg%3E">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #07091e;
+      --bg2:   #0d1028;
+      --bg3:   #111432;
+      --glass: rgba(255,255,255,0.04);
+
+      --blue:        #3b82f6;
+      --blue-dim:    rgba(59,130,246,0.16);
+      --blue-glow:   rgba(59,130,246,0.35);
+      --violet:      #6366f1;
+      --violet-dim:  rgba(99,102,241,0.16);
+      --violet-glow: rgba(99,102,241,0.35);
+      --cyan:        #0ea5e9;
+      --cyan-dim:    rgba(14,165,233,0.16);
+      --cyan-glow:   rgba(14,165,233,0.35);
+
+      --text:   #eef0fa;
+      --muted:  #7880a8;
+      --border: rgba(255,255,255,0.07);
+
+      --ff-h: 'Playfair Display', Georgia, serif;
+      --ff-b: 'Outfit', sans-serif;
+      --ff-m: 'Space Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-b);
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      padding-bottom: 50px;
+      min-height: 100vh;
+    }
+
+    ::selection { background: var(--blue); color: #fff; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--violet)); }
+
+    /* ── CANVAS ──────────────────────────────────────────────── */
+    #bg-canvas {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    }
+
+    /* ── GLOW BLOBS ──────────────────────────────────────────── */
+    .glow {
+      position: fixed; border-radius: 50%; filter: blur(110px);
+      pointer-events: none; z-index: 1; animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      0%   { transform: translate(0,0) scale(1); }
+      50%  { transform: translate(30px,-25px) scale(1.06); }
+      100% { transform: translate(-20px,20px) scale(0.96); }
+    }
+    .g1 { background: radial-gradient(ellipse, rgba(239,68,68,0.38) 0%, rgba(251,146,60,0.18) 55%, transparent 100%); width: 900px; height: 900px; top: -300px; right: -200px; }
+    .g2 { background: radial-gradient(ellipse, rgba(234,179,8,0.32) 0%, rgba(202,138,4,0.16) 55%, transparent 100%); width: 700px; height: 700px; bottom: 10%; left: -180px; animation-delay: -3.5s; }
+    .g3 { background: radial-gradient(ellipse, rgba(16,185,129,0.28) 0%, rgba(52,211,153,0.14) 55%, transparent 100%); width: 600px; height: 600px; top: 38%; right: 8%; animation-delay: -6s; }
+    .g4 { background: radial-gradient(ellipse, rgba(251,191,36,0.26) 0%, rgba(245,158,11,0.12) 55%, transparent 100%); width: 500px; height: 500px; top: 65%; left: 25%; animation-delay: -9s; }
+
+    /* ── GRAIN ───────────────────────────────────────────────── */
+    .grain {
+      position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0.018;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    /* ── TOP NAV ─────────────────────────────────────────────── */
+    #topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(7,9,30,0.82);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 40px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--ff-m); font-size: 18px; font-weight: 700;
+      color: var(--text); text-decoration: none; letter-spacing: 0.02em;
+    }
+    .logo-dot { color: var(--blue); }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-family: var(--ff-b); font-size: 13px; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta {
+      font-family: var(--ff-b); font-size: 13px; font-weight: 600;
+      color: var(--blue); text-decoration: none; letter-spacing: 0.04em;
+      border: 1px solid var(--blue-glow); padding: 8px 20px; border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue-dim); }
+
+    /* ── PAGE CONTENT ────────────────────────────────────────── */
+    .page-wrap {
+      position: relative; z-index: 10;
+      max-width: 1100px; margin: 0 auto;
+      padding: 140px 40px 80px;
+    }
+
+    /* ── HEADER ──────────────────────────────────────────────── */
+    .blog-header {
+      margin-bottom: 72px;
+    }
+    .blog-eyebrow {
+      font-family: var(--ff-m); font-size: 11px; letter-spacing: 0.18em;
+      color: var(--blue); text-transform: uppercase; margin-bottom: 16px;
+    }
+    .blog-title {
+      font-family: var(--ff-h); font-size: clamp(42px, 6vw, 72px);
+      font-weight: 900; line-height: 1.05; color: var(--text);
+      margin-bottom: 18px;
+    }
+    .blog-subtitle {
+      font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.7;
+    }
+
+    /* ── CARD GRID ───────────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    /* ── BLOG CARD ───────────────────────────────────────────── */
+    .blog-card {
+      background: rgba(13,16,40,0.72);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      padding: 32px 28px 28px;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      opacity: 0; transform: translateY(22px);
+      animation: cardIn 0.55s ease forwards;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.35);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(59,130,246,0.1);
+    }
+
+    @keyframes cardIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .card-tag {
+      font-family: var(--ff-m); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+      background: var(--tag-dim, var(--blue-dim));
+      color: var(--tag-col, var(--blue));
+      border: 1px solid var(--tag-glow, var(--blue-glow));
+    }
+    .card-date {
+      font-family: var(--ff-m); font-size: 11px; color: var(--muted);
+    }
+    .card-title {
+      font-family: var(--ff-h); font-size: 20px; font-weight: 700;
+      line-height: 1.25; color: var(--text);
+      transition: color 0.2s;
+    }
+    .blog-card:hover .card-title { color: var(--blue); }
+    .card-excerpt {
+      font-size: 13px; color: var(--muted); line-height: 1.7; flex: 1;
+    }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 14px; border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+    .card-read-time {
+      font-family: var(--ff-m); font-size: 11px; color: var(--muted);
+    }
+    .card-arrow {
+      font-size: 13px; color: var(--blue); font-weight: 600;
+      transition: transform 0.2s;
+    }
+    .blog-card:hover .card-arrow { transform: translateX(4px); }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .page-wrap { padding: 120px 20px 60px; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── MARQUEE ─────────────────────────────────────────────── */
+    .marquee-wrap {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+      overflow: hidden; padding: 13px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(7,9,30,0.92);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    }
+    .marquee-track {
+      display: flex; width: max-content; white-space: nowrap;
+      animation: marquee 55s linear infinite;
+    }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0 28px; font-family: var(--ff-m); font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+    }
+    .marquee-item span { color: var(--blue); font-size: 16px; line-height: 1; }
+  </style>
+</head>
+<body>
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="glow g3"></div>
+  <div class="glow g4"></div>
+  <div class="grain"></div>
+
+  <!-- TOP NAV -->
+  <header id="topnav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">SG<span class="logo-dot">.</span></a>
+      <nav class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#education">Education</a>
+        <a href="index.html#publications">Publications</a>
+        <a href="index.html#recommendations">Recommendations</a>
+        <a href="blog.html" class="active">Blog</a>
+      </nav>
+      <a href="index.html#contact" class="nav-cta">Get In Touch</a>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-wrap">
+
+    <div class="blog-header">
+      <p class="blog-eyebrow">Writing</p>
+      <h1 class="blog-title">Thoughts &amp; Ideas</h1>
+      <p class="blog-subtitle">Notes on data science, LLMs, taxonomy design, and building analytical systems that actually work.</p>
+    </div>
+
+    <div class="cards-grid">
+
+      <a class="blog-card" href="posts/ai-at-linkedin.html" style="animation-delay: 0.05s">
+        <div class="card-top">
+          <span class="card-tag" style="--tag-col:#6366f1;--tag-dim:rgba(99,102,241,0.16);--tag-glow:rgba(99,102,241,0.35)">Career &amp; AI</span>
+          <span class="card-date">May 2026</span>
+        </div>
+        <h2 class="card-title">Learning to Build with AI: My First Year at LinkedIn</h2>
+        <p class="card-excerpt">I came in as a data person. I didn't expect to become a builder. But somewhere between Cursor, Claude Code, and a Streamlit dashboard that refused to stop hanging, that's exactly what happened.</p>
+        <div class="card-footer">
+          <span class="card-read-time">6 min read</span>
+          <span class="card-arrow">Read →</span>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Data Science <span>✦</span></span>
+      <span class="marquee-item">LLM Classification <span>✦</span></span>
+      <span class="marquee-item">Taxonomy Engineering <span>✦</span></span>
+      <span class="marquee-item">Product Analytics <span>✦</span></span>
+      <span class="marquee-item">Python <span>✦</span></span>
+      <span class="marquee-item">SQL <span>✦</span></span>
+      <span class="marquee-item">Prompt Engineering <span>✦</span></span>
+      <span class="marquee-item">Customer Experience <span>✦</span></span>
+      <span class="marquee-item">Machine Learning <span>✦</span></span>
+      <span class="marquee-item">Insights <span>✦</span></span>
+      <span class="marquee-item">Data Science <span>✦</span></span>
+      <span class="marquee-item">LLM Classification <span>✦</span></span>
+      <span class="marquee-item">Taxonomy Engineering <span>✦</span></span>
+      <span class="marquee-item">Product Analytics <span>✦</span></span>
+      <span class="marquee-item">Python <span>✦</span></span>
+      <span class="marquee-item">SQL <span>✦</span></span>
+      <span class="marquee-item">Prompt Engineering <span>✦</span></span>
+      <span class="marquee-item">Customer Experience <span>✦</span></span>
+      <span class="marquee-item">Machine Learning <span>✦</span></span>
+      <span class="marquee-item">Insights <span>✦</span></span>
+    </div>
+  </div>
+
+  <script>
+    // ── CANVAS NEBULA (identical to portfolio) ──────────────────
+    const canvas = document.getElementById('bg-canvas');
+    const ctx    = canvas.getContext('2d');
+
+    const COLS = [
+      '#f43f5e', '#fb923c', '#fbbf24', '#facc15',
+      '#4ade80', '#f97316', '#fde047', '#34d399',
+    ];
+
+    const N = 90, DIST = 140;
+    let mouse = { x: -9999, y: -9999 };
+
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+
+    class Dot {
+      constructor() { this.reset(true); }
+      reset(init) {
+        this.x  = Math.random() * canvas.width;
+        this.y  = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.56;
+        this.vy = (Math.random() - 0.5) * 0.56;
+        this.r  = Math.random() < 0.25
+                  ? Math.random() * 3.2 + 1.8
+                  : Math.random() * 1.4 + 0.5;
+        this.c  = COLS[Math.floor(Math.random() * COLS.length)];
+        this.a  = Math.random() * 0.45 + 0.18;
+        this.pulse      = Math.random() * Math.PI * 2;
+        this.pulseSpeed = 0.008 + Math.random() * 0.012;
+      }
+      tick() {
+        const dx = this.x - mouse.x, dy = this.y - mouse.y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+        if (d < 100 && d > 0) { this.x += (dx / d) * 1.6; this.y += (dy / d) * 1.6; }
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height)  this.vy *= -1;
+        this.pulse += this.pulseSpeed;
+      }
+      draw() {
+        const pulsedAlpha = this.a + Math.sin(this.pulse) * 0.08;
+        if (this.r > 1.8) {
+          const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 3.5);
+          grad.addColorStop(0, this.c);
+          grad.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r * 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.globalAlpha = pulsedAlpha * 0.35;
+          ctx.fill();
+        }
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = this.c;
+        ctx.globalAlpha = pulsedAlpha;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    resize();
+    const dots = Array.from({ length: N }, () => new Dot());
+
+    function frame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].tick();
+        dots[i].draw();
+        for (let j = i + 1; j < dots.length; j++) {
+          const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
+          const d  = Math.sqrt(dx * dx + dy * dy);
+          if (d < DIST) {
+            ctx.beginPath();
+            ctx.moveTo(dots[i].x, dots[i].y);
+            ctx.lineTo(dots[j].x, dots[j].y);
+            ctx.strokeStyle = dots[i].c;
+            ctx.globalAlpha = (1 - d / DIST) * 0.08;
+            ctx.lineWidth   = 0.5;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    frame();
+    window.addEventListener('resize', resize);
+    document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+  </script>
+
+</body>
+</html>

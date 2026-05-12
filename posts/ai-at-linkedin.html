@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning to Build with AI at LinkedIn | Sneh Gajiwala</title>
+  <meta name="description" content="On joining LinkedIn, discovering AI-native development, and what it really feels like to build alongside agents that don't sleep.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306071a' rx='4'/%3E%3Ctext x='4' y='22' font-family='monospace' font-weight='700' font-size='14' fill='white'%3ESG%3C/text%3E%3Ccircle cx='28.5' cy='21' r='2.5' fill='%233b82f6'/%3E%3C/svg%3E">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #07091e;
+      --bg2:   #0d1028;
+      --bg3:   #111432;
+      --glass: rgba(255,255,255,0.04);
+
+      --blue:        #3b82f6;
+      --blue-dim:    rgba(59,130,246,0.16);
+      --blue-glow:   rgba(59,130,246,0.35);
+      --violet:      #6366f1;
+      --violet-dim:  rgba(99,102,241,0.16);
+      --violet-glow: rgba(99,102,241,0.35);
+      --cyan:        #0ea5e9;
+      --cyan-dim:    rgba(14,165,233,0.16);
+      --cyan-glow:   rgba(14,165,233,0.35);
+
+      --text:   #eef0fa;
+      --muted:  #7880a8;
+      --border: rgba(255,255,255,0.07);
+
+      --ff-h: 'Playfair Display', Georgia, serif;
+      --ff-b: 'Outfit', sans-serif;
+      --ff-m: 'Space Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-b);
+      font-size: 18px;
+      line-height: 1.8;
+      overflow-x: hidden;
+      padding-bottom: 50px;
+    }
+
+    ::selection { background: var(--blue); color: #fff; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--violet)); }
+
+    /* ── CANVAS ──────────────────────────────────────────────── */
+    #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    /* ── GLOW BLOBS ──────────────────────────────────────────── */
+    .glow {
+      position: fixed; border-radius: 50%; filter: blur(110px);
+      pointer-events: none; z-index: 1;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      0%   { transform: translate(0,0) scale(1); }
+      50%  { transform: translate(30px,-25px) scale(1.06); }
+      100% { transform: translate(-20px,20px) scale(0.96); }
+    }
+    .g1 { background: radial-gradient(ellipse, rgba(239,68,68,0.38) 0%, rgba(251,146,60,0.18) 55%, transparent 100%); width: 900px; height: 900px; top: -300px; right: -200px; }
+    .g2 { background: radial-gradient(ellipse, rgba(234,179,8,0.32) 0%, rgba(202,138,4,0.16) 55%, transparent 100%); width: 700px; height: 700px; bottom: 10%; left: -180px; animation-delay: -3.5s; }
+    .g3 { background: radial-gradient(ellipse, rgba(16,185,129,0.28) 0%, rgba(52,211,153,0.14) 55%, transparent 100%); width: 600px; height: 600px; top: 38%; right: 8%; animation-delay: -6s; }
+    .g4 { background: radial-gradient(ellipse, rgba(251,191,36,0.26) 0%, rgba(245,158,11,0.12) 55%, transparent 100%); width: 500px; height: 500px; top: 65%; left: 25%; animation-delay: -9s; }
+
+    /* ── GRAIN ───────────────────────────────────────────────── */
+    .grain {
+      position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0.018;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    /* ── TOP NAV ─────────────────────────────────────────────── */
+    #topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(7,9,30,0.82);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 40px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--ff-m); font-size: 18px; font-weight: 700;
+      color: var(--text); text-decoration: none; letter-spacing: 0.02em;
+    }
+    .logo-dot { color: var(--blue); }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-family: var(--ff-b); font-size: 13px; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta {
+      font-family: var(--ff-b); font-size: 13px; font-weight: 600;
+      color: var(--blue); text-decoration: none; letter-spacing: 0.04em;
+      border: 1px solid var(--blue-glow); padding: 8px 20px; border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue-dim); }
+
+    /* ── ARTICLE LAYOUT ──────────────────────────────────────── */
+    .article-wrap {
+      position: relative; z-index: 10;
+      max-width: 900px; margin: 0 auto;
+      padding: 120px 40px 80px;
+    }
+
+    /* ── BACK LINK ───────────────────────────────────────────── */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--ff-m); font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none;
+      margin-bottom: 52px; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--blue); }
+    .back-link svg { transition: transform 0.2s; }
+    .back-link:hover svg { transform: translateX(-3px); }
+
+    /* ── ARTICLE HEADER ──────────────────────────────────────── */
+    .article-header { margin-bottom: 56px; }
+
+    .article-meta {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .article-tag {
+      font-family: var(--ff-m); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+      background: var(--violet-dim); color: var(--violet); border: 1px solid var(--violet-glow);
+    }
+    .article-date {
+      font-family: var(--ff-m); font-size: 11px; color: var(--muted);
+    }
+    .article-read-time {
+      font-family: var(--ff-m); font-size: 11px; color: var(--muted);
+    }
+
+    .article-title {
+      font-family: var(--ff-h); font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900; line-height: 1.1; color: var(--text); margin-bottom: 20px;
+    }
+    .article-lede {
+      font-size: 18px; color: var(--muted); line-height: 1.75;
+      border-left: 2px solid var(--blue); padding-left: 20px;
+      text-align: justify; hyphens: auto; -webkit-hyphens: auto;
+    }
+
+    /* ── DIVIDER ─────────────────────────────────────────────── */
+    .article-divider {
+      border: none; border-top: 1px solid var(--border); margin: 48px 0;
+    }
+
+    /* ── PROSE ───────────────────────────────────────────────── */
+    .prose { color: #c8cce8; }
+
+    .prose p {
+      margin-bottom: 28px;
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
+
+    .prose h2 {
+      font-family: var(--ff-h); font-size: 26px; font-weight: 700;
+      color: var(--text); margin: 52px 0 18px; line-height: 1.2;
+    }
+
+    .prose h3 {
+      font-family: var(--ff-b); font-size: 15px; font-weight: 600;
+      color: var(--text); letter-spacing: 0.03em; margin: 36px 0 14px;
+      text-transform: uppercase; font-size: 12px; letter-spacing: 0.12em;
+      color: var(--blue);
+    }
+
+    .prose strong { color: var(--text); font-weight: 600; }
+
+    .prose em { font-style: italic; color: var(--text); }
+
+    .prose a {
+      color: var(--blue); text-decoration: underline;
+      text-decoration-color: var(--blue-glow); text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    .prose a:hover { color: var(--cyan); }
+
+    /* Pull quote */
+    .prose blockquote {
+      margin: 40px 0;
+      padding: 24px 28px;
+      background: rgba(99,102,241,0.07);
+      border-left: 3px solid var(--violet);
+      border-radius: 0 10px 10px 0;
+    }
+    .prose blockquote p {
+      font-family: var(--ff-h); font-size: 20px; font-style: italic;
+      color: var(--text); line-height: 1.5; margin: 0;
+    }
+
+    /* Inline code */
+    .prose code {
+      font-family: var(--ff-m); font-size: 12px;
+      background: rgba(59,130,246,0.12); color: var(--cyan);
+      padding: 2px 7px; border-radius: 4px;
+      border: 1px solid rgba(59,130,246,0.2);
+    }
+
+    /* Tool pill callout */
+    .tool-row {
+      display: flex; gap: 10px; flex-wrap: wrap; margin: 32px 0;
+    }
+    .tool-pill {
+      font-family: var(--ff-m); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 7px 16px; border-radius: 100px;
+      border: 1px solid var(--border); color: var(--muted);
+      background: rgba(255,255,255,0.03);
+    }
+    .tool-pill.highlight {
+      border-color: var(--blue-glow); color: var(--blue); background: var(--blue-dim);
+    }
+
+    /* ── AUTHOR FOOTER ───────────────────────────────────────── */
+    .article-footer {
+      margin-top: 64px; padding-top: 36px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 20px;
+    }
+    .author-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-m); font-size: 14px; font-weight: 700;
+      color: #fff; flex-shrink: 0;
+    }
+    .author-info { flex: 1; }
+    .author-name {
+      font-family: var(--ff-b); font-size: 14px; font-weight: 600; color: var(--text);
+    }
+    .author-bio { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .article-wrap { padding: 100px 20px 60px; }
+      .article-title { font-size: 28px; }
+    }
+
+    /* ── MARQUEE ─────────────────────────────────────────────── */
+    .marquee-wrap {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+      overflow: hidden; padding: 13px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(7,9,30,0.92);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    }
+    .marquee-track {
+      display: flex; width: max-content; white-space: nowrap;
+      animation: marquee 55s linear infinite;
+    }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0 28px; font-family: var(--ff-m); font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+    }
+    .marquee-item span { color: var(--blue); font-size: 16px; line-height: 1; }
+  </style>
+</head>
+<body>
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="glow g3"></div>
+  <div class="glow g4"></div>
+  <div class="grain"></div>
+
+  <!-- TOP NAV -->
+  <header id="topnav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="../index.html">SG<span class="logo-dot">.</span></a>
+      <nav class="nav-links">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#education">Education</a>
+        <a href="../index.html#publications">Publications</a>
+        <a href="../index.html#recommendations">Recommendations</a>
+        <a href="../blog.html" class="active">Blog</a>
+      </nav>
+      <a href="../index.html#contact" class="nav-cta">Get In Touch</a>
+    </div>
+  </header>
+
+  <!-- ARTICLE -->
+  <article class="article-wrap">
+
+    <a class="back-link" href="../blog.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      All Posts
+    </a>
+
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-tag">Career &amp; AI</span>
+        <span class="article-date">May 2026</span>
+        <span class="article-read-time">6 min read</span>
+      </div>
+      <h1 class="article-title">Learning to Build with AI: My First Few Months at LinkedIn</h1>
+      <p class="article-lede">
+        I came in as a data person. I didn't expect to become a builder. But somewhere between Cursor, Claude Code, and a Streamlit dashboard that refused to stop hanging, that's exactly what happened.
+      </p>
+    </header>
+
+    <hr class="article-divider">
+
+    <div class="prose">
+
+      <p>
+        When I joined LinkedIn, I knew the role would be intellectually demanding. What I didn't fully anticipate was <em>how different</em> the work would feel from anything I'd done before. Not just in the problems themselves, but in the texture of the day-to-day. This is a post about that shift, and about the unexpected partner that made it possible.
+      </p>
+
+      <h2>A new kind of work</h2>
+
+      <p>
+        My role sits at the intersection of taxonomy design and LLM classification accuracy. In plain terms, I spend a lot of time thinking about how to teach an AI model to correctly understand what a customer is trying to say. That sounds narrow. In practice, it touches everything: how categories are defined, what language signals intent versus sentiment, and why two labels that sound similar can quietly confuse a model into picking the wrong one.
+      </p>
+
+      <p>
+        It's a domain where the craft is in the details. A single ambiguous sentence in a taxonomy description can silently tank accuracy across hundreds of conversations. Getting it right requires a mix of linguistic precision, statistical thinking, and a willingness to sit with confusion long enough for patterns to emerge.
+      </p>
+
+      <p>
+        What I didn't expect was how much <strong>building</strong> would be part of it.
+      </p>
+
+      <h2>Cursor + Claude Code changed something</h2>
+
+      <p>
+        I've always been comfortable in Python. I can wrangle data, build models, write pipelines. But I'm not a software engineer. Before these tools, there was a clear ceiling: I could analyze things, but building a real interface to share that analysis (something interactive, something polished) required either a front-end engineer or weeks of learning I didn't have time for.
+      </p>
+
+      <div class="tool-row">
+        <span class="tool-pill highlight">Cursor</span>
+        <span class="tool-pill highlight">Claude Code</span>
+        <span class="tool-pill">Streamlit</span>
+        <span class="tool-pill">Python</span>
+        <span class="tool-pill">Trino / SQL</span>
+      </div>
+
+      <p>
+        Cursor changed the experience of writing code. Having an AI that understands the full context of a file, can suggest the next logical step, catch the bug you were about to introduce, or refactor older code without losing the intent, removes the friction that used to slow me down most. It doesn't make me a better programmer in the abstract. It makes the <em>act</em> of programming feel less like fighting syntax and more like thinking out loud.
+      </p>
+
+      <p>
+        Claude Code goes further. It's not just autocomplete; it's a collaborator that can hold the shape of a multi-step project, reason about tradeoffs, and execute changes across an entire codebase while explaining what it's doing. I've used it to debug queries, build out classification pipelines, refactor dashboard logic, and, yes, build this very website. Tasks that used to take most of a day now happen in a fraction of the time. Not because corners are being cut, but because the cognitive overhead of switching between thinking and typing has nearly disappeared.
+      </p>
+
+      <blockquote>
+        <p>"The question is no longer whether I can build something. It's whether I have a clear enough idea of what I want."</p>
+      </blockquote>
+
+      <h2>Streamlit: from analysis to product</h2>
+
+      <p>
+        One of the most tangible expressions of this shift has been building Streamlit dashboards. If you haven't used Streamlit, it's a Python library that lets you turn a script into a web app (charts, filters, tables, the works) without touching HTML or JavaScript. What used to require a full-stack team, I can now do myself in an afternoon.
+      </p>
+
+      <p>
+        But the real value isn't the speed. It's the <strong>closing of the loop</strong>. When you can take an analysis from notebook to shareable dashboard in the same session, stakeholders can interact with the data directly instead of waiting for your next slide deck. Questions get answered faster. The analysis stops being a deliverable and starts being a conversation.
+      </p>
+
+      <p>
+        I've built dashboards that give teams visibility into data they previously had to ask for. Each one taught me something about what people actually need to see versus what an analyst thinks they need to see. That gap is where most dashboards go wrong.
+      </p>
+
+      <h2>AI agents as actual partners</h2>
+
+      <p>
+        I want to be careful here, because this could easily tip into hype. So let me be specific.
+      </p>
+
+      <p>
+        AI agents are genuinely useful when the task has clear inputs, a defined goal, and enough complexity that doing it manually would be tedious or error-prone. Debugging a query. Iterating on descriptions based on a pattern of failures. Refactoring a codebase to follow a new convention. In these cases, delegating to an agent isn't about being lazy. It's about staying at the level of the problem rather than getting lost in the mechanics of the solution.
+      </p>
+
+      <p>
+        What surprised me most is how much better my own thinking got in the process. When you're working with an agent, you have to be precise about what you want. Vague instructions produce vague results. The discipline of specifying a goal clearly enough for an AI to act on it turns out to be the same discipline required to think clearly about a problem in the first place. It's a feedback loop that makes you sharper.
+      </p>
+
+      <p>
+        There are still things agents get wrong. They misread context. They confidently do the wrong thing. They sometimes solve a problem you didn't actually have. But so do humans. The difference is that with an agent, the cost of iterating is low. You can redirect, correct, and try again without the social friction of managing a person's feelings about their work.
+      </p>
+
+      <h2>What these first few months have taught me</h2>
+
+      <p>
+        I came into this role thinking my job was to understand data. That's still true. But I've learned that understanding data is only useful when it reaches the right person at the right time in the right form. Building is the bridge. And it turns out that bridge is now accessible to people like me: analytically minded, technically comfortable, but not engineers by training.
+      </p>
+
+      <p>
+        LinkedIn has been the right environment for this kind of growth. The problems are genuinely hard, and that pressure pushes you to reach for better tools and sharper thinking. It's the kind of place where figuring out a smarter way to work isn't optional.
+      </p>
+
+      <p>
+        The tools have made me faster. But more than that, they've made me more ambitious about what I think is possible to attempt. That might be the most lasting thing these past few months have given me.
+      </p>
+
+    </div>
+
+    <!-- AUTHOR FOOTER -->
+    <footer class="article-footer">
+      <div class="author-avatar">SG</div>
+      <div class="author-info">
+        <div class="author-name">Sneh Gajiwala</div>
+        <div class="author-bio">Data Science & AI at LinkedIn · Taxonomy, LLM classification, and building things that matter.</div>
+      </div>
+    </footer>
+
+  </article>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Data Science <span>✦</span></span>
+      <span class="marquee-item">LLM Classification <span>✦</span></span>
+      <span class="marquee-item">Taxonomy Engineering <span>✦</span></span>
+      <span class="marquee-item">Product Analytics <span>✦</span></span>
+      <span class="marquee-item">Python <span>✦</span></span>
+      <span class="marquee-item">SQL <span>✦</span></span>
+      <span class="marquee-item">Prompt Engineering <span>✦</span></span>
+      <span class="marquee-item">Customer Experience <span>✦</span></span>
+      <span class="marquee-item">Machine Learning <span>✦</span></span>
+      <span class="marquee-item">Insights <span>✦</span></span>
+      <span class="marquee-item">Data Science <span>✦</span></span>
+      <span class="marquee-item">LLM Classification <span>✦</span></span>
+      <span class="marquee-item">Taxonomy Engineering <span>✦</span></span>
+      <span class="marquee-item">Product Analytics <span>✦</span></span>
+      <span class="marquee-item">Python <span>✦</span></span>
+      <span class="marquee-item">SQL <span>✦</span></span>
+      <span class="marquee-item">Prompt Engineering <span>✦</span></span>
+      <span class="marquee-item">Customer Experience <span>✦</span></span>
+      <span class="marquee-item">Machine Learning <span>✦</span></span>
+      <span class="marquee-item">Insights <span>✦</span></span>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('bg-canvas');
+    const ctx    = canvas.getContext('2d');
+    const COLS   = ['#f43f5e','#fb923c','#fbbf24','#facc15','#4ade80','#f97316','#fde047','#34d399'];
+    const N = 90, DIST = 140;
+    let mouse = { x: -9999, y: -9999 };
+
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+
+    class Dot {
+      constructor() { this.reset(); }
+      reset() {
+        this.x  = Math.random() * canvas.width;
+        this.y  = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.56;
+        this.vy = (Math.random() - 0.5) * 0.56;
+        this.r  = Math.random() < 0.25 ? Math.random() * 3.2 + 1.8 : Math.random() * 1.4 + 0.5;
+        this.c  = COLS[Math.floor(Math.random() * COLS.length)];
+        this.a  = Math.random() * 0.45 + 0.18;
+        this.pulse = Math.random() * Math.PI * 2;
+        this.pulseSpeed = 0.008 + Math.random() * 0.012;
+      }
+      tick() {
+        const dx = this.x - mouse.x, dy = this.y - mouse.y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 100 && d > 0) { this.x += (dx/d)*1.6; this.y += (dy/d)*1.6; }
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height)  this.vy *= -1;
+        this.pulse += this.pulseSpeed;
+      }
+      draw() {
+        const a = this.a + Math.sin(this.pulse) * 0.08;
+        if (this.r > 1.8) {
+          const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 3.5);
+          g.addColorStop(0, this.c); g.addColorStop(1, 'transparent');
+          ctx.beginPath(); ctx.arc(this.x, this.y, this.r * 3.5, 0, Math.PI*2);
+          ctx.fillStyle = g; ctx.globalAlpha = a * 0.35; ctx.fill();
+        }
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+        ctx.fillStyle = this.c; ctx.globalAlpha = a; ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    resize();
+    const dots = Array.from({ length: N }, () => new Dot());
+
+    function frame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].tick(); dots[i].draw();
+        for (let j = i+1; j < dots.length; j++) {
+          const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
+          const d  = Math.sqrt(dx*dx + dy*dy);
+          if (d < DIST) {
+            ctx.beginPath(); ctx.moveTo(dots[i].x, dots[i].y); ctx.lineTo(dots[j].x, dots[j].y);
+            ctx.strokeStyle = dots[i].c; ctx.globalAlpha = (1 - d/DIST) * 0.08;
+            ctx.lineWidth = 0.5; ctx.stroke(); ctx.globalAlpha = 1;
+          }
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    frame();
+    window.addEventListener('resize', resize);
+    document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  </script>
+
+</body>
+</html>
