@@ -7,7 +7,7 @@
   <meta name="description" content="Portfolio of Sneh Gajiwala — Data science and analytics leader building AI systems, driving integrations, and turning data into measurable impact.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Geist+Mono:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306071a' rx='4'/%3E%3Ctext x='4' y='22' font-family='monospace' font-weight='700' font-size='14' fill='white'%3ESG%3C/text%3E%3Ccircle cx='28.5' cy='21' r='2.5' fill='%233b82f6'/%3E%3C/svg%3E">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,9 +32,9 @@
       --muted:  #7880a8;
       --border: rgba(255,255,255,0.07);
 
-      --ff-h: 'Playfair Display', Georgia, serif;
+      --ff-h: 'Geist Mono', ui-monospace, monospace;
       --ff-b: 'Outfit', sans-serif;
-      --ff-m: 'Space Mono', monospace;
+      --ff-m: 'Geist Mono', monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -208,6 +208,7 @@
       background-clip: text;
       animation: gradShift 7s ease infinite;
       padding-bottom: 0.14em; /* room for j/g descenders under tight line-height */
+      transform: translateX(0.35ch); /* optical center: mono '.' cell is mostly whitespace */
     }
     @keyframes gradShift {
       0%, 100% { background-position: 0% 50%; }
@@ -628,9 +629,9 @@
     }
     .pub-title:hover { color: var(--blue); }
     .pub-abstract {
-      font-size: 17px;
+      font-size: 14px;
       font-weight: 300;
-      line-height: 1.72;
+      line-height: 1.65;
       color: rgba(238,240,250,0.52);
       margin: 8px 0 12px;
       max-width: 680px;
@@ -1012,12 +1013,10 @@
           </div>
         </div>
         <ul class="exp-bullets">
-          <li>Architected and shipped an LLM-powered voice-response system end-to-end — moving 28% of inbound calls to self-service and measurably reducing live-agent dependency at scale across millions of customer interactions</li>
-          <li>Owned the full product roadmap for mobile servicing: from regulatory sign-off to technical delivery, achieving a 95%+ self-service containment rate and ensuring continuous compliance with legal and accessibility mandates</li>
-          <li>Engineered real-time transaction scoring models that detected fraud 25% more accurately, running at sub-100ms inference latency in production and integrated directly into the card authorization pipeline</li>
-          <li>Redesigned the cross-team fraud investigation workflow and built shared tooling that eliminated handoff bottlenecks — compressing case resolution time by 30% without increasing headcount</li>
-          <li>Built an Airflow-orchestrated analytics platform monitoring 30+ KPIs across servicing operations, retiring fragmented manual reporting and saving $325K annually in analyst overhead</li>
-          <li>Defined the analytics strategy for customer service optimization — translating contact-center data into executive-level decisions on staffing, tooling, and compliance posture</li>
+          <li>Architected an LLM-powered voice response system that moved 28% of inbound calls to self-service across millions of customer interactions</li>
+          <li>Owned the mobile servicing product roadmap end-to-end, achieving a 95%+ self-service containment rate and continuous regulatory compliance</li>
+          <li>Engineered real-time fraud scoring at sub-100ms inference latency, detecting fraud 25% more accurately inside the card authorization pipeline</li>
+          <li>Built an Airflow-orchestrated analytics platform monitoring 30+ servicing KPIs, retiring manual reporting and saving $325K annually</li>
         </ul>
       </div>
 
@@ -1030,10 +1029,10 @@
           </div>
         </div>
         <ul class="exp-bullets">
-          <li>Designed and launched scalable merchant onboarding pipelines supporting 30+ enterprise partners, 5,000+ store locations, and 10,000+ daily orders — built to handle catalog complexity and real-time menu state changes</li>
-          <li>Built Python/AWS ETL systems for live inventory synchronization, enabling millisecond-accurate menu availability across millions of daily consumer sessions and eliminating ghost-item orders</li>
-          <li>Developed automated inventory health monitoring that detected stock anomalies before order placement, reducing unfillable order rate by 17% and protecting both merchant and consumer experience</li>
-          <li>Partnered directly with engineering and product leadership to re-engineer the onboarding flow — cutting merchant time-to-live by 20% and driving a measurable lift in post-launch satisfaction scores</li>
+          <li>Launched merchant onboarding pipelines supporting 30+ enterprise partners, 5,000+ stores, and 10,000+ daily orders</li>
+          <li>Built Python/AWS ETL systems for live inventory sync, eliminating ghost-item orders across millions of daily consumer sessions</li>
+          <li>Developed inventory health monitoring that caught stock anomalies pre-order, reducing unfillable order rate by 17%</li>
+          <li>Re-engineered the onboarding flow with engineering and product leadership, cutting merchant time-to-live by 20%</li>
         </ul>
       </div>
 
@@ -1046,10 +1045,10 @@
           </div>
         </div>
         <ul class="exp-bullets">
-          <li>Led 30+ end-to-end SaaS implementations for enterprise clients across data privacy, consent management, and security tooling — owning scoping, delivery, and sign-off with a 95% CSAT across the portfolio</li>
-          <li>Managed the full delivery lifecycle for complex integrations spanning REST API configuration, data mapping, A/B test frameworks, and multi-round UAT — often running 4–6 concurrent client workstreams</li>
-          <li>Aligned all implementations with GDPR, CCPA, and global privacy mandates, serving as the primary compliance checkpoint between client engineering teams and OneTrust's legal and product organizations</li>
-          <li>Acted as technical bridge between client engineers and OneTrust product — accelerating issue resolution and surfacing field feedback that directly influenced platform roadmap prioritization</li>
+          <li>Led 30+ SaaS implementations across privacy, consent, and security tooling — owning scoping through sign-off with 95% CSAT</li>
+          <li>Ran 4–6 concurrent client workstreams covering REST API configuration, data mapping, A/B frameworks, and multi-round UAT</li>
+          <li>Aligned all implementations with GDPR, CCPA, and global privacy mandates as the primary compliance checkpoint with clients</li>
+          <li>Bridged client engineers and OneTrust product, surfacing field feedback that directly influenced platform roadmap prioritization</li>
         </ul>
       </div>
 
@@ -1062,9 +1061,9 @@
           </div>
         </div>
         <ul class="exp-bullets">
-          <li>Processed and analyzed 1TB+ of continuous glucose monitoring (CGM) telemetry to surface clinically relevant fluctuation patterns and anomalies across diabetic patient populations</li>
-          <li>Developed a reusable Python library for time-series visualization of glucose data — adopted by downstream research teams as a standard analysis tool across ongoing studies</li>
-          <li>Achieved 83.7% accuracy on health data imputation and 87% classification accuracy on diabetic status prediction — results validated through cross-validation and published in peer-reviewed research</li>
+          <li>Processed 1TB+ of continuous glucose monitoring (CGM) telemetry to surface clinically relevant patterns across diabetic patient populations</li>
+          <li>Built a reusable Python library for time-series glucose visualization, adopted as a standard analysis tool across ongoing studies</li>
+          <li>Achieved 83.7% accuracy on health data imputation and 87% on diabetic status prediction, validated and published in peer-reviewed research</li>
         </ul>
       </div>
 
@@ -1077,9 +1076,9 @@
           </div>
         </div>
         <ul class="exp-bullets">
-          <li>Built geospatial crop yield projection models for Illinois using satellite imagery, NDVI analysis, and soil and weather feature engineering — producing localized forecasts at sub-county resolution</li>
-          <li>Automated scheduled satellite data collection jobs that continuously monitored geographic signals, keeping model inputs fresh and improving predictive accuracy over static seasonal baselines</li>
-          <li>Collaborated with globally distributed data science teams to architect a reusable geospatial ingestion pipeline — designed for extensibility across crop types and geographies beyond the initial Illinois scope</li>
+          <li>Built geospatial crop yield projection models for Illinois using satellite imagery, NDVI, and soil/weather feature engineering</li>
+          <li>Automated scheduled satellite data collection that kept model inputs fresh and improved accuracy over static seasonal baselines</li>
+          <li>Architected a reusable geospatial ingestion pipeline with global data science teams, extensible across crops and geographies</li>
         </ul>
       </div>
 
@@ -1092,9 +1091,9 @@
           </div>
         </div>
         <ul class="exp-bullets">
-          <li>Ingested and structured terabytes of multi-source IoT log data from agricultural machinery, building ETL pipelines and predictive models that surfaced proactive service signals weeks before field failures</li>
-          <li>Architected data lake and warehouse layers that unified fragmented storage, dramatically reduced ad-hoc query times, and enabled BI tools to run directly against clean, normalized tables</li>
-          <li>Migrated scheduled batch jobs from AWS Glue to Azure Databricks — cutting infrastructure cost, increasing nightly processing throughput, and standardizing the team's cloud toolchain</li>
+          <li>Built ETL pipelines on terabytes of IoT log data from agricultural machinery, surfacing service signals weeks before field failures</li>
+          <li>Architected data lake and warehouse layers that unified fragmented storage and let BI tools run on clean, normalized tables</li>
+          <li>Migrated batch jobs from AWS Glue to Azure Databricks, cutting infrastructure cost and increasing nightly processing throughput</li>
         </ul>
       </div>
 
@@ -1107,9 +1106,9 @@
           </div>
         </div>
         <ul class="exp-bullets">
-          <li>Designed and deployed an automated classification pipeline for raw point-of-sale transaction data — transforming unstructured merchant inputs into structured reporting without manual intervention</li>
-          <li>Contributed to full-stack development of the SipSync merchant portal, building order management, customer data views, and analytics features that formed the product's core operator experience</li>
-          <li>Delivered a fully functional MVP 3 weeks ahead of schedule through tight cross-functional coordination — aligning engineering, design, and product around a shared delivery timeline from day one</li>
+          <li>Designed an automated classification pipeline for raw POS transaction data, turning unstructured merchant inputs into structured reporting</li>
+          <li>Contributed to full-stack development of the SipSync merchant portal: order management, customer data views, and analytics features</li>
+          <li>Delivered a fully functional MVP 3 weeks ahead of schedule through tight cross-functional coordination across engineering, design, and product</li>
         </ul>
       </div>
 
