@@ -13,9 +13,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:    #07091e;
-      --bg2:   #0d1028;
-      --bg3:   #111432;
+      --bg:    #080c10;
+      --bg2:   #0c1118;
+      --bg3:   #101620;
       --glass: rgba(255,255,255,0.04);
 
       --blue:        #3b82f6;
@@ -41,12 +41,14 @@
 
     body {
       background: var(--bg);
+      background-image: radial-gradient(circle, rgba(59,130,246,0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
       color: var(--text);
       font-family: var(--ff-b);
       font-size: 18px;
       line-height: 1.7;
       overflow-x: hidden;
-      padding-bottom: 50px; /* room for fixed marquee ticker */
+      padding-bottom: 50px;
     }
 
     ::selection { background: var(--blue); color: #fff; }
@@ -55,30 +57,9 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--violet)); }
 
-    /* ── CANVAS ──────────────────────────────────────────────── */
+    /* ── CIRCUIT CANVAS ─────────────────────────────────────── */
     #bg-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ── GLOW BLOBS ──────────────────────────────────────────── */
-    .glow {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(110px);
-      pointer-events: none;
-      z-index: 1;
-      animation: breathe 9s ease-in-out infinite;
-    }
-    .g1 { background: radial-gradient(ellipse, rgba(239,68,68,0.38) 0%, rgba(251,146,60,0.18) 55%, transparent 100%);   width: 900px; height: 900px; top: -300px; right: -200px; }
-    .g2 { background: radial-gradient(ellipse, rgba(234,179,8,0.32) 0%, rgba(202,138,4,0.16) 55%, transparent 100%);   width: 700px; height: 700px; bottom: 10%;  left: -180px; animation-delay: -3.5s; }
-    .g3 { background: radial-gradient(ellipse, rgba(16,185,129,0.28) 0%, rgba(52,211,153,0.14) 55%, transparent 100%);  width: 600px; height: 600px; top: 38%;    right: 8%;    animation-delay: -6s; }
-    .g4 { background: radial-gradient(ellipse, rgba(251,191,36,0.26) 0%, rgba(245,158,11,0.12) 55%, transparent 100%);  width: 500px; height: 500px; top: 65%;    left: 25%;    animation-delay: -9s; }
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.12); }
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
     }
 
     /* ── GRAIN ───────────────────────────────────────────────── */
@@ -401,15 +382,15 @@
       align-items: start;
     }
     .about-text p {
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 300;
-      line-height: 1.88;
-      color: rgba(232,234,246,0.78);
+      line-height: 1.65;
+      color: rgba(232,234,246,0.7);
       margin-bottom: 20px;
     }
     .about-text p strong { color: #fff; font-weight: 600; }
     .about-details { margin-top: 36px; display: flex; flex-direction: column; gap: 10px; }
-    .detail-row { display: flex; gap: 12px; font-size: 12px; }
+    .detail-row { display: flex; gap: 12px; font-size: 16px; }
     .detail-key {
       color: var(--blue);
       min-width: 80px;
@@ -591,16 +572,17 @@
     .edu-card:hover::after { transform: scaleX(1); }
     .edu-degree {
       font-family: var(--ff-h);
-      font-size: 20px;
+      font-size: 17px;
       font-weight: 700;
       color: #fff;
       line-height: 1.3;
       margin-bottom: 10px;
     }
     .edu-school {
-      font-family: var(--ff-m);
-      font-size: 11px;
-      letter-spacing: 0.04em;
+      font-family: var(--ff-h);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0;
       color: var(--edu-color, var(--blue));
       margin-bottom: 6px;
     }
@@ -689,7 +671,7 @@
     }
     .contact-heading {
       font-family: var(--ff-h);
-      font-size: clamp(40px, 7vw, 80px);
+      font-size: clamp(60px, 9vw, 110px);
       font-weight: 900;
       letter-spacing: -0.03em;
       line-height: 1;
@@ -814,12 +796,15 @@
       flex-wrap: wrap;
     }
     .rec-tag {
-      font-size: 10px;
+      font-size: 13px;
       font-family: var(--ff-m);
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       color: var(--rc, var(--blue));
       background: var(--rc-dim, var(--blue-dim));
-      padding: 2px 8px;
+      border: 1px solid var(--rc, var(--blue));
+      padding: 3px 10px;
+      border-radius: 4px;
     }
 
     /* ── CURSOR ──────────────────────────────────────────────── */
@@ -865,10 +850,6 @@
 <body>
 
   <canvas id="bg-canvas"></canvas>
-  <div class="glow g1"></div>
-  <div class="glow g2"></div>
-  <div class="glow g3"></div>
-  <div class="glow g4"></div>
   <div class="grain"></div>
 
   <!-- TOP NAV -->
@@ -912,7 +893,7 @@
     </p>
     <div class="hero-ctas">
       <a href="#experience" class="btn-primary">View Experience</a>
-      <a href="#contact"    class="btn-secondary">Get In Touch</a>
+      <a href="blog.html"   class="btn-secondary">Blog</a>
     </div>
     <div class="hero-scroll">Scroll to explore</div>
   </section>
@@ -1223,8 +1204,8 @@
         <div class="rec-person">
           <span class="rec-name">Angela Campbell</span>
           <div class="rec-meta">
-            <span>Partner Manager, Strategy &amp; Operations</span>
             <span class="rec-tag">DoorDash</span>
+            <span>Partner Manager, Strategy &amp; Operations</span>
           </div>
         </div>
       </div>
@@ -1235,8 +1216,8 @@
         <div class="rec-person">
           <span class="rec-name">Thomas Coulter</span>
           <div class="rec-meta">
-            <span>Manager, New Verticals Partner Integrations</span>
             <span class="rec-tag">DoorDash</span>
+            <span>Manager, New Verticals Partner Integrations</span>
           </div>
         </div>
       </div>
@@ -1247,8 +1228,8 @@
         <div class="rec-person">
           <span class="rec-name">Katherine Jonas</span>
           <div class="rec-meta">
-            <span>Sr. Manager, New Verticals Partner Integration</span>
             <span class="rec-tag">DoorDash</span>
+            <span>Sr. Manager, New Verticals Partner Integration</span>
           </div>
         </div>
       </div>
@@ -1257,10 +1238,10 @@
         <div class="rec-quote">"</div>
         <p class="rec-text">Sneh and I worked together on a complex strategic project where Sneh was the technical lead of a consent management implementation. He was responsible for the initial guidance of the functional and technical requirements of each phase, providing guidance on best practices and developing solutions to varied use cases. The success the client attested to in their first 6 months is largely due to Sneh's ability to keep them on task, help them unpack years of undocumented processes, and understand how the work ties together.</p>
         <div class="rec-person">
-          <span class="rec-name">Nwabisa S. Johnson</span>
+          <span class="rec-name">Reshaunda S. Johnson</span>
           <div class="rec-meta">
-            <span>Sr. Strategic Project Manager, Implementation Delivery</span>
             <span class="rec-tag">OneTrust</span>
+            <span>Sr. Strategic Project Manager, Implementation Delivery</span>
           </div>
         </div>
       </div>
@@ -1271,8 +1252,8 @@
         <div class="rec-person">
           <span class="rec-name">Sahithya Dhakar</span>
           <div class="rec-meta">
-            <span>Senior Manager, Technical Implementation</span>
             <span class="rec-tag">OneTrust</span>
+            <span>Senior Manager, Technical Implementation</span>
           </div>
         </div>
       </div>
@@ -1283,8 +1264,8 @@
         <div class="rec-person">
           <span class="rec-name">Matthew Harrison</span>
           <div class="rec-meta">
-            <span>Consultant · OneTrust Fellow · CIPM · CDPSE</span>
             <span class="rec-tag">OneTrust</span>
+            <span>Consultant · OneTrust Fellow · CIPM · CDPSE</span>
           </div>
         </div>
       </div>
@@ -1295,8 +1276,8 @@
         <div class="rec-person">
           <span class="rec-name">Camila Arias</span>
           <div class="rec-meta">
-            <span>Technical Implementation Consultant</span>
             <span class="rec-tag">OneTrust</span>
+            <span>Technical Implementation Consultant</span>
           </div>
         </div>
       </div>
@@ -1307,8 +1288,8 @@
         <div class="rec-person">
           <span class="rec-name">Clarke Bishop</span>
           <div class="rec-meta">
-            <span>Fractional CTO · Gen AI &amp; Data Strategy</span>
             <span class="rec-tag">AGCO</span>
+            <span>Fractional CTO · Gen AI &amp; Data Strategy</span>
           </div>
         </div>
       </div>
@@ -1318,11 +1299,10 @@
 
   <!-- CONTACT -->
   <section id="contact">
-    <p class="contact-eyebrow">Let's connect</p>
-    <h2 class="contact-heading">Get In Touch.</h2>
+    <h2 class="contact-heading">Let's Connect.</h2>
     <div class="contact-links">
-      <a href="mailto:sneh.gajiwala@gmail.com" class="contact-link primary">sneh.gajiwala@gmail.com</a>
-      <a href="https://www.linkedin.com/in/sneh-gajiwala/" target="_blank" rel="noopener" class="contact-link secondary">LinkedIn Profile</a>
+      <a href="mailto:sneh.gajiwala@gmail.com" class="contact-link primary">Email</a>
+      <a href="https://www.linkedin.com/in/sneh-gajiwala/" target="_blank" rel="noopener" class="contact-link secondary">LinkedIn</a>
     </div>
   </section>
 
@@ -1332,107 +1312,113 @@
   </footer>
 
   <script>
-    // ── PARTICLE CANVAS ───────────────────────────────────────
-    const canvas = document.getElementById('bg-canvas');
-    const ctx    = canvas.getContext('2d');
+    // ── CIRCUIT BOARD ─────────────────────────────────────────
+    (function () {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx    = canvas.getContext('2d');
+      const PC     = ['#38bdf8','#22d3ee','#34d399','#60a5fa'];
+      const G      = 80;
+      let nodes = [], edges = [], pulses = [];
 
-    // Nebula palette: crimson, orange, gold, amber, emerald
-    const COLS = [
-      '#f43f5e',  // rose-red
-      '#fb923c',  // orange
-      '#fbbf24',  // amber-gold
-      '#facc15',  // yellow-gold
-      '#4ade80',  // bright green
-      '#f97316',  // deep orange
-      '#fde047',  // pale gold
-      '#34d399',  // emerald
-    ];
-
-    const N = 90, DIST = 140;
-    let mouse = { x: -9999, y: -9999 };
-
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-
-    class Dot {
-      constructor() {
-        this.reset(true);
-      }
-      reset(init) {
-        this.x  = Math.random() * canvas.width;
-        this.y  = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.56;
-        this.vy = (Math.random() - 0.5) * 0.56;
-        // Mix of pinpoint stars and slightly larger glowing orbs
-        this.r  = Math.random() < 0.25
-                  ? Math.random() * 3.2 + 1.8   // larger glow orb
-                  : Math.random() * 1.4 + 0.5;  // small star
-        this.c  = COLS[Math.floor(Math.random() * COLS.length)];
-        this.a  = Math.random() * 0.45 + 0.18;
-        // Orbs pulse slightly
-        this.pulse = Math.random() * Math.PI * 2;
-        this.pulseSpeed = 0.008 + Math.random() * 0.012;
-      }
-      tick() {
-        const dx = this.x - mouse.x, dy = this.y - mouse.y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < 100 && d > 0) { this.x += (dx / d) * 1.6; this.y += (dy / d) * 1.6; }
-        this.x += this.vx; this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height)  this.vy *= -1;
-        this.pulse += this.pulseSpeed;
-      }
-      draw() {
-        const pulsedAlpha = this.a + Math.sin(this.pulse) * 0.08;
-        // Glow halo for larger orbs
-        if (this.r > 1.8) {
-          const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 3.5);
-          grad.addColorStop(0, this.c);
-          grad.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.r * 3.5, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
-          ctx.globalAlpha = pulsedAlpha * 0.35;
-          ctx.fill();
+      function build() {
+        nodes = []; edges = []; pulses = [];
+        const cols = Math.ceil(canvas.width  / G) + 1;
+        const rows = Math.ceil(canvas.height / G) + 1;
+        const grid = [];
+        for (let r = 0; r <= rows; r++) { grid[r] = []; for (let c = 0; c <= cols; c++) grid[r][c] = null; }
+        for (let r = 0; r <= rows; r++)
+          for (let c = 0; c <= cols; c++)
+            if (Math.random() < 0.42) { grid[r][c] = nodes.length; nodes.push({ x:c*G, y:r*G, lit:0, adj:[] }); }
+        function link(a, b, corner) {
+          const e = { from:a, to:b, corner:corner||null };
+          edges.push(e); nodes[a].adj.push(e); nodes[b].adj.push(e);
         }
-        // Core dot
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = this.c;
-        ctx.globalAlpha = pulsedAlpha;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      }
-    }
-
-    resize();
-    const dots = Array.from({ length: N }, () => new Dot());
-
-    function frame() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < dots.length; i++) {
-        dots[i].tick();
-        dots[i].draw();
-        for (let j = i + 1; j < dots.length; j++) {
-          const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
-          const d  = Math.sqrt(dx * dx + dy * dy);
-          if (d < DIST) {
-            ctx.beginPath();
-            ctx.moveTo(dots[i].x, dots[i].y);
-            ctx.lineTo(dots[j].x, dots[j].y);
-            ctx.strokeStyle = dots[i].c;
-            ctx.globalAlpha = (1 - d / DIST) * 0.08;
-            ctx.lineWidth   = 0.5;
-            ctx.stroke();
-            ctx.globalAlpha = 1;
+        for (let r = 0; r <= rows; r++) {
+          for (let c = 0; c <= cols; c++) {
+            const a = grid[r][c]; if (a == null) continue;
+            const na = nodes[a];
+            if (c < cols && grid[r][c+1] != null && Math.random() < 0.60) link(a, grid[r][c+1]);
+            if (r < rows && grid[r+1] && grid[r+1][c] != null && Math.random() < 0.60) link(a, grid[r+1][c]);
+            if (c < cols && r < rows && grid[r+1] && grid[r+1][c+1] != null && Math.random() < 0.10) {
+              const nb = nodes[grid[r+1][c+1]];
+              link(a, grid[r+1][c+1], Math.random() < 0.5 ? {x:nb.x, y:na.y} : {x:na.x, y:nb.y});
+            }
           }
         }
+        for (let i = 0; i < 16; i++) spawn();
       }
-      requestAnimationFrame(frame);
-    }
 
-    frame();
-    window.addEventListener('resize', resize);
-    document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+      function posOnEdge(e, fromId, t) {
+        const a = nodes[fromId], toId = e.from===fromId ? e.to : e.from, b = nodes[toId];
+        if (!e.corner || e.from !== fromId) return { x:a.x+(b.x-a.x)*t, y:a.y+(b.y-a.y)*t };
+        const cx = e.corner.x, cy = e.corner.y;
+        if (t < 0.5) { const s = t*2; return { x:a.x+(cx-a.x)*s, y:a.y+(cy-a.y)*s }; }
+        const s = (t-0.5)*2; return { x:cx+(b.x-cx)*s, y:cy+(b.y-cy)*s };
+      }
+
+      function drawEdge(e) {
+        const a = nodes[e.from], b = nodes[e.to];
+        ctx.beginPath(); ctx.moveTo(a.x, a.y);
+        if (e.corner) ctx.lineTo(e.corner.x, e.corner.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = 'rgba(56,189,248,0.15)'; ctx.lineWidth = 1.5; ctx.stroke();
+      }
+
+      function drawPad(n) {
+        const lit = n.lit, ra = lit > 0.05 ? 0.12 + lit*0.45 : 0.10;
+        ctx.beginPath(); ctx.arc(n.x, n.y, 5, 0, Math.PI*2);
+        ctx.strokeStyle = `rgba(56,189,248,${ra})`; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.beginPath(); ctx.arc(n.x, n.y, 2.2, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(56,189,248,${Math.min(ra*2.5, 1)})`; ctx.fill();
+        if (lit > 0.25) {
+          const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 14);
+          g.addColorStop(0, `rgba(56,189,248,${lit*0.45})`); g.addColorStop(1, 'transparent');
+          ctx.beginPath(); ctx.arc(n.x, n.y, 14, 0, Math.PI*2); ctx.fillStyle = g; ctx.fill();
+        }
+      }
+
+      function spawn() {
+        if (!edges.length) return;
+        const e = edges[Math.floor(Math.random()*edges.length)];
+        const from = Math.random() < 0.5 ? e.from : e.to;
+        pulses.push({ edge:e, from, to:from===e.from?e.to:e.from, prev:e,
+          t:Math.random()*0.5, speed:0.004+Math.random()*0.005,
+          color:PC[Math.floor(Math.random()*PC.length)] });
+      }
+
+      function frame() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        edges.forEach(drawEdge);
+        nodes.forEach(n => { n.lit *= 0.92; drawPad(n); });
+        const next = [];
+        pulses.forEach(p => {
+          p.t += p.speed;
+          const pos = posOnEdge(p.edge, p.from, Math.min(p.t, 1));
+          const g = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, 12);
+          g.addColorStop(0, p.color+'cc'); g.addColorStop(0.5, p.color+'40'); g.addColorStop(1, 'transparent');
+          ctx.beginPath(); ctx.arc(pos.x, pos.y, 12, 0, Math.PI*2); ctx.fillStyle = g; ctx.fill();
+          ctx.beginPath(); ctx.arc(pos.x, pos.y, 2, 0, Math.PI*2);
+          ctx.fillStyle = '#fff'; ctx.globalAlpha = 0.92; ctx.fill(); ctx.globalAlpha = 1;
+          if (p.t < 1) { next.push(p); }
+          else {
+            nodes[p.to].lit = 1;
+            const cands = nodes[p.to].adj.filter(e => e !== p.prev);
+            if (cands.length && Math.random() < 0.78) {
+              const e = cands[Math.floor(Math.random()*cands.length)];
+              const from = e.from===p.to ? e.from : e.to, to = e.from===p.to ? e.to : e.from;
+              next.push({ edge:e, from, to, prev:e, t:0, speed:p.speed, color:p.color });
+            }
+          }
+        });
+        pulses = next;
+        if (pulses.length < 18 && Math.random() < 0.06) spawn();
+        requestAnimationFrame(frame);
+      }
+
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; build(); }
+      resize(); frame();
+      window.addEventListener('resize', resize);
+    })();
 
     // ── TYPEWRITER (full line) ────────────────────────────────
     const LINE = 'Data Scientist.  Product Manager.  Integration Lead.  AI Builder.';

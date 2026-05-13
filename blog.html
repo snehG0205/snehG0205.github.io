@@ -55,25 +55,8 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: linear-gradient(var(--blue), var(--violet)); }
 
-    /* ── CANVAS ──────────────────────────────────────────────── */
-    #bg-canvas {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    }
-
-    /* ── GLOW BLOBS ──────────────────────────────────────────── */
-    .glow {
-      position: fixed; border-radius: 50%; filter: blur(110px);
-      pointer-events: none; z-index: 1; animation: drift 18s ease-in-out infinite alternate;
-    }
-    @keyframes drift {
-      0%   { transform: translate(0,0) scale(1); }
-      50%  { transform: translate(30px,-25px) scale(1.06); }
-      100% { transform: translate(-20px,20px) scale(0.96); }
-    }
-    .g1 { background: radial-gradient(ellipse, rgba(239,68,68,0.38) 0%, rgba(251,146,60,0.18) 55%, transparent 100%); width: 900px; height: 900px; top: -300px; right: -200px; }
-    .g2 { background: radial-gradient(ellipse, rgba(234,179,8,0.32) 0%, rgba(202,138,4,0.16) 55%, transparent 100%); width: 700px; height: 700px; bottom: 10%; left: -180px; animation-delay: -3.5s; }
-    .g3 { background: radial-gradient(ellipse, rgba(16,185,129,0.28) 0%, rgba(52,211,153,0.14) 55%, transparent 100%); width: 600px; height: 600px; top: 38%; right: 8%; animation-delay: -6s; }
-    .g4 { background: radial-gradient(ellipse, rgba(251,191,36,0.26) 0%, rgba(245,158,11,0.12) 55%, transparent 100%); width: 500px; height: 500px; top: 65%; left: 25%; animation-delay: -9s; }
+    /* ── CIRCUIT CANVAS ─────────────────────────────────────── */
+    #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
     /* ── GRAIN ───────────────────────────────────────────────── */
     .grain {
@@ -233,10 +216,6 @@
 <body>
 
   <canvas id="bg-canvas"></canvas>
-  <div class="glow g1"></div>
-  <div class="glow g2"></div>
-  <div class="glow g3"></div>
-  <div class="glow g4"></div>
   <div class="grain"></div>
 
   <!-- TOP NAV -->
@@ -309,95 +288,86 @@
   </div>
 
   <script>
-    // ── CANVAS NEBULA (identical to portfolio) ──────────────────
-    const canvas = document.getElementById('bg-canvas');
-    const ctx    = canvas.getContext('2d');
-
-    const COLS = [
-      '#f43f5e', '#fb923c', '#fbbf24', '#facc15',
-      '#4ade80', '#f97316', '#fde047', '#34d399',
-    ];
-
-    const N = 90, DIST = 140;
-    let mouse = { x: -9999, y: -9999 };
-
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-
-    class Dot {
-      constructor() { this.reset(true); }
-      reset(init) {
-        this.x  = Math.random() * canvas.width;
-        this.y  = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.56;
-        this.vy = (Math.random() - 0.5) * 0.56;
-        this.r  = Math.random() < 0.25
-                  ? Math.random() * 3.2 + 1.8
-                  : Math.random() * 1.4 + 0.5;
-        this.c  = COLS[Math.floor(Math.random() * COLS.length)];
-        this.a  = Math.random() * 0.45 + 0.18;
-        this.pulse      = Math.random() * Math.PI * 2;
-        this.pulseSpeed = 0.008 + Math.random() * 0.012;
-      }
-      tick() {
-        const dx = this.x - mouse.x, dy = this.y - mouse.y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < 100 && d > 0) { this.x += (dx / d) * 1.6; this.y += (dy / d) * 1.6; }
-        this.x += this.vx; this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height)  this.vy *= -1;
-        this.pulse += this.pulseSpeed;
-      }
-      draw() {
-        const pulsedAlpha = this.a + Math.sin(this.pulse) * 0.08;
-        if (this.r > 1.8) {
-          const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 3.5);
-          grad.addColorStop(0, this.c);
-          grad.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.r * 3.5, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
-          ctx.globalAlpha = pulsedAlpha * 0.35;
-          ctx.fill();
-        }
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = this.c;
-        ctx.globalAlpha = pulsedAlpha;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      }
-    }
-
-    resize();
-    const dots = Array.from({ length: N }, () => new Dot());
-
-    function frame() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < dots.length; i++) {
-        dots[i].tick();
-        dots[i].draw();
-        for (let j = i + 1; j < dots.length; j++) {
-          const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
-          const d  = Math.sqrt(dx * dx + dy * dy);
-          if (d < DIST) {
-            ctx.beginPath();
-            ctx.moveTo(dots[i].x, dots[i].y);
-            ctx.lineTo(dots[j].x, dots[j].y);
-            ctx.strokeStyle = dots[i].c;
-            ctx.globalAlpha = (1 - d / DIST) * 0.08;
-            ctx.lineWidth   = 0.5;
-            ctx.stroke();
-            ctx.globalAlpha = 1;
+    (function () {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx    = canvas.getContext('2d');
+      const PC     = ['#38bdf8','#22d3ee','#34d399','#60a5fa'];
+      const G      = 80;
+      let nodes = [], edges = [], pulses = [];
+      function build() {
+        nodes=[]; edges=[]; pulses=[];
+        const cols=Math.ceil(canvas.width/G)+1, rows=Math.ceil(canvas.height/G)+1;
+        const grid=[];
+        for(let r=0;r<=rows;r++){grid[r]=[];for(let c=0;c<=cols;c++)grid[r][c]=null;}
+        for(let r=0;r<=rows;r++) for(let c=0;c<=cols;c++)
+          if(Math.random()<0.42){grid[r][c]=nodes.length;nodes.push({x:c*G,y:r*G,lit:0,adj:[]});}
+        function link(a,b,corner){const e={from:a,to:b,corner:corner||null};edges.push(e);nodes[a].adj.push(e);nodes[b].adj.push(e);}
+        for(let r=0;r<=rows;r++) for(let c=0;c<=cols;c++){
+          const a=grid[r][c]; if(a==null) continue; const na=nodes[a];
+          if(c<cols&&grid[r][c+1]!=null&&Math.random()<0.60) link(a,grid[r][c+1]);
+          if(r<rows&&grid[r+1]&&grid[r+1][c]!=null&&Math.random()<0.60) link(a,grid[r+1][c]);
+          if(c<cols&&r<rows&&grid[r+1]&&grid[r+1][c+1]!=null&&Math.random()<0.10){
+            const nb=nodes[grid[r+1][c+1]];
+            link(a,grid[r+1][c+1],Math.random()<0.5?{x:nb.x,y:na.y}:{x:na.x,y:nb.y});
           }
         }
+        for(let i=0;i<16;i++) spawn();
       }
-      requestAnimationFrame(frame);
-    }
-
-    frame();
-    window.addEventListener('resize', resize);
-    document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-
+      function posOnEdge(e,fromId,t){
+        const a=nodes[fromId],toId=e.from===fromId?e.to:e.from,b=nodes[toId];
+        if(!e.corner||e.from!==fromId) return{x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t};
+        const cx=e.corner.x,cy=e.corner.y;
+        if(t<0.5){const s=t*2;return{x:a.x+(cx-a.x)*s,y:a.y+(cy-a.y)*s};}
+        const s=(t-0.5)*2;return{x:cx+(b.x-cx)*s,y:cy+(b.y-cy)*s};
+      }
+      function drawEdge(e){
+        const a=nodes[e.from],b=nodes[e.to];
+        ctx.beginPath();ctx.moveTo(a.x,a.y);
+        if(e.corner)ctx.lineTo(e.corner.x,e.corner.y);
+        ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(56,189,248,0.15)';ctx.lineWidth=1.5;ctx.stroke();
+      }
+      function drawPad(n){
+        const lit=n.lit,ra=lit>0.05?0.12+lit*0.45:0.10;
+        ctx.beginPath();ctx.arc(n.x,n.y,5,0,Math.PI*2);ctx.strokeStyle=`rgba(56,189,248,${ra})`;ctx.lineWidth=1.5;ctx.stroke();
+        ctx.beginPath();ctx.arc(n.x,n.y,2.2,0,Math.PI*2);ctx.fillStyle=`rgba(56,189,248,${Math.min(ra*2.5,1)})`;ctx.fill();
+        if(lit>0.25){const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,14);g.addColorStop(0,`rgba(56,189,248,${lit*0.45})`);g.addColorStop(1,'transparent');ctx.beginPath();ctx.arc(n.x,n.y,14,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();}
+      }
+      function spawn(){
+        if(!edges.length)return;
+        const e=edges[Math.floor(Math.random()*edges.length)];
+        const from=Math.random()<0.5?e.from:e.to;
+        pulses.push({edge:e,from,to:from===e.from?e.to:e.from,prev:e,t:Math.random()*0.5,speed:0.004+Math.random()*0.005,color:PC[Math.floor(Math.random()*PC.length)]});
+      }
+      function frame(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        edges.forEach(drawEdge);
+        nodes.forEach(n=>{n.lit*=0.92;drawPad(n);});
+        const next=[];
+        pulses.forEach(p=>{
+          p.t+=p.speed;
+          const pos=posOnEdge(p.edge,p.from,Math.min(p.t,1));
+          const g=ctx.createRadialGradient(pos.x,pos.y,0,pos.x,pos.y,12);
+          g.addColorStop(0,p.color+'cc');g.addColorStop(0.5,p.color+'40');g.addColorStop(1,'transparent');
+          ctx.beginPath();ctx.arc(pos.x,pos.y,12,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+          ctx.beginPath();ctx.arc(pos.x,pos.y,2,0,Math.PI*2);ctx.fillStyle='#fff';ctx.globalAlpha=0.92;ctx.fill();ctx.globalAlpha=1;
+          if(p.t<1){next.push(p);}
+          else{
+            nodes[p.to].lit=1;
+            const cands=nodes[p.to].adj.filter(e=>e!==p.prev);
+            if(cands.length&&Math.random()<0.78){
+              const e=cands[Math.floor(Math.random()*cands.length)];
+              const from=e.from===p.to?e.from:e.to,to=e.from===p.to?e.to:e.from;
+              next.push({edge:e,from,to,prev:e,t:0,speed:p.speed,color:p.color});
+            }
+          }
+        });
+        pulses=next;
+        if(pulses.length<18&&Math.random()<0.06)spawn();
+        requestAnimationFrame(frame);
+      }
+      function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;build();}
+      resize();frame();window.addEventListener('resize',resize);
+    })();
   </script>
 
 </body>
