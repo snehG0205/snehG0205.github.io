@@ -1,30 +1,26 @@
 # snehG0205.github.io
 
-Personal portfolio and blog site for Sneh Gajiwala.
+This is my corner of the internet — a personal portfolio and blog that I maintain myself.
 
-## Structure
+## What lives here
 
-```
-├── index.html          # Main portfolio (about, experience, education, publications, recommendations, contact)
-├── blog.html           # Blog index
-├── posts/
-│   └── ai-at-linkedin.html   # "Learning to Build with AI: My First Few Months at LinkedIn"
-└── assets/             # CSS, JS, images, vendor libraries
-```
+The site is two things, side by side:
 
-## Stack
+- **A portfolio.** A snapshot of who I am, what I've worked on, and the roles, projects, and publications that shaped how I think about data, products, and the people they serve.
+- **A blog.** Longer-form notes on what I'm learning, building, and reflecting on — currently focused on AI, data science, and the texture of working at companies that move fast.
 
-- Vanilla HTML/CSS/JS — no build step, no framework
-- All styles and scripts are inline in each HTML file
-- Canvas-based PCB circuit board animation as background
-- Deployed via GitHub Pages
+It's intentionally low-ceremony. No CMS, no analytics dashboard, no comment section. Just pages I write, edit, and ship when I have something to say.
 
-## Local Development
+## Why I maintain it myself
 
-Open any `.html` file directly in a browser. No server required.
+I wanted a place I owned end-to-end — one that wouldn't quietly change shape on me, lock me into someone else's template, or expire when a platform pivots. Maintaining it by hand keeps it honest: every word, every layout choice, every line on the page is something I deliberately put there. It also doubles as a low-stakes sandbox for me to keep my hands in the code outside my day job.
 
-> Note: `mailto:` links won't work on `file://` — they function correctly once deployed.
+## Where to find what
 
-## Deployment
+- **Home / portfolio:** [index.html](index.html) — about, experience, education, publications, recommendations, contact
+- **Blog index:** [blog.html](blog.html)
+- **Posts:** [posts/](posts/)
 
-Push to the `master` branch. GitHub Pages serves from the repo root.
+If you stumbled onto this repo and want to reach me, the contact links on the portfolio page are the best way.
+
+— Sneh
